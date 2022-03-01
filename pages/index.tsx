@@ -6,8 +6,6 @@ const Home: NextPage = () => {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center py-2">
       <h1>Sheefo Rocks
-
-        
       </h1>
     </div>
   )
