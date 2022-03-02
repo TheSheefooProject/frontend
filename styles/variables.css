@@ -9,13 +9,13 @@
   /* #FF6969 Red   | Brand Colour */
   --color-brand: 225 105 105;
 
-  /* #F2F2F2 White   | Background Colour */
-  --color-neutral: 242 242 242;
+  /* #FAFAFA White   | Background Colour */
+  --color-neutral: 250 250 250;
 }
 
 .theme-dark {
-  /* #F2F2F2 White   | Text Colour 1*/
-  --color-primary: 242 242 242;
+  /* #FAFAFA White   | Text Colour 1*/
+  --color-primary: 250 250 250;
 
   /* #E4E4E5 Offwhite| Text Colour 2 */
   --color-secondary: 228 228 229;
