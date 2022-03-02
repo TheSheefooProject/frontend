@@ -9,9 +9,9 @@ const Home: NextPage = () => {
       <Head>
         <title>Sheefoo</title>
       </Head>
-      <h1 className="text-primary">Sheefo Rocks</h1>
+      <h1 className="m-6 text-4xl text-primary">Sheefoo</h1>
       <Link href="/devpage">
-        <a className="rounded-md bg-brand px-2 py-1 hover:bg-brand/75">
+        <a className="rounded-md bg-brand px-2 py-1 text-xl hover:cursor-pointer hover:bg-brand/75">
           Dev Page
         </a>
       </Link>
