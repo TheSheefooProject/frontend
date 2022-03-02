@@ -1,0 +1,13 @@
+
+.theme-light {
+    --color-primary: 255 115 179;
+    --color-secondary: 111 114 185;
+    /* ... */
+  }
+  
+  .theme-dark {
+    --color-primary: 2 82 204;
+    --color-secondary: 255 196 2;
+    /* ... */
+  }
+  
