@@ -23,10 +23,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   })
   return (
     <>
-      <Head>
-        <title>Sheefoo</title>
-        <link rel="shortcut icon" href="/static/favicon.ico" />
-      </Head>
+      
       <button
         className="absolute m-2 rounded-md bg-slate-300 p-1"
         onClick={toggleTheme}
