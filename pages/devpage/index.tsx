@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
+import Button from '../../components/common/Button'
 
 const Devpage: NextPage = () => {
   return (
@@ -17,6 +18,7 @@ const Devpage: NextPage = () => {
         This is a development environment to collate styled components and
         create a cohesive style.
       </h2>
+      <Button></Button>
     </div>
   )
 }
