@@ -1,19 +1,29 @@
 /* Theme Variables */
 .theme-light {
+  /* #202225 Black | Text Colour 1*/
   --color-primary: 32 34 37;
-  --color-secondary: 111 114 185;
-  --color-tertiary: 225 105 105;
 
+  /* #4E4E4E Grey  | Text Colour 2  */
+  --color-secondary: 78 78 78;
+
+  /* #FF6969 Red   | Brand Colour */
+  --color-brand: 225 105 105;
+
+  /* #F2F2F2 White   | Background Colour */
   --color-neutral: 242 242 242;
-
-  /* ... */
 }
 
 .theme-dark {
+  /* #F2F2F2 White   | Text Colour 1*/
   --color-primary: 242 242 242;
-  --color-secondary: 255 196 2;
-  --color-tertiary: 255 153 105;
 
+  /* #E4E4E5 Offwhite| Text Colour 2 */
+  --color-secondary: 228 228 229;
+
+  /* #FF9969 Orange  | Brand Colour */
+  --color-brand: 255 153 105;
+
+  /* #202225 Black| Background Colour*/
   --color-neutral: 32 34 37;
   /* ... */
 }

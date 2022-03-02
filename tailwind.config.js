@@ -19,7 +19,8 @@ module.exports = {
       colors: {
         primary: withOpacityValue('--color-primary'),
         secondary: withOpacityValue('--color-secondary'),
-        tertiary: withOpacityValue('--color-tertiary'),
+
+        brand: withOpacityValue('--color-brand'),
 
         neutral: withOpacityValue('--color-neutral'),
         // ...

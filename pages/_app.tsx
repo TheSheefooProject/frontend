@@ -23,9 +23,8 @@ function MyApp({ Component, pageProps }: AppProps) {
   })
   return (
     <>
-      
       <button
-        className="absolute m-2 rounded-md pl-2 pt-1 pr-2 pb-1 bg-tertiary"
+        className="absolute m-2 rounded-md bg-brand pl-2 pt-1 pr-2 pb-1 hover:bg-brand/75"
         onClick={toggleTheme}
       >
         Swap Theme
