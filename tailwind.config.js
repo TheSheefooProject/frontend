@@ -14,10 +14,14 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
+    // Adds variables on top of the theme defined further down
     extend: {
       colors: {
         primary: withOpacityValue('--color-primary'),
         secondary: withOpacityValue('--color-secondary'),
+        tertiary: withOpacityValue('--color-tertiary'),
+
+        neutral: withOpacityValue('--color-neutral'),
         // ...
       }
     },

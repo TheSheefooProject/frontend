@@ -25,7 +25,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       
       <button
-        className="absolute m-2 rounded-md bg-slate-300 p-1"
+        className="absolute m-2 rounded-md pl-2 pt-1 pr-2 pb-1 bg-tertiary"
         onClick={toggleTheme}
       >
         Swap Theme
