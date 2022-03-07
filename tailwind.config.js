@@ -1,3 +1,4 @@
+
 // Convert colour channels from /styles/globals.css into css parsable values
 function withOpacityValue(variable) {
   return ({ opacityValue }) => {
@@ -367,6 +368,7 @@ module.exports = {
     },
     fontFamily: {
       sans: [
+        'Fredoka',
         'ui-sans-serif',
         'system-ui',
         '-apple-system',
