@@ -14,11 +14,11 @@ const Devpage: NextPage = () => {
       <h1 className="border-b-2 border-secondary pb-2 text-4xl text-primary">
         Sheefoo Dev Page
       </h1>
-      <h2 className="py-2">
+      <h2 className="py-2 text-primary">
         This is a development environment to collate styled components and
         create a cohesive style.
       </h2>
-      <Button></Button>
+      <Button className="text-primary"></Button>
     </div>
   )
 }
