@@ -18,8 +18,25 @@ const Devpage: NextPage = () => {
         This is a development environment to collate styled components and
         create a cohesive style.
       </h2>
+      <Button onClick={() => console.log('I was clicked 💀')}></Button>
       <Button
-        className="text-primary"
+        type="positive"
+        text="Positive"
+        onClick={() => console.log('I was clicked 💀')}
+      ></Button>
+      <Button
+        type="negative"
+        text="Negative"
+        onClick={() => console.log('I was clicked 💀')}
+      ></Button>
+      <Button
+        type="neutral"
+        text="Neutral"
+        onClick={() => console.log('I was clicked 💀')}
+      ></Button>
+      <Button
+        type="disabled"
+        text="Disabled (Work in Progress)"
         onClick={() => console.log('I was clicked 💀')}
       ></Button>
     </div>
