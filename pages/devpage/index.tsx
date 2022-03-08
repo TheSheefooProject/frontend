@@ -35,8 +35,25 @@ const Devpage: NextPage = () => {
         onClick={() => console.log('I was clicked 💀')}
       ></Button>
       <Button
-        type="disabled"
-        text="Disabled (Work in Progress)"
+        disabled={true}
+        onClick={() => console.log('I was clicked 💀')}
+      ></Button>
+      <Button
+        disabled={true}
+        type="positive"
+        text="Positive"
+        onClick={() => console.log('I was clicked 💀')}
+      ></Button>
+      <Button
+        disabled={true}
+        type="negative"
+        text="Negative"
+        onClick={() => console.log('I was clicked 💀')}
+      ></Button>
+      <Button
+        disabled={true}
+        type="neutral"
+        text="Neutral"
         onClick={() => console.log('I was clicked 💀')}
       ></Button>
     </div>

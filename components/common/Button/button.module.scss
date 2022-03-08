@@ -5,6 +5,15 @@
   vertical-align: middle;
   transition: transform 0.1s ease;
 }
+.btn:disabled {
+  opacity: 0.5;
+  border: 1px solid red;
+  box-shadow: inset 0px 0px 3px rgb(88, 88, 88);
+  &:hover {
+    transform: none;
+    cursor: default;
+  }
+}
 
 .btn:hover {
   cursor: pointer;
