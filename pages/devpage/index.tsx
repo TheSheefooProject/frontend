@@ -11,10 +11,10 @@ const Devpage: NextPage = () => {
         <title>Sheefoo | Dev Page</title>
       </Head>
 
-      <h1 className="border-b-2 border-secondary pb-2 font-sans text-4xl text-primary">
+      <h1 className="border-b-2 border-secondary pb-2 font-heading text-4xl text-primary">
         Sheefoo Dev Page
       </h1>
-      <h2 className=" py-2 text-primary">
+      <h2 className=" py-2 font-body text-lg font-normal text-primary">
         This is a development environment to collate styled components and
         create a cohesive style.
       </h2>

@@ -1,20 +1,13 @@
-.btn_outer {
-  position: relative;
+.btn {
   width: auto;
-}
-
-.btn_inner {
-  width: auto;
-  cursor: pointer;
-  border: 1px solid;
   border-radius: 3px;
-  outline: none;
-  transition: 1s ease-in-out;
+  text-align: center;
+  vertical-align: middle;
+  &::first-line {
+    border: 1px solid red;
+  }
 }
 
-.btn_inner:hover {
-  transition: 1s ease-in-out;
-}
-
-.btn_text {
+.btn:hover {
+  cursor: pointer;
 }
