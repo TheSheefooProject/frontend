@@ -1,3 +1,4 @@
+
 // Convert colour channels from /styles/globals.css into css parsable values
 function withOpacityValue(variable) {
   return ({ opacityValue }) => {
@@ -366,7 +367,25 @@ module.exports = {
       DEFAULT: '1',
     },
     fontFamily: {
-      sans: [
+      heading: [
+        'Fredoka',
+        'ui-sans-serif',
+        'system-ui',
+        '-apple-system',
+        'BlinkMacSystemFont',
+        '"Segoe UI"',
+        'Roboto',
+        '"Helvetica Neue"',
+        'Arial',
+        '"Noto Sans"',
+        'sans-serif',
+        '"Apple Color Emoji"',
+        '"Segoe UI Emoji"',
+        '"Segoe UI Symbol"',
+        '"Noto Color Emoji"',
+      ],
+      body: [
+        'Lato',
         'ui-sans-serif',
         'system-ui',
         '-apple-system',
