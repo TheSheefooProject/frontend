@@ -1,11 +1,10 @@
 import styles from './button.module.scss'
 
 const typeColours = {
-  default: '#DF51D1',
-  positive: '#00BA9A',
-  negative: '#FF6969',
-  neutral: '#5E9AFF',
-  disabled: '#A8805F',
+  default: '#6727B9',
+  positive: '#008044',
+  negative: '#BC203F',
+  neutral: '#3F67AB',
 }
 const Button = (props: {
   [x: string]: any
@@ -34,10 +33,11 @@ const Button = (props: {
         className +
         ' ' +
         styles.btn +
-        ' mx-1 h-8 w-16 px-2 py-0 font-body font-bold text-white shadow-md'
+        ' mx-1 my-1 h-8 w-16 px-2 py-0 font-body font-bold text-white shadow-md'
       }`}
       onClick={onClick}
     >
+      {/* Button Icon */}
       <span>{icon}</span>
       {/* Button Text  */}
       {text}
