@@ -1,7 +1,7 @@
 import styles from './button.module.scss'
 
 const typeColours = {
-  default: '#6727B9',
+  default: '#444444',
   positive: '#008044',
   negative: '#BC203F',
   neutral: '#3F67AB',
