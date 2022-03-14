@@ -16,6 +16,11 @@ const Home: NextPage = () => {
           Dev Page
         </a>
       </Link>
+      <Link href="/settings">
+        <a className="rounded-md bg-brand px-2 py-1 text-xl hover:cursor-pointer hover:bg-brand/75">
+          Settings
+        </a>
+      </Link>
     </div>
   )
 }
