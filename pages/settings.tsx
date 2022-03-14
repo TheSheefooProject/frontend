@@ -22,9 +22,40 @@ const SettingsPage: NextPage = () => {
           id="settings_container"
           className="container mx-auto flex flex-col "
         >
-          <div className="flex flex-row justify-between">
+          {/* Dark Theme Toggle */}
+          <div className="flex flex-row items-center justify-between">
             <h2 className="text-xl text-primary">Dark Theme</h2>
-            <Switch></Switch>
+            <Switch name="setting_theme"></Switch>
+          </div>
+
+          {/* Divider */}
+          <span className="relative bottom-0 my-4 h-[1px] w-auto bg-primary opacity-20 "></span>
+          {/* Reduced Motion Toggle */}
+          <div className="flex flex-row items-center justify-between">
+            <h2 className="text-xl text-primary">Reduced Motion</h2>
+            <Switch name="setting_motion"></Switch>
+          </div>
+
+          {/* Divider */}
+          <span className="relative bottom-0 my-4 h-[1px] w-auto bg-primary opacity-20 "></span>
+          <div className="flex flex-row items-center justify-between">
+            <h2 className="text-xl text-primary">Lorem Ipsum</h2>
+            <Switch name="setting_PLACEHOLDER1"></Switch>
+          </div>
+
+          {/* Divider */}
+          <span className="relative bottom-0 my-4 h-[1px] w-auto bg-primary opacity-20 "></span>
+          <div className="flex flex-row items-center justify-between">
+            <h2 className="text-xl text-primary">Lorem Ipsum</h2>
+            <Switch name="setting_PLACEHOLDER2"></Switch>
+          </div>
+
+          {/* Divider */}
+          <span className="relative bottom-0 my-4 h-[1px] w-auto bg-primary opacity-20 "></span>
+          {/* Delete Account Button */}
+          <div className="flex flex-row items-center justify-between">
+            <h2 className="text-xl text-primary">Permanently Delete Account</h2>
+            <Button text="DELETE" type="negative" noMargin></Button>
           </div>
         </form>
       </div>

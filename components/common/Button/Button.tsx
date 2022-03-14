@@ -12,6 +12,7 @@ const Button = (props: {
   className?: string
   type?: keyof typeof typeColours
   disabled?: boolean
+  noMargin?: boolean
 }) => {
   // Default prop values
   const {
@@ -22,13 +23,17 @@ const Button = (props: {
     className = '',
     bg_colour = '#4FDC7C',
     onClick = null,
+    noMargin = false,
     ...restProps
   } = props
 
   return (
     <button
       disabled={disabled}
-      style={{ backgroundColor: typeColours[type] }}
+      style={{
+        backgroundColor: typeColours[type],
+        margin: noMargin ? '0rem' : '0.25rem',
+      }}
       className={`${
         className +
         ' ' +

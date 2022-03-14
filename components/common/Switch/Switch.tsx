@@ -6,19 +6,22 @@ const typeColours = {
   negative: '#BC203F',
   neutral: '#3F67AB',
 }
-const Switch = (props: {}) => {
+const Switch = (props: { name: string }) => {
   // Default prop values
-  const { ...restProps } = props
+  const { name = 'setting_default', ...restProps } = props
 
   return (
-    <div className={`${styles.switch}`}>
+    <div className={`${styles.switch}` + ' '}>
       <input
-        id="setting_theme"
-        name="setting_theme"
+        id={name}
+        name={name}
         type="checkbox"
-        className={`${styles.checkbox}`}
+        className={`${styles.checkbox}` + ' '}
       ></input>
-      <label htmlFor="setting_theme" className={`${styles.label}`}></label>
+      <label
+        htmlFor={name}
+        className={`${styles.label}` + ' border-2 border-primary'}
+      ></label>
     </div>
   )
 }
