@@ -55,7 +55,12 @@ const SettingsPage: NextPage = () => {
           {/* Delete Account Button */}
           <div className="flex flex-row items-center justify-between">
             <h2 className="text-xl text-primary">Permanently Delete Account</h2>
-            <Button text="DELETE" type="negative" noMargin></Button>
+            <Button
+              text="DELETE"
+              type="negative"
+              onClick={() => alert('☠️Account Deleted☠️')}
+              noMargin
+            ></Button>
           </div>
         </form>
       </div>
