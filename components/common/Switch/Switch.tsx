@@ -11,19 +11,14 @@ const Switch = (props: {}) => {
   const { ...restProps } = props
 
   return (
-    <div
-      className={`${
-        styles.switch + ' relative m-0 overflow-hidden rounded-md bg-gray-600'
-      }`}
-    >
+    <div className={`${styles.switch}`}>
       <input
         id="setting_theme"
         name="setting_theme"
         type="checkbox"
-        className={`${styles.checkbox + ' '}`}
+        className={`${styles.checkbox}`}
       ></input>
-      <div className={`${styles.knobs + ' align-middle'}`}></div>
-      <div className={`${styles.layers + ' align-middle'}`}></div>
+      <label htmlFor="setting_theme" className={`${styles.label}`}></label>
     </div>
   )
 }
