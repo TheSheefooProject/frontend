@@ -58,7 +58,7 @@ const SettingsPage: NextPage = () => {
             <Button
               text="DELETE"
               type="negative"
-              onClick={() => alert('☠️Account Deleted☠️')}
+              onClick={() => alert('☠️ Account Deleted ☠️')}
               noMargin
             ></Button>
           </div>
