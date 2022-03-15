@@ -1,5 +1,6 @@
-import { MouseEventHandler } from 'react'
+import { MouseEventHandler, useEffect } from 'react'
 import styles from './switch.module.scss'
+import { useState } from 'react'
 
 const typeColours = {
   default: '#444444',
@@ -7,11 +8,19 @@ const typeColours = {
   negative: '#BC203F',
   neutral: '#3F67AB',
 }
-const Switch = (props: { name: string; onClick: any }) => {
+const Switch = (props: {
+  name: string
+  onClick?: any
+  initialState?: boolean
+}) => {
+  const [checked, setChecked] = useState<boolean>()
+  useEffect(() => setChecked(initialState))
+
   // Default prop values
   const {
     name = 'setting_default',
-    onClick = () => console.log('Default Switch Press Hebaviour'),
+    initialState = false,
+    onClick = () => console.log('Default Switch Press Behaviour'),
     ...restProps
   } = props
 
@@ -21,6 +30,7 @@ const Switch = (props: { name: string; onClick: any }) => {
         id={name}
         name={name}
         type="checkbox"
+        defaultChecked={checked}
         className={`${styles.checkbox}` + ' '}
         onClick={onClick}
       ></input>
