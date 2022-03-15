@@ -1,3 +1,4 @@
+import { MouseEventHandler } from 'react'
 import styles from './switch.module.scss'
 
 const typeColours = {
@@ -6,9 +7,13 @@ const typeColours = {
   negative: '#BC203F',
   neutral: '#3F67AB',
 }
-const Switch = (props: { name: string }) => {
+const Switch = (props: { name: string; onClick: any }) => {
   // Default prop values
-  const { name = 'setting_default', ...restProps } = props
+  const {
+    name = 'setting_default',
+    onClick = () => console.log('Default Switch Press Hebaviour'),
+    ...restProps
+  } = props
 
   return (
     <div className={`${styles.switch}` + ' '}>
@@ -17,6 +22,7 @@ const Switch = (props: { name: string }) => {
         name={name}
         type="checkbox"
         className={`${styles.checkbox}` + ' '}
+        onClick={onClick}
       ></input>
       <label
         htmlFor={name}
