@@ -10,10 +10,10 @@ import Button from '../components/common/Button'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <>
+    <div className="flex flex-row">
       <Sidebar></Sidebar>
       <Component {...pageProps} />
-    </>
+    </div>
   )
 }
 
