@@ -5,6 +5,8 @@ import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { GiHamburgerMenu } from 'react-icons/gi'
+import { BiCog } from 'react-icons/bi'
+import { CgLogOut, CgMail, CgProfile, CgOptions } from 'react-icons/cg'
 
 const Sidebar = (props: {}) => {
   const { ...restProps } = props
@@ -30,11 +32,26 @@ const Sidebar = (props: {}) => {
       <div
         className={
           `${(styles.sidebar, sidebar_visible ? 'flex w-20' : 'hidden w-0')}` +
-          '  h-[100%] w-20 flex-col bg-brand md:flex md:w-20'
+          '  h-[100%] w-20 flex-col items-center bg-[#80402c] py-2 md:flex md:w-20'
         }
       >
-        <button className="mt-2">
+        <button className="drop-shadow-lg">
           <Image src="/logo.svg" width={64} height={64}></Image>
+        </button>
+        <button className=" relative drop-shadow-lg hover:top-[1px] hover:drop-shadow-none">
+          <CgMail size="4em" className="text-brand"></CgMail>
+        </button>
+
+        {/* Free space */}
+
+        <button className=" relative mt-auto justify-self-end drop-shadow-lg hover:top-[1px] hover:drop-shadow-none">
+          <CgProfile size="4em" className="text-brand"></CgProfile>
+        </button>
+        <button className=" relative justify-self-end drop-shadow-lg hover:top-[1px] hover:drop-shadow-none">
+          <BiCog size="4em" className="text-brand"></BiCog>
+        </button>
+        <button className=" relative justify-self-end drop-shadow-lg hover:top-[1px] hover:drop-shadow-none">
+          <CgLogOut size="4em" className="text-brand"></CgLogOut>
         </button>
       </div>
     </div>
