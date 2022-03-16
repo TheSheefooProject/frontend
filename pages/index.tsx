@@ -9,6 +9,7 @@ const Home: NextPage = () => {
       <Head>
         <title>Sheefoo</title>
       </Head>
+
       <Image src="/logo.svg" width="200" height="200"></Image>
       <h1 className="m-6 font-mono text-6xl text-primary">Sheefoo</h1>
       <Link href="/devpage">

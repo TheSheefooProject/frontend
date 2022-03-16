@@ -3,6 +3,7 @@ import '../styles/variables.css'
 
 import type { AppProps } from 'next/app'
 import React, { useEffect } from 'react'
+import Sidebar from '../components/common/Sidebar'
 import Head from 'next/head'
 
 import Button from '../components/common/Button'
@@ -10,6 +11,7 @@ import Button from '../components/common/Button'
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
+      <Sidebar></Sidebar>
       <Component {...pageProps} />
     </>
   )
