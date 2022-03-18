@@ -53,7 +53,7 @@ const SettingsPage: NextPage = () => {
   }, [])
 
   return (
-    <main className="w-[100%] ">
+    <main className="w-[100%] overflow-x-hidden">
       <div className="md:[5vw] static min-h-screen min-w-[320px] bg-neutral px-10 pt-12 md:px-[20vw]  ">
         <Head>
           <title>Sheefoo | Dev Page</title>
