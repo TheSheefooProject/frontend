@@ -18,7 +18,7 @@ const Sidebar = (props: {}) => {
       <button
         className={
           `${sidebar_visible ? 'left-20' : 'left-0'}` +
-          ' absolute ml-1 h-12 w-12 text-primary md:hidden'
+          ' absolute ml-1 h-12 w-12 text-brand md:hidden'
         }
         onClick={() => setSidebarVisible(!sidebar_visible)}
       >

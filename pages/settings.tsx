@@ -10,18 +10,17 @@ import Switch from '../components/common/Switch'
 let body: HTMLBodyElement | null = null
 let localStorage: Storage
 
-const SettingsPage: NextPage = () => {
-  const [is_dark, setIsDark] = useState<boolean>()
+const SettingsPage = (props: { is_dark: boolean }) => {
+  // Default prop values
+  const { is_dark = false, ...restProps } = props
 
   // Light/Dark theme switching function
   const setDark = (val: boolean) => {
-    console.log('amog')
     if (body != null) {
       // Set Dark
       if (val == true) {
         body.classList.add('theme-dark')
         body.classList.remove('theme-light')
-        setIsDark(true)
         localStorage.theme = 'dark'
       }
 
@@ -29,28 +28,10 @@ const SettingsPage: NextPage = () => {
       if (val == false) {
         body.classList.add('theme-light')
         body.classList.remove('theme-dark')
-        setIsDark(false)
         localStorage.theme = 'light'
       }
     }
   }
-
-  // Is called on rerenders, but not state changes
-  useEffect(() => {
-    body = document.querySelector('body')
-    localStorage = window.localStorage
-
-    if (body != null) {
-      body.classList.add('theme-light')
-    }
-    // If theme saved in LocalStorage is dark, swap client theme
-    if (
-      body != null &&
-      (localStorage.theme === 'dark' || !('theme' in localStorage))
-    ) {
-      setDark(true)
-    }
-  }, [])
 
   return (
     <main className="w-[100%] overflow-x-hidden">
