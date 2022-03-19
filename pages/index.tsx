@@ -13,7 +13,7 @@ const Home: NextPage = () => {
       <div className="relative mx-2 my-2 mt-12 flex w-[100%] flex-col rounded-md bg-back_3 md:mx-4 md:my-4">
         <div className="flex-1"></div>
 
-        <input className="relative mx-2 mb-2 rounded-md bg-back_4 px-3 py-2 focus:outline-none focus:ring focus:ring-red-600"></input>
+        <input className="relative mx-2 mb-2 rounded-md bg-back_4 px-3 py-2 focus:outline-none focus:ring focus:ring-back_2"></input>
       </div>
     </main>
   )

@@ -36,7 +36,7 @@ const Switch = (props: {
       ></input>
       <label
         htmlFor={name}
-        className={`${styles.label}` + ' border-2 border-primary'}
+        className={`${styles.label}` + ' border-2 border-text_1'}
       ></label>
     </div>
   )

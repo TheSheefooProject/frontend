@@ -1,5 +1,5 @@
 .switch {
-  height: 24px;
+  height: 40px;
   border-radius: 50px;
 
   position: relative;
@@ -16,7 +16,7 @@
 
 .label {
   width: 40px;
-  height: 24px;
+  height: 40px;
 
   background: transparent;
   display: inline-block;
@@ -31,23 +31,17 @@
     position: absolute;
     display: block;
     transition: all 0.2s ease;
-    width: 20px;
-    height: 20px;
+    width: 0px;
+    height: 0px;
+
+    background: var(--color-back-1);
 
     top: 0px;
-    left: -2px;
+    left: 0px;
     border-radius: 100%;
-    border: 10px solid rgb(204, 55, 55);
-    background: rgb(204, 55, 55);
     transition: 0.3s ease;
   }
 }
 .checkbox:checked + label {
-  &:before {
-    content: '';
-    position: absolute;
-    transform: translateX(20px);
-    background: rgb(55, 204, 55);
-    border-color: rgb(55, 204, 55);
-  }
+  background: rgb(140, 158, 219);
 }

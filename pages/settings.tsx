@@ -15,12 +15,12 @@ const SettingsPage = (props: { is_dark: boolean; setDark: Function }) => {
   const { is_dark = false, setDark = null, ...restProps } = props
 
   return (
-    <main className="md:[5vw] static min-h-screen w-[100%] min-w-[320px] overflow-x-hidden bg-back_2 px-10 pt-12 md:px-[20vw] ">
+    <main className="md:[5vw] static min-h-screen w-[100%] min-w-[320px] overflow-x-hidden bg-back_3 px-10 pt-12 md:px-[20vw] ">
       <Head>
         <title>Sheefoo | Dev Page</title>
       </Head>
 
-      <h1 className=" border-secondary border-b-2 pb-2 text-right font-heading text-4xl text-text_1">
+      <h1 className=" border-b-2 border-back_2 pb-2 text-right font-heading text-4xl text-text_1">
         Settings
       </h1>
       <br />
@@ -62,7 +62,7 @@ const SettingsPage = (props: { is_dark: boolean; setDark: Function }) => {
         </div>
 
         {/* Divider */}
-        <span className="relative bottom-0 my-4 h-[1px] w-auto bg-back_4 opacity-20 "></span>
+        <span className="relative bottom-0 my-4 h-[1px] w-auto bg-accent_1 opacity-40 "></span>
         {/* Delete Account Button */}
         <div className="flex flex-row items-center justify-between">
           <h2 className="text-xl ">Permanently Delete Account</h2>
