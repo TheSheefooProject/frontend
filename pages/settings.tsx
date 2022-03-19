@@ -48,20 +48,6 @@ const SettingsPage = (props: { is_dark: boolean; setDark: Function }) => {
         </div>
 
         {/* Divider */}
-        <span className="relative bottom-0 my-4 h-[1px] w-auto bg-back_4  opacity-20 "></span>
-        <div className="flex flex-row items-center justify-between">
-          <h2 className="text-xl ">Lorem Ipsum</h2>
-          <Switch name="setting_PLACEHOLDER1"></Switch>
-        </div>
-
-        {/* Divider */}
-        <span className="relative bottom-0 my-4 h-[1px] w-auto bg-back_4 opacity-20 "></span>
-        <div className="flex flex-row items-center justify-between">
-          <h2 className="text-xl ">Lorem Ipsum</h2>
-          <Switch name="setting_PLACEHOLDER2"></Switch>
-        </div>
-
-        {/* Divider */}
         <span className="relative bottom-0 my-4 h-[1px] w-auto bg-accent_1 opacity-40 "></span>
         {/* Delete Account Button */}
         <div className="flex flex-row items-center justify-between">
