@@ -5,24 +5,17 @@ import Image from 'next/image'
 
 const Home: NextPage = () => {
   return (
-    <div className="flex min-h-screen w-[100%] flex-col items-center justify-center overflow-x-hidden bg-neutral py-2">
+    <main className=" flex min-h-screen w-[100%] flex-row items-stretch overflow-x-hidden bg-neutral ">
       <Head>
         <title>Sheefoo</title>
       </Head>
+      {/* Main Container */}
+      <div className="relative mx-2 my-2 mt-12 flex w-[100%] flex-col rounded-md bg-amber-500 md:mx-4 md:my-4">
+        <div className="flex-1"></div>
 
-      <Image src="/logo.svg" width="200" height="200"></Image>
-      <h1 className="m-6 font-mono text-6xl text-primary">Sheefoo</h1>
-      <Link href="/devpage">
-        <a className="rounded-md bg-brand px-2 py-1 text-xl hover:cursor-pointer hover:bg-brand/75">
-          Dev Page
-        </a>
-      </Link>
-      <Link href="/settings">
-        <a className="rounded-md bg-brand px-2 py-1 text-xl hover:cursor-pointer hover:bg-brand/75">
-          Settings
-        </a>
-      </Link>
-    </div>
+        <input className="relative mx-2 mb-2 rounded-md bg-amber-300 px-3 py-2 focus:outline-none focus:ring focus:ring-red-600"></input>
+      </div>
+    </main>
   )
 }
 

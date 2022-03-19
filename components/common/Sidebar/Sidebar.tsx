@@ -40,19 +40,24 @@ const Sidebar = (props: {}) => {
             <Image src="/logo.svg" width={64} height={64}></Image>
           </a>
         </Link>
-        <button className=" relative drop-shadow-lg hover:top-[1px] hover:drop-shadow-none">
+        <button className=" relative drop-shadow-lg hover:top-[1px] hover:cursor-pointer hover:drop-shadow-none">
           <CgMail size="4em" className="text-brand"></CgMail>
         </button>
 
         {/* Free space */}
 
-        <button className=" relative mt-auto justify-self-end drop-shadow-lg hover:top-[1px] hover:drop-shadow-none">
+        <button className=" relative mt-auto justify-self-end drop-shadow-lg hover:top-[1px] hover:cursor-pointer hover:drop-shadow-none">
           <CgProfile size="4em" className="text-brand"></CgProfile>
         </button>
-        <button className=" relative justify-self-end drop-shadow-lg hover:top-[1px] hover:drop-shadow-none">
-          <BiCog size="4em" className="text-brand"></BiCog>
-        </button>
-        <button className=" relative justify-self-end drop-shadow-lg hover:top-[1px] hover:drop-shadow-none">
+        <Link href="/settings">
+          <a>
+            <BiCog
+              size="4em"
+              className="relative justify-self-end text-brand drop-shadow-lg hover:top-[1px] hover:cursor-pointer hover:drop-shadow-none"
+            ></BiCog>
+          </a>
+        </Link>
+        <button className=" relative justify-self-end drop-shadow-lg hover:top-[1px] hover:cursor-pointer hover:drop-shadow-none">
           <CgLogOut size="4em" className="text-brand"></CgLogOut>
         </button>
       </div>
