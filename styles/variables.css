@@ -1,29 +1,47 @@
 /* Theme Variables */
 .theme-light {
-  /* #202225 Black | Text Colour 1*/
-  --color-primary: 32 34 37;
+  /* Background Colours */
+  /*# */
+  --color-back-1: 144 58 49;
+  /*# */
+  --color-back-2: 189 77 65;
+  /*# */
+  --color-back-3: 217 110 77;
+  /*# */
+  --color-back-4: 255 153 105;
+  /* Text Colours */
+  /*# */
+  --color-text-1: 32 34 37;
+  /*# */
+  --color-text-2: 78 78 78;
 
-  /* #4E4E4E Grey  | Text Colour 2  */
-  --color-secondary: 78 78 78;
-
-  /* #FF6969 Red   | Brand Colour */
-  --color-brand: 225 105 105;
-
-  /* #F2F2F5 White   | Background Colour */
-  --color-neutral: 242 242 245;
+  /* Accent/Element Colours */
+  /*# */
+  --color-accent-1: 250 250 250;
+  /*# */
+  --color-accent-2: 238 238 238;
 }
 
 .theme-dark {
-  /* #F2F2F5 White   | Text Colour 1*/
-  --color-primary: 242 242 245;
+  /* Background Colours */
+  /*# */
+  --color-back-1: 32 34 37;
+  /*# */
+  --color-back-2: 47 49 54;
+  /*# */
+  --color-back-3: 54 57 63;
+  /*# */
+  --color-back-4: 80 84 92;
 
-  /* #E4E4E5 Offwhite| Text Colour 2 */
-  --color-secondary: 228 228 229;
+  /* Text Colours */
+  /*# */
+  --color-text-1: 250 250 250;
+  /*# */
+  --color-text-2: 238 238 238;
 
-  /* #FF9969 Orange  | Brand Colour */
-  --color-brand: 255 153 105;
-
-  /* #202225 Black| Background Colour*/
-  --color-neutral: 32 34 37;
-  /* ... */
+  /* Accent/Element Colours */
+  /*# */
+  --color-accent-1: 255 153 105;
+  /*# */
+  --color-accent-2: 255 105 105;
 }

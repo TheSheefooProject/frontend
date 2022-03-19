@@ -18,13 +18,16 @@ module.exports = {
     // Adds variables on top of the theme defined further down
     extend: {
       colors: {
-        primary: withOpacityValue('--color-primary'),
-        secondary: withOpacityValue('--color-secondary'),
+        back_1: withOpacityValue('--color-back-1'),
+        back_2: withOpacityValue('--color-back-2'),
+        back_3: withOpacityValue('--color-back-3'),
+        back_4: withOpacityValue('--color-back-4'),
 
-        brand: withOpacityValue('--color-brand'),
+        text_1: withOpacityValue('--color-text-1'),
+        text_2: withOpacityValue('--color-text-2'),
 
-        neutral: withOpacityValue('--color-neutral'),
-        // ...
+        accent_1: withOpacityValue('--color-accent-1'),
+        accent_2: withOpacityValue('--color-accent-2'),
       }
     },
     screens: {
