@@ -10,28 +10,9 @@ import Switch from '../components/common/Switch'
 let body: HTMLBodyElement | null = null
 let localStorage: Storage
 
-const SettingsPage = (props: { is_dark: boolean }) => {
+const SettingsPage = (props: { is_dark: boolean; setDark: Function }) => {
   // Default prop values
-  const { is_dark = false, ...restProps } = props
-
-  // Light/Dark theme switching function
-  const setDark = (val: boolean) => {
-    if (body != null) {
-      // Set Dark
-      if (val == true) {
-        body.classList.add('theme-dark')
-        body.classList.remove('theme-light')
-        localStorage.theme = 'dark'
-      }
-
-      //Set Light
-      if (val == false) {
-        body.classList.add('theme-light')
-        body.classList.remove('theme-dark')
-        localStorage.theme = 'light'
-      }
-    }
-  }
+  const { is_dark = false, setDark = null, ...restProps } = props
 
   return (
     <main className="md:[5vw] static min-h-screen w-[100%] min-w-[320px] overflow-x-hidden bg-neutral px-10 pt-12 md:px-[20vw] ">
@@ -53,7 +34,7 @@ const SettingsPage = (props: { is_dark: boolean }) => {
           <h2 className="text-xl text-primary">Dark Theme</h2>
           <Switch
             name="setting_theme"
-            onClick={() => setDark(!is_dark)}
+            onClick={() => props.setDark(!is_dark)}
             initialState={is_dark}
           ></Switch>
         </div>
