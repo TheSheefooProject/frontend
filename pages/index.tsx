@@ -5,7 +5,7 @@ import Image from 'next/image'
 
 const Home: NextPage = () => {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-neutral py-2">
+    <div className="flex min-h-screen w-[100%] flex-col items-center justify-center overflow-x-hidden bg-neutral py-2">
       <Head>
         <title>Sheefoo</title>
       </Head>

@@ -35,9 +35,11 @@ const Sidebar = (props: {}) => {
           '  h-[100%] w-20 flex-col items-center bg-[#80402c] py-2 md:flex md:w-20'
         }
       >
-        <button className="drop-shadow-lg">
-          <Image src="/logo.svg" width={64} height={64}></Image>
-        </button>
+        <Link href="/">
+          <a className="relative drop-shadow-lg hover:top-[1px] hover:drop-shadow-none">
+            <Image src="/logo.svg" width={64} height={64}></Image>
+          </a>
+        </Link>
         <button className=" relative drop-shadow-lg hover:top-[1px] hover:drop-shadow-none">
           <CgMail size="4em" className="text-brand"></CgMail>
         </button>
