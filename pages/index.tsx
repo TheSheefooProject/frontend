@@ -52,7 +52,10 @@ const Home: NextPage = () => {
                 text="ADD IMAGE"
                 className="justify-self-start"
               ></Button>
-              <div id="tags_container" className="mr-1 mb-2 justify-self-end">
+              <div
+                id="tags_container"
+                className="mr-1 mb-2 w-[100%] justify-self-end"
+              >
                 <input type="text" placeholder="Add Tag"></input>
               </div>
             </div>
