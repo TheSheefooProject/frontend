@@ -32,13 +32,15 @@ const Button = (props: {
       disabled={disabled}
       style={{
         backgroundColor: typeColours[type],
-        margin: noMargin ? '0rem' : '0.25rem',
       }}
       className={`${
-        className +
-        ' ' +
-        styles.btn +
-        ' mx-1 my-1 h-8 w-16 px-2 py-0 font-body font-bold text-white shadow-md'
+        noMargin
+          ? '0rem'
+          : '0.25rem' +
+            className +
+            ' ' +
+            styles.btn +
+            ' mx-1 my-1 h-8 w-16 px-2 py-0 font-body font-bold text-white shadow-md'
       }`}
       onClick={onClick}
     >
