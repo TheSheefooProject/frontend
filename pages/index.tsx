@@ -30,26 +30,27 @@ const Home: NextPage = () => {
           className="flex h-[100%] flex-col justify-between"
         >
           {/* Modal (shown when input is focused) */}
-          <div className={`${modal_showing ? ' visible' : 'hidden'}`}>
+          <div
+            className={`${modal_showing ? ' visible' : 'hidden'}` + ' mt-auto'}
+          >
             {/* Uploaded Image */}
             <div
               id="image_container"
-              className="m-auto mt-2 mb-auto rounded-md bg-back_4 p-2"
+              className="m-auto mt-2 mb-auto flex w-[300px] items-center justify-center rounded-md bg-back_4 p-2"
             >
-              <Image src="/logo.svg" width={500} height={500}></Image>
+              <Image src="/logo.svg" width={300} height={300}></Image>
             </div>
 
             {/* Grid inside modal */}
             <div
               className={
-                ' mb-2 grid  w-[100%] grid-cols-2 items-end rounded-md text-text_1'
+                ' my-2 grid w-[100%] grid-cols-1 items-end rounded-md text-text_1 sm:grid-cols-2'
               }
             >
-              {' '}
               <Button
                 type="neutral"
                 text="ADD IMAGE"
-                className="ml-1 mb-2 justify-self-start"
+                className="justify-self-start"
               ></Button>
               <div id="tags_container" className="mr-1 mb-2 justify-self-end">
                 <input type="text" placeholder="Add Tag"></input>
@@ -60,7 +61,10 @@ const Home: NextPage = () => {
           <span
             role="textbox"
             contentEditable
-            className=" bottom-0 mb-2 max-h-[30vh] w-[100%] overflow-y-scroll break-words rounded-md bg-back_4 px-3 py-2 focus:outline-none focus:ring focus:ring-back_2"
+            className={
+              `${modal_showing ? ' mt-0' : 'mt-auto'}` +
+              ' bottom-0 mb-2 max-h-[30vh] w-[100%] overflow-y-auto break-words rounded-md bg-back_4 px-3 py-2 focus:outline-none focus:ring focus:ring-back_2'
+            }
             onFocus={() => showModal(true)}
             // onBlur={() => showModal(false)}
           ></span>
