@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import Button from '../components/common/Button'
+import TextBox from '../components/common/TextBox'
 
 const Home: NextPage = () => {
   const [modal_showing, setModalShowing] = useState<boolean>()
@@ -32,7 +33,10 @@ const Home: NextPage = () => {
                 : ' blur-0 brightness-100'
             }` + ' flex-1 transition-all'
           }
-        ></div>
+        >
+          {/* //!FEED GOES HERE */}
+          <TextBox></TextBox>
+        </div>
         <div
           id="modal_container"
           className="z-10 flex h-[100%] flex-col justify-between"
