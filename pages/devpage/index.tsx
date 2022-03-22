@@ -56,7 +56,6 @@ const Devpage: NextPage = () => {
           onClick={() => console.log('I was clicked 💀')}
         ></Button>
       </div>
-      <TextBox></TextBox>
     </main>
   )
 }
