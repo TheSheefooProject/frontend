@@ -32,8 +32,12 @@ const Home: NextPage = () => {
           {/* Modal (shown when input is focused) */}
           <div
             className={
-              `${modal_showing ? ' visible' : 'hidden'}` +
-              ' mt-auto flex flex-col-reverse items-center md:flex-row md:items-end'
+              `${
+                modal_showing
+                  ? ' opacity-1 pointer-events-auto'
+                  : ' pointer-events-none opacity-0'
+              }` +
+              ' mt-auto flex flex-col-reverse items-center transition-opacity md:flex-row md:items-end'
             }
           >
             {/* Upload Image GRID */}
