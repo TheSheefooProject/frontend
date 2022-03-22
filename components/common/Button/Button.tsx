@@ -13,6 +13,7 @@ const Button = (props: {
   type?: keyof typeof typeColours
   disabled?: boolean
   noMargin?: boolean
+  fixedWidth?: boolean
 }) => {
   // Default prop values
   const {
@@ -24,6 +25,7 @@ const Button = (props: {
     bg_colour = '#4FDC7C',
     onClick = null,
     noMargin = false,
+    fixedWidth = false,
     ...restProps
   } = props
 
@@ -34,13 +36,12 @@ const Button = (props: {
         backgroundColor: typeColours[type],
       }}
       className={`${
-        noMargin
-          ? ' 0rem '
-          : ' 0.25rem ' +
-            className +
-            ' ' +
-            styles.btn +
-            ' mx-1 my-1 h-8 w-[100%] px-2 py-0 font-body font-bold text-white shadow-md '
+        (noMargin ? ' m-0 ' : ' m-1 ') +
+        (fixedWidth ? ' w-28 ' : ' 2-[100%] ') +
+        className +
+        ' ' +
+        styles.btn +
+        ' h-8 w-[100%] px-2 py-0 font-body font-bold text-white shadow-md '
       }`}
       onClick={onClick}
     >

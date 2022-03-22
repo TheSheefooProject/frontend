@@ -31,33 +31,39 @@ const Home: NextPage = () => {
         >
           {/* Modal (shown when input is focused) */}
           <div
-            className={`${modal_showing ? ' visible' : 'hidden'}` + ' mt-auto'}
+            className={
+              `${modal_showing ? ' visible' : 'hidden'}` +
+              ' mt-auto flex flex-col-reverse items-center md:flex-row md:items-end'
+            }
           >
-            {/* Uploaded Image */}
-            <div
-              id="image_container"
-              className="m-auto mt-2 mb-auto flex w-[300px] items-center justify-center rounded-md bg-back_4 p-2"
-            >
-              <Image src="/logo.svg" width={300} height={300}></Image>
-            </div>
-
-            {/* Grid inside modal */}
-            <div
-              className={
-                ' my-2 grid w-[100%] grid-cols-1 items-end rounded-md text-text_1 sm:grid-cols-2'
-              }
-            >
+            {/* Upload Image GRID */}
+            <div className=" mb-3 flex w-[100%] flex-col md:w-[300px]">
+              {/* Uploaded Image */}
+              <div
+                id="image_container"
+                className="m-auto mt-2 mb-2 flex w-[100%] items-center justify-center rounded-md bg-back_4 p-2"
+              >
+                <Image src="/logo.svg" width={300} height={300}></Image>
+              </div>
               <Button
                 type="neutral"
                 text="ADD IMAGE"
                 className="justify-self-start"
+                noMargin
               ></Button>
-              <div
-                id="tags_container"
-                className="mr-1 mb-2 w-[100%] justify-self-end"
-              >
-                <input type="text" placeholder="Add Tag"></input>
-              </div>
+            </div>
+
+            {/* Tags GRID */}
+            <div
+              className={
+                'mb-0 flex w-[100%] flex-col items-end rounded-md text-text_1 md:mb-3 '
+              }
+            >
+              <input
+                type="text"
+                placeholder="Add Tag"
+                className=" h-8 w-[100%] bg-back_4 px-2 text-right md:w-48"
+              ></input>
             </div>
           </div>
           {/* Text input box */}

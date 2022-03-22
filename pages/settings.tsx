@@ -57,6 +57,7 @@ const SettingsPage = (props: { is_dark: boolean; setDark: Function }) => {
             type="negative"
             onClick={() => alert('☠️ Account Deleted ☠️')}
             noMargin
+            fixedWidth
           ></Button>
         </div>
       </form>
