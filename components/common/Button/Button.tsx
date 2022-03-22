@@ -14,11 +14,12 @@ const Button = (props: {
   disabled?: boolean
   noMargin?: boolean
   fixedWidth?: boolean
+  iconOnly?: boolean
 }) => {
   // Default prop values
   const {
     icon = '',
-    text = 'DEFAULT VALUE',
+    text = '',
     type = 'default',
     disabled = false,
     className = '',
@@ -26,6 +27,7 @@ const Button = (props: {
     onClick = null,
     noMargin = false,
     fixedWidth = false,
+    iconOnly = false,
     ...restProps
   } = props
 
@@ -38,10 +40,11 @@ const Button = (props: {
       className={`${
         (noMargin ? ' m-0 ' : ' m-1 ') +
         (fixedWidth ? ' w-28 ' : ' 2-[100%] ') +
+        (iconOnly ? ' w-8 ' : ' ') +
         className +
         ' ' +
         styles.btn +
-        ' h-8 w-[100%] px-2 py-0 font-body font-bold text-white shadow-md '
+        ' h-8 w-[100%] px-2 py-0 font-body font-bold text-white shadow-md hover:scale-95 hover:shadow-none '
       }`}
       onClick={onClick}
     >

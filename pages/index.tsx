@@ -56,14 +56,38 @@ const Home: NextPage = () => {
             {/* Tags GRID */}
             <div
               className={
-                'mb-0 flex w-[100%] flex-col items-end rounded-md text-text_1 md:mb-3 '
+                'mb-0 flex w-[100%] flex-col-reverse items-end rounded-md text-text_1 md:mb-3 '
               }
             >
-              <input
-                type="text"
-                placeholder="Add Tag"
-                className=" h-8 w-[100%] bg-back_4 px-2 text-right md:w-48"
-              ></input>
+              <div className="tag_input_container relative">
+                <input
+                  type="text"
+                  placeholder="Add Tag"
+                  className=" mt-1 h-8 w-[100%] bg-back_4 px-4 text-text_1 placeholder:text-text_1 focus:outline-none focus:ring focus:ring-back_2 md:w-48"
+                ></input>
+                <Button
+                  iconOnly
+                  noMargin
+                  type="positive"
+                  fixedWidth
+                  icon="+"
+                  className="absolute right-0 bottom-0"
+                ></Button>
+              </div>
+
+              <div className="flex flex-col-reverse items-end " id="tags">
+                <span className="my-1 inline-block w-48 overflow-hidden overflow-ellipsis whitespace-nowrap rounded-lg bg-back_2 py-0.5 px-3 hover:cursor-pointer hover:bg-accent_2 hover:first-letter:text-black">
+                  <span className="text-accent_1">◈</span> Example Tag 1
+                </span>
+                <span className="my-1 inline-block w-48 overflow-hidden overflow-ellipsis whitespace-nowrap rounded-lg bg-back_2 py-0.5 px-3 hover:cursor-pointer hover:bg-accent_2 hover:first-letter:text-black">
+                  <span className="text-accent_1">◈</span> Example Tag 2 with a
+                  long name
+                </span>
+                <span className="my-1 inline-block w-48 overflow-hidden overflow-ellipsis whitespace-nowrap rounded-lg bg-back_2 py-0.5 px-3  hover:cursor-pointer hover:bg-accent_2 hover:first-letter:text-black">
+                  <span className="text-accent_1">◈</span> Example Tag 3. It is
+                  polite.
+                </span>
+              </div>
             </div>
           </div>
           {/* Text input box */}
@@ -72,7 +96,7 @@ const Home: NextPage = () => {
             contentEditable
             className={
               `${modal_showing ? ' mt-0' : 'mt-auto'}` +
-              ' bottom-0 mb-2 max-h-[30vh] w-[100%] overflow-y-auto break-words rounded-md bg-back_4 px-3 py-2 focus:outline-none focus:ring focus:ring-back_2'
+              ' bottom-0 mb-2 max-h-[30vh] w-[100%] overflow-y-auto break-words rounded-md bg-back_4 px-3 py-2 text-text_1 focus:outline-none focus:ring focus:ring-back_2'
             }
             onFocus={() => showModal(true)}
             // onBlur={() => showModal(false)}
