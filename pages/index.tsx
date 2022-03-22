@@ -35,7 +35,6 @@ const Home: NextPage = () => {
           }
         >
           {/* //!FEED GOES HERE */}
-          <TextBox></TextBox>
         </div>
         <div
           id="modal_container"
