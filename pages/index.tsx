@@ -116,13 +116,13 @@ const Home: NextPage = () => {
             <div
               role="textbox"
               contentEditable
-              className=" mb-2 max-h-[28vh] w-[100%] overflow-y-auto break-all rounded-md bg-back_4 py-2 pl-3 pb-[48px] text-text_1 focus:outline-none focus:ring focus:ring-back_2"
+              className=" mb-2 max-h-[28vh] w-[100%] overflow-y-auto break-all rounded-md bg-back_4 py-2 pr-[165px] pl-3  text-text_1 focus:outline-none focus:ring focus:ring-back_2"
               onFocus={() => showModal(true)}
               // onBlur={() => showModal(false)}
             ></div>
             <div
               id="action_buttons_container"
-              className="absolute right-1 bottom-3 rounded-md bg-back_3 p-1"
+              className="absolute right-0 bottom-2 rounded-md bg-back_3 px-0.5 py-1 "
             >
               <Button
                 noMargin
