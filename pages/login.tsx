@@ -13,7 +13,7 @@ const Login: NextPage = () => {
       id="text_input_container"
       className={' relative bottom-0 max-h-[30vh] w-[100%]'}
     >
-      text among us
+      text
     </div>
   )
 }
