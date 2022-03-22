@@ -116,7 +116,7 @@ const Home: NextPage = () => {
             <div
               role="textbox"
               contentEditable
-              className=" mb-2 max-h-[28vh] w-[100%] overflow-y-auto break-words rounded-md bg-back_4 px-3 py-2 text-text_1 focus:outline-none focus:ring focus:ring-back_2"
+              className=" mb-2 max-h-[28vh] w-[100%] overflow-y-auto break-all rounded-md bg-back_4 py-2 pl-3 pr-[120px] text-text_1 focus:outline-none focus:ring focus:ring-back_2"
               onFocus={() => showModal(true)}
               // onBlur={() => showModal(false)}
             ></div>
