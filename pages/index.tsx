@@ -59,7 +59,7 @@ const Home: NextPage = () => {
                 'mb-0 flex w-[100%] flex-col-reverse items-end rounded-md text-text_1 md:mb-3 '
               }
             >
-              <div className="tag_input_container relative">
+              <div className="relative" id="tag_input_container">
                 <input
                   type="text"
                   placeholder="Add Tag"
@@ -91,16 +91,31 @@ const Home: NextPage = () => {
             </div>
           </div>
           {/* Text input box */}
-          <span
-            role="textbox"
-            contentEditable
+          <div
+            id="text_input_container"
             className={
               `${modal_showing ? ' mt-0' : 'mt-auto'}` +
-              ' bottom-0 mb-2 max-h-[30vh] w-[100%] overflow-y-auto break-words rounded-md bg-back_4 px-3 py-2 text-text_1 focus:outline-none focus:ring focus:ring-back_2'
+              ' relative bottom-0 max-h-[30vh] w-[100%]'
             }
-            onFocus={() => showModal(true)}
-            // onBlur={() => showModal(false)}
-          ></span>
+          >
+            <div
+              role="textbox"
+              contentEditable
+              className=" mb-2 max-h-[28vh] w-[100%] overflow-y-auto break-words rounded-md bg-back_4 px-3 py-2 text-text_1 focus:outline-none focus:ring focus:ring-back_2"
+              onFocus={() => showModal(true)}
+              // onBlur={() => showModal(false)}
+            ></div>
+            <Button
+              noMargin
+              type="positive"
+              fixedWidth
+              text="Submit Post"
+              className="absolute right-1 bottom-3"
+              onClick={() => {
+                alert('🪴 Post Submitted 🏵️')
+              }}
+            ></Button>
+          </div>
         </div>
       </div>
     </main>
