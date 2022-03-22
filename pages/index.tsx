@@ -37,13 +37,13 @@ const Home: NextPage = () => {
             }
           >
             {/* Upload Image GRID */}
-            <div className=" mb-3 flex w-[100%] flex-col md:w-[300px]">
+            <div className=" mb-3 flex w-[100%] flex-col md:w-[auto]">
               {/* Uploaded Image */}
               <div
                 id="image_container"
                 className="m-auto mt-2 mb-2 flex w-[100%] items-center justify-center rounded-md bg-back_4 p-2"
               >
-                <Image src="/logo.svg" width={300} height={300}></Image>
+                <Image src="/logo.svg" width={200} height={200}></Image>
               </div>
               <Button
                 type="neutral"
@@ -59,7 +59,10 @@ const Home: NextPage = () => {
                 'mb-0 flex w-[100%] flex-col-reverse items-end rounded-md text-text_1 md:mb-3 '
               }
             >
-              <div className="relative" id="tag_input_container">
+              <div
+                className="relative w-[100%] md:w-48"
+                id="tag_input_container"
+              >
                 <input
                   type="text"
                   placeholder="Add Tag"
