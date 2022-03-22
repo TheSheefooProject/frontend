@@ -13,17 +13,21 @@ const Button = (props: {
   type?: keyof typeof typeColours
   disabled?: boolean
   noMargin?: boolean
+  fixedWidth?: boolean
+  iconOnly?: boolean
 }) => {
   // Default prop values
   const {
     icon = '',
-    text = 'DEFAULT VALUE',
+    text = '',
     type = 'default',
     disabled = false,
     className = '',
     bg_colour = '#4FDC7C',
     onClick = null,
     noMargin = false,
+    fixedWidth = false,
+    iconOnly = false,
     ...restProps
   } = props
 
@@ -32,13 +36,15 @@ const Button = (props: {
       disabled={disabled}
       style={{
         backgroundColor: typeColours[type],
-        margin: noMargin ? '0rem' : '0.25rem',
       }}
       className={`${
+        (noMargin ? ' m-0 ' : ' m-1 ') +
+        (fixedWidth ? ' w-28 ' : ' 2-[100%] ') +
+        (iconOnly ? ' w-8 ' : ' ') +
         className +
         ' ' +
         styles.btn +
-        ' mx-1 my-1 h-8 w-16 px-2 py-0 font-body font-bold text-white shadow-md'
+        ' h-8 w-[100%] px-2 py-0 font-body font-bold text-white shadow-md hover:scale-95 hover:shadow-none '
       }`}
       onClick={onClick}
     >
