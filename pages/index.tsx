@@ -23,11 +23,19 @@ const Home: NextPage = () => {
       </Head>
       {/* Main Container */}
       <div className="relative mx-2 my-2 mt-12 flex w-[100%] flex-col rounded-md bg-back_3 px-2 md:mx-4 md:my-4">
-        <div className="flex-1"></div>
-
+        {/* Homescreen Feed */}
+        <div
+          className={
+            `${
+              modal_showing
+                ? ' blur brightness-[.25]'
+                : ' blur-0 brightness-100'
+            }` + ' flex-1 transition-all'
+          }
+        ></div>
         <div
           id="modal_container"
-          className="flex h-[100%] flex-col justify-between"
+          className="z-10 flex h-[100%] flex-col justify-between"
         >
           {/* Modal (shown when input is focused) */}
           <div
@@ -37,7 +45,7 @@ const Home: NextPage = () => {
                   ? ' opacity-1 pointer-events-auto'
                   : ' pointer-events-none opacity-0'
               }` +
-              ' mt-auto flex flex-col-reverse items-center transition-opacity md:flex-row md:items-end'
+              '  mt-auto flex flex-col-reverse items-center transition-opacity md:flex-row md:items-end'
             }
           >
             {/* Upload Image GRID */}
