@@ -53,9 +53,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, [])
 
   return (
-    <div className="flex flex-row">
-      <Sidebar></Sidebar>
+    <div className="flex flex-row-reverse">
       <Component is_dark={is_dark} setDark={setDark} {...pageProps} />
+      <Sidebar></Sidebar>
     </div>
   )
 }

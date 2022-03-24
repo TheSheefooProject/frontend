@@ -41,7 +41,7 @@ const SettingsPage = (props: { is_dark: boolean; setDark: Function }) => {
             type="range"
             min="1"
             max="100"
-            value="50"
+            defaultValue="50"
             className="slider"
             id="myRange"
           ></input>
