@@ -55,10 +55,12 @@ const Sidebar = (props: {}) => {
 
           {/* Free space */}
 
-          <button className=" has-tooltip relative mt-auto justify-self-end drop-shadow-lg hover:top-[1px] hover:cursor-pointer hover:text-accent_2 hover:drop-shadow-none">
-            <FiUser size="3.5em"></FiUser>
-            <Tooltip text="Profile" side="right"></Tooltip>
-          </button>
+          <Link href="/profile">
+            <div className=" has-tooltip relative mt-auto justify-self-end drop-shadow-lg hover:top-[1px] hover:cursor-pointer hover:text-accent_2 hover:drop-shadow-none">
+              <FiUser size="3.5em"></FiUser>
+              <Tooltip text="Profile" side="right"></Tooltip>
+            </div>
+          </Link>
           <Link href="/settings">
             <div className=" has-tooltip relative mt-5 justify-self-end drop-shadow-lg hover:top-[1px] hover:cursor-pointer hover:text-accent_2 hover:drop-shadow-none">
               <FiSettings size="3.5em"></FiSettings>
