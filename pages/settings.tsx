@@ -15,7 +15,7 @@ const SettingsPage = (props: { is_dark: boolean; setDark: Function }) => {
   const { is_dark = false, setDark = null, ...restProps } = props
 
   return (
-    <main className="md:[5vw] static min-h-screen w-[100%] min-w-[320px] overflow-x-hidden bg-back_3 px-10 pt-12 md:px-[20vw] ">
+    <main className="md:[5vw] static min-h-screen w-[100%] min-w-[320px] overflow-x-hidden bg-back_3 px-10 pt-12 md:px-[calc(20vw+5rem)]">
       <Head>
         <title>Sheefoo | Dev Page</title>
       </Head>
