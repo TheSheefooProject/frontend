@@ -13,7 +13,12 @@ const Sidebar = (props: {}) => {
   const [sidebar_visible, setSidebarVisible] = useState<boolean>()
 
   return (
-    <div className={`${sidebar_visible ? 'w-20' : 'w-0'}` + ' z-50 md:w-20'}>
+    <div
+      className={
+        `${sidebar_visible ? 'w-20' : 'w-0'}` +
+        ' fixed left-0 top-0 z-50 h-[100vh] md:w-20'
+      }
+    >
       {/* Hamburger Menu Button */}
       <button
         className={
