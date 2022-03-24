@@ -19,7 +19,7 @@ const Home: NextPage = () => {
     }
   }
   return (
-    <main className=" flex min-h-screen w-[100%] flex-row items-stretch overflow-x-hidden bg-back_2 ">
+    <main className=" flex min-h-screen w-[100%] flex-row items-stretch overflow-x-hidden bg-back_2 md:pl-20">
       <Head>
         <title>Sheefoo</title>
       </Head>
@@ -39,7 +39,7 @@ const Home: NextPage = () => {
         </div>
         <div
           id="modal_container"
-          className="z-10 flex h-[100%] flex-col justify-between"
+          className="flex h-[100%] flex-col justify-between"
         >
           {/* Modal (shown when input is focused) */}
           <div
