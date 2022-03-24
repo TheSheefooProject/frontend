@@ -81,7 +81,7 @@ const Home: NextPage = () => {
                 <input
                   type="text"
                   placeholder="Add Tag"
-                  className=" mt-1 h-8 w-[100%] bg-back_4 px-4 text-text_1 placeholder:text-text_1 focus:outline-none focus:ring focus:ring-back_2 md:w-48"
+                  className=" mt-1 h-8 w-[100%] rounded-md bg-back_4 px-4 text-text_1 placeholder:text-text_1 focus:outline-none focus:ring focus:ring-back_2 md:w-48"
                 ></input>
                 <Button
                   iconOnly
