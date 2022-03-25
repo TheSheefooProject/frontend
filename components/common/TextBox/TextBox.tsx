@@ -12,7 +12,7 @@ const TextBox = (props: {
   return (
     <input
       className={
-        `${'rounded-sm bg-back_4 py-1 px-2 text-text_1 focus:outline-none focus:ring focus:ring-back_2'} ` +
+        `${'rounded-sm bg-back_4 py-1 px-3 text-text_1 placeholder:text-text_1 focus:outline-none focus:ring focus:ring-back_2'} ` +
         className
       }
       defaultValue={text}
