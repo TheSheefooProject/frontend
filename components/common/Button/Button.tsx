@@ -39,7 +39,7 @@ const Button = (props: {
       }}
       className={`${
         (noMargin ? ' m-0 ' : ' m-1 ') +
-        (fixedWidth ? ' w-28 ' : ' 2-[100%] ') +
+        (fixedWidth ? ' w-28 ' : ' w-[100%] ') +
         (iconOnly ? ' w-8 ' : ' ') +
         className +
         ' ' +

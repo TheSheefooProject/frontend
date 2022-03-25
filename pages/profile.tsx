@@ -33,17 +33,25 @@ const Profile: NextPage = () => {
                 <label>About Me </label>
                 <TextArea text="(Current Biography)"></TextArea>
               </li>
+              <li>
+                <Button
+                  noMargin
+                  text="Save Changes"
+                  type="positive"
+                  className="mb-5 md:mb-0"
+                ></Button>
+              </li>
             </ul>
           </form>
         </div>
       </div>
       {/* Change User Settings Container */}
       <div className="mb-10 flex flex-col">
-        <div className="flex flex-col md:flex-row">
+        <div className="flex flex-col items-center md:flex-row">
           <Button text="Change E-Mail" type="neutral"></Button>
           <Button text="Change Password" type="neutral"></Button>
         </div>
-        <div className="flex flex-col md:flex-row">
+        <div className="flex flex-col items-center md:flex-row">
           <Button text="Permanently Delete Account" type="negative"></Button>
         </div>
       </div>
