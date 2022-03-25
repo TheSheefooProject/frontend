@@ -6,6 +6,7 @@ import Image from 'next/image'
 import Button from '../components/common/Button'
 import TextBox from '../components/common/TextBox'
 import { FiPlus, FiX } from 'react-icons/fi'
+import Tag from '../components/common/Tag'
 
 const Home: NextPage = () => {
   const [modal_showing, setModalShowing] = useState<boolean>()
@@ -111,6 +112,7 @@ const Home: NextPage = () => {
                     Example Tag 2 with a long name
                   </p>
                 </span>
+                <Tag text="Example Tag from Tag component"></Tag>
                 <span className=" my-1 inline-flex h-7 w-64 flex-row items-center  whitespace-nowrap rounded-md bg-back_2 py-0.5 pr-3 ">
                   <div className="flex h-7 w-7 items-center rounded-l-md px-1 align-middle text-accent_1 hover:cursor-pointer hover:bg-red-600">
                     <FiX className="m-auto block"></FiX>
