@@ -4,6 +4,8 @@ import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import Button from '../components/common/Button'
+import TextBox from '../components/common/TextBox'
+import { FiPlus, FiX } from 'react-icons/fi'
 
 const Home: NextPage = () => {
   const [modal_showing, setModalShowing] = useState<boolean>()
@@ -17,7 +19,7 @@ const Home: NextPage = () => {
     }
   }
   return (
-    <main className=" flex min-h-screen w-[100%] flex-row items-stretch overflow-x-hidden bg-back_2 ">
+    <main className=" flex min-h-screen w-[100%] flex-row items-stretch overflow-x-hidden bg-back_2 md:pl-20">
       <Head>
         <title>Sheefoo</title>
       </Head>
@@ -32,10 +34,12 @@ const Home: NextPage = () => {
                 : ' blur-0 brightness-100'
             }` + ' flex-1 transition-all'
           }
-        ></div>
+        >
+          {/* //!FEED GOES HERE */}
+        </div>
         <div
           id="modal_container"
-          className="z-10 flex h-[100%] flex-col justify-between"
+          className="flex h-[100%] flex-col justify-between"
         >
           {/* Modal (shown when input is focused) */}
           <div
@@ -72,35 +76,48 @@ const Home: NextPage = () => {
               }
             >
               <div
-                className="relative w-[100%] md:w-48"
+                className="relative w-[100%] md:w-64"
                 id="tag_input_container"
               >
                 <input
                   type="text"
                   placeholder="Add Tag"
-                  className=" mt-1 h-8 w-[100%] bg-back_4 px-4 text-text_1 placeholder:text-text_1 focus:outline-none focus:ring focus:ring-back_2 md:w-48"
+                  className=" mt-1 h-8 w-[100%] rounded-md bg-back_4 px-4 text-text_1 placeholder:text-text_1 focus:outline-none focus:ring focus:ring-back_2 md:w-64"
                 ></input>
                 <Button
                   iconOnly
                   noMargin
                   type="positive"
                   fixedWidth
-                  icon="+"
+                  icon={<FiPlus></FiPlus>}
                   className="absolute right-0 bottom-0"
                 ></Button>
               </div>
 
               <div className="flex flex-col-reverse items-end " id="tags">
-                <span className="my-1 inline-block w-48 overflow-hidden overflow-ellipsis whitespace-nowrap rounded-lg bg-back_2 py-0.5 px-3 hover:cursor-pointer hover:bg-accent_2 hover:first-letter:text-black">
-                  <span className="text-accent_1">◈</span> Example Tag 1
+                <span className=" my-1 inline-flex h-7 w-64 flex-row items-center  whitespace-nowrap rounded-md bg-back_2 py-0.5 pr-3 ">
+                  <div className="flex h-7 w-7 items-center rounded-l-md px-1 text-accent_1 hover:cursor-pointer hover:bg-red-600">
+                    <FiX className="m-auto block"></FiX>
+                  </div>
+                  <p className="overflow-hidden overflow-ellipsis border-l-2 border-back_3 pl-2">
+                    Example Tag 1
+                  </p>
                 </span>
-                <span className="my-1 inline-block w-48 overflow-hidden overflow-ellipsis whitespace-nowrap rounded-lg bg-back_2 py-0.5 px-3 hover:cursor-pointer hover:bg-accent_2 hover:first-letter:text-black">
-                  <span className="text-accent_1">◈</span> Example Tag 2 with a
-                  long name
+                <span className=" my-1 inline-flex h-7 w-64 flex-row items-center  whitespace-nowrap rounded-md bg-back_2 py-0.5 pr-3 ">
+                  <div className="flex h-7 w-7 items-center rounded-l-md px-1 text-accent_1 hover:cursor-pointer hover:bg-red-600">
+                    <FiX className="m-auto block"></FiX>
+                  </div>
+                  <p className="overflow-hidden overflow-ellipsis border-l-2 border-back_3 pl-2">
+                    Example Tag 2 with a long name
+                  </p>
                 </span>
-                <span className="my-1 inline-block w-48 overflow-hidden overflow-ellipsis whitespace-nowrap rounded-lg bg-back_2 py-0.5 px-3  hover:cursor-pointer hover:bg-accent_2 hover:first-letter:text-black">
-                  <span className="text-accent_1">◈</span> Example Tag 3. It is
-                  polite.
+                <span className=" my-1 inline-flex h-7 w-64 flex-row items-center  whitespace-nowrap rounded-md bg-back_2 py-0.5 pr-3 ">
+                  <div className="flex h-7 w-7 items-center rounded-l-md px-1 align-middle text-accent_1 hover:cursor-pointer hover:bg-red-600">
+                    <FiX className="m-auto block"></FiX>
+                  </div>
+                  <p className="overflow-hidden overflow-ellipsis border-l-2 border-back_3 pl-2">
+                    Example Tag 3 😳
+                  </p>
                 </span>
               </div>
             </div>
@@ -116,20 +133,36 @@ const Home: NextPage = () => {
             <div
               role="textbox"
               contentEditable
-              className=" mb-2 max-h-[28vh] w-[100%] overflow-y-auto break-all rounded-md bg-back_4 py-2 pl-3 pr-[120px] text-text_1 focus:outline-none focus:ring focus:ring-back_2"
+              className=" mb-2 max-h-[28vh] w-[100%] overflow-y-auto break-all rounded-md bg-back_4 py-2 pr-[165px] pl-3  text-text_1 focus:outline-none focus:ring focus:ring-back_2"
               onFocus={() => showModal(true)}
               // onBlur={() => showModal(false)}
             ></div>
-            <Button
-              noMargin
-              type="positive"
-              fixedWidth
-              text="Submit Post"
-              className="absolute right-1 bottom-3"
-              onClick={() => {
-                alert('🪴 Post Submitted 🏵️')
-              }}
-            ></Button>
+            <div
+              id="action_buttons_container"
+              className="absolute right-0 bottom-2 rounded-md bg-back_3 px-0.5 py-1 "
+            >
+              <Button
+                noMargin
+                type="positive"
+                fixedWidth
+                text="Submit Post"
+                className="mx-0.5"
+                onClick={() => {
+                  alert('🪴 Post Submitted 🏵️')
+                }}
+              ></Button>
+              <Button
+                noMargin
+                type="negative"
+                fixedWidth
+                icon={<FiX></FiX>}
+                iconOnly
+                className="mx-0.5"
+                onClick={() => {
+                  alert('⚠️ Are you sure you wish to cancel your post? ⚠️')
+                }}
+              ></Button>
+            </div>
           </div>
         </div>
       </div>
