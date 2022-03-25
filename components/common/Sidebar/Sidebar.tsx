@@ -76,7 +76,7 @@ const Sidebar = (props: {}) => {
       <div
         className={
           `${sidebar_visible ? 'visible' : 'hidden'}` +
-          ' absolute top-0 left-0 h-[100vh] w-[100vw] bg-[rgba(0,0,0,0.8)] bg-blend-darken  md:hidden'
+          ' fixed top-0 left-0 h-[100vh] w-[100vw] bg-[rgba(0,0,0,0.8)] bg-blend-darken  md:hidden'
         }
       ></div>
     </>
