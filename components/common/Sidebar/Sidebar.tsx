@@ -67,10 +67,12 @@ const Sidebar = (props: {}) => {
               <Tooltip text="Settings" side="right"></Tooltip>
             </div>
           </Link>
-          <button className=" has-tooltip relative mt-5 justify-self-end drop-shadow-lg hover:top-[1px] hover:cursor-pointer hover:text-accent_2 hover:drop-shadow-none">
-            <FiLogOut size="3.5em"></FiLogOut>
-            <Tooltip text="Log Out" side="right"></Tooltip>
-          </button>
+          <Link href="/login">
+            <div className=" has-tooltip relative mt-5 justify-self-end drop-shadow-lg hover:top-[1px] hover:cursor-pointer hover:text-accent_2 hover:drop-shadow-none">
+              <FiLogOut size="3.5em"></FiLogOut>
+              <Tooltip text="Log Out" side="right"></Tooltip>
+            </div>
+          </Link>
         </div>
       </div>
       <div
