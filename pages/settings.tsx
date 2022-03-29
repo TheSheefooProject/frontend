@@ -72,7 +72,7 @@ const SettingsPage = (props: { is_dark: boolean; setDark: Function }) => {
         {/* Disable autoplay toggle */}
         <div className="flex flex-row items-center justify-between">
           <h2 className="text-xl ">Disable video/GIF autoplay</h2>
-          <Switch name="setting_motion"></Switch>
+          <Switch name="setting_autoplay"></Switch>
         </div>
 
         {/* Divider */}
@@ -80,7 +80,7 @@ const SettingsPage = (props: { is_dark: boolean; setDark: Function }) => {
         {/* Disable Sound toggle */}
         <div className="flex flex-row items-center justify-between">
           <h2 className="text-xl ">Disable sounds</h2>
-          <Switch name="setting_motion"></Switch>
+          <Switch name="setting_sound"></Switch>
         </div>
 
         <h2 className=" mt-10 border-b-[1px] border-back_2 pb-2 text-left font-heading text-2xl text-text_2">
@@ -91,21 +91,21 @@ const SettingsPage = (props: { is_dark: boolean; setDark: Function }) => {
         {/* Reduced Motion Toggle */}
         <div className="flex flex-row items-center justify-between">
           <h2 className="text-xl ">Profile visibility</h2>
-          <Switch name="setting_motion"></Switch>
+          <Switch name="setting_visibility"></Switch>
         </div>
         {/* Divider */}
         <span className="relative bottom-0 my-4 h-[1px] w-auto bg-back_4 opacity-20 "></span>
         {/* Reduced Motion Toggle */}
         <div className="flex flex-row items-center justify-between">
           <h2 className="text-xl ">Receive direct messages from</h2>
-          <Switch name="setting_motion"></Switch>
+          <Switch name="setting_dms"></Switch>
         </div>
         {/* Divider */}
         <span className="relative bottom-0 my-4 h-[1px] w-auto bg-back_4 opacity-20 "></span>
         {/* Reduced Motion Toggle */}
         <div className="flex flex-row items-center justify-between">
           <h2 className="text-xl ">Disable push notifications</h2>
-          <Switch name="setting_motion"></Switch>
+          <Switch name="setting_notifications"></Switch>
         </div>
 
         {/* Divider */}
