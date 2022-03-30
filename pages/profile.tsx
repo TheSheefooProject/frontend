@@ -1,3 +1,4 @@
+import axios from 'axios'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
@@ -39,6 +40,7 @@ const Profile: NextPage = () => {
                   text="Save Changes"
                   type="positive"
                   className="mb-5 md:mb-0"
+                  onClick={() => testFunction()}
                 ></Button>
               </li>
             </ul>
@@ -60,3 +62,16 @@ const Profile: NextPage = () => {
 }
 
 export default Profile
+function testFunction() {
+  axios
+    .get('http://localhost:4000/userData', {
+      params: { username: searchQuery },
+    })
+    .then(function (response) {
+      setUserData(response.data)
+      console.log(response.data)
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
+}
