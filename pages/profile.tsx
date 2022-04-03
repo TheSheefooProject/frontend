@@ -40,7 +40,7 @@ const Profile: NextPage = () => {
                   text="Save Changes"
                   type="positive"
                   className="mb-5 md:mb-0"
-                  onClick={() => testFunction()}
+                  onClick={() => {}}
                 ></Button>
               </li>
             </ul>
