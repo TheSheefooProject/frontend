@@ -20,6 +20,14 @@ const Sidebar = (props: {}) => {
           ' fixed left-0 top-0 z-50 h-[100vh] drop-shadow-lg md:w-20'
         }
       >
+        {/* Dark Overlay */}
+        <div
+          className={
+            `${sidebar_visible ? 'visible' : 'hidden'}` +
+            ' fixed top-0 left-0 -z-10 h-[100vh] w-[100vw] bg-[rgba(0,0,0,0.8)]  bg-blend-darken md:hidden'
+          }
+          onClick={() => setSidebarVisible(false)}
+        ></div>
         {/* Hamburger Menu Button */}
         <button
           className={
@@ -30,7 +38,10 @@ const Sidebar = (props: {}) => {
         >
           <GiHamburgerMenu
             size="3em"
-            className=" absolute top-0 "
+            className={
+              `${sidebar_visible ? 'fill-accent_2' : 'fill-text_1'}` +
+              ' absolute top-0 '
+            }
           ></GiHamburgerMenu>
         </button>
 
@@ -75,12 +86,6 @@ const Sidebar = (props: {}) => {
           </Link>
         </div>
       </div>
-      <div
-        className={
-          `${sidebar_visible ? 'visible' : 'hidden'}` +
-          ' fixed top-0 left-0 h-[100vh] w-[100vw] bg-[rgba(0,0,0,0.8)] bg-blend-darken  md:hidden'
-        }
-      ></div>
     </>
   )
 }
