@@ -42,7 +42,6 @@ const Profile: NextPage = () => {
                   noMargin
                   text="Save Changes"
                   type="positive"
-                  className="mb-5 md:mb-0"
                   onClick={() => {}}
                 ></Button>
               </li>
