@@ -17,7 +17,7 @@ const Sidebar = (props: {}) => {
       <div
         className={
           `${sidebar_visible ? 'w-20' : 'w-0'}` +
-          ' fixed left-0 top-0 z-50 h-[100vh] md:w-20'
+          ' fixed left-0 top-0 z-50 h-[100vh] drop-shadow-lg md:w-20'
         }
       >
         {/* Hamburger Menu Button */}
@@ -40,7 +40,7 @@ const Sidebar = (props: {}) => {
             `${
               (styles.sidebar, sidebar_visible ? 'flex w-20' : 'hidden w-0')
             }` +
-            '   h-[100%] w-20 flex-col items-center bg-back_1 py-2 text-accent_1 md:flex md:w-20'
+            '   h-[100%] w-20 flex-col items-center bg-back_1 py-2 text-text_1 md:flex md:w-20'
           }
         >
           <Link href="/">

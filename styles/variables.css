@@ -2,13 +2,13 @@
 .theme-light {
   /* Background Colours */
   /*# */
-  --color-back-1: 144 58 49;
+  --color-back-1: 240 200 160;
   /*# */
-  --color-back-2: 189 77 65;
+  --color-back-2: 240 210 190;
   /*# */
-  --color-back-3: 217 110 77;
+  --color-back-3: 245 240 235;
   /*# */
-  --color-back-4: 255 153 105;
+  --color-back-4: 255 255 255;
   /* Text Colours */
   /*# */
   --color-text-1: 32 34 37;
@@ -17,9 +17,9 @@
 
   /* Accent/Element Colours */
   /*# */
-  --color-accent-1: 250 250 250;
+  --color-accent-1: 255 153 105;
   /*# */
-  --color-accent-2: 238 238 238;
+  --color-accent-2: 255 105 105;
 }
 
 .theme-dark {
