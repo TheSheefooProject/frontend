@@ -20,7 +20,7 @@ const SettingsPage = (props: { is_dark: boolean; setDark: Function }) => {
         <title>Sheefoo | Dev Page</title>
       </Head>
 
-      <h1 className=" pb-2 text-right font-heading text-4xl text-accent_1">
+      <h1 className=" pb-2 text-right font-heading text-4xl text-accent_2">
         Settings
       </h1>
       <br />
