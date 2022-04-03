@@ -8,6 +8,8 @@ import Button from '../components/common/Button'
 import TextArea from '../components/common/TextArea'
 import TextBox from '../components/common/TextBox'
 
+import { FiEdit } from 'react-icons/fi'
+
 const Profile: NextPage = () => {
   return (
     <main className="static flex min-h-screen w-[100%] min-w-[320px] flex-col justify-between overflow-x-hidden bg-back_3 px-10 pt-12 text-text_1  md:px-[calc(15vw+5rem)]">
@@ -15,13 +17,14 @@ const Profile: NextPage = () => {
       <div className="flex flex-col justify-between rounded-lg border-2 bg-back_2 p-6 font-body md:flex-row">
         <div
           id="userimage"
-          className="relative mr-8 h-full min-h-[12rem] w-full min-w-[12rem] cursor-pointer overflow-hidden rounded-md border-2 border-back_4 hover:brightness-75"
+          className="group relative mr-8 h-full min-h-[12rem] w-full min-w-[12rem] cursor-pointer overflow-hidden rounded-md border-2 border-back_4 hover:brightness-75"
         >
           <Image
             src="/images/thispersondoesnotexist.jpg"
             layout="fill"
             objectFit="cover"
           ></Image>
+          <FiEdit className="absolute left-2 bottom-2 hidden h-12 w-12 text-white group-hover:inline"></FiEdit>
         </div>
         <div id="userinfo">
           <form method="post">
