@@ -15,7 +15,7 @@ const Profile: NextPage = () => {
       <div className="flex flex-col justify-between rounded-lg border-2 bg-back_2 p-6 font-body md:flex-row">
         <div
           id="userimage"
-          className="relative mr-8 h-full min-h-[12rem] w-full min-w-[12rem] overflow-hidden rounded-md border-2 border-back_4"
+          className="relative mr-8 h-full min-h-[12rem] w-full min-w-[12rem] cursor-pointer overflow-hidden rounded-md border-2 border-back_4 hover:brightness-75"
         >
           <Image
             src="/images/thispersondoesnotexist.jpg"
@@ -62,16 +62,3 @@ const Profile: NextPage = () => {
 }
 
 export default Profile
-function testFunction() {
-  axios
-    .get('http://localhost:4000/userData', {
-      params: { username: searchQuery },
-    })
-    .then(function (response) {
-      setUserData(response.data)
-      console.log(response.data)
-    })
-    .catch(function (error) {
-      console.log(error)
-    })
-}
