@@ -10,17 +10,17 @@ import TextBox from '../components/common/TextBox'
 
 const Profile: NextPage = () => {
   return (
-    <main className="static flex min-h-screen w-[100%] min-w-[320px] flex-col justify-between overflow-x-hidden bg-back_3 px-10 pt-12 text-text_1  md:px-[calc(25vw+5rem)]">
+    <main className="static flex min-h-screen w-[100%] min-w-[320px] flex-col justify-between overflow-x-hidden bg-back_3 px-10 pt-12 text-text_1  md:px-[calc(15vw+5rem)]">
       {/* Profile Container */}
-      <div className="flex flex-col justify-between font-body md:flex-row">
+      <div className="flex flex-col justify-between rounded-lg border-2 bg-back_2 p-6 font-body md:flex-row">
         <div
           id="userimage"
-          className="mr-10 h-64 w-64 overflow-hidden rounded-full border-4 border-back_1"
+          className="relative mr-8 h-full min-h-[12rem] w-full min-w-[12rem] overflow-hidden rounded-md border-2 border-back_4"
         >
           <Image
             src="/images/thispersondoesnotexist.jpg"
-            width={500}
-            height={500}
+            layout="fill"
+            objectFit="cover"
           ></Image>
         </div>
         <div id="userinfo">
