@@ -6,6 +6,11 @@
     "start": "next start"
   },
   "dependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/react-icons": "^3.0.0",
+    "@types/react-router": "^5.1.18",
+    "axios": "^0.26.1",
+    "cors": "^2.8.5",
     "eslint": "^8.10.0",
     "next": "latest",
     "react": "^17.0.2",
