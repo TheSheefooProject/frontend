@@ -12,9 +12,9 @@ import { FiEdit } from 'react-icons/fi'
 
 const Profile: NextPage = () => {
   return (
-    <main className="static flex min-h-screen w-[100%] min-w-[320px] flex-col justify-between overflow-x-hidden bg-back_3 px-10 pt-12 text-text_1  md:px-[calc(15vw+5rem)]">
+    <main className="static flex min-h-screen w-[100%] min-w-[320px] flex-col justify-between overflow-x-hidden bg-back_3 px-10 pt-12 text-text_1 md:pl-[calc(5vw+10rem)] md:pr-[calc(5vw+5rem)]">
       {/* Profile Container */}
-      <div className="flex flex-col justify-between rounded-lg border-2 bg-back_2 p-6 font-body md:flex-row">
+      <div className="mb-4 flex flex-col justify-between rounded-lg border-0 bg-back_2 p-6 font-body md:mb-0 md:flex-row md:border-2">
         <div
           id="userimage"
           className="group relative mr-8 h-full min-h-[12rem] w-full min-w-[12rem] cursor-pointer overflow-hidden rounded-md border-2 border-back_4 hover:brightness-75"
@@ -26,14 +26,14 @@ const Profile: NextPage = () => {
           ></Image>
           <FiEdit className="absolute left-2 bottom-2 hidden h-12 w-12 text-white group-hover:inline"></FiEdit>
         </div>
-        <div id="userinfo">
+        <div id="userinfo" className="relative">
           <form method="post">
             <ul>
-              <li className="flex flex-col gap-1">
+              <li className=" inline-flex w-full flex-col gap-1">
                 <label>Username </label>
                 <TextBox placeholder="(Current Username)"></TextBox>
               </li>
-              <li className="mt-4 flex flex-col gap-1">
+              <li className=" mt-4 inline-flex w-full flex-col gap-1">
                 <label>About Me </label>
                 <TextArea text="(Current Biography)"></TextArea>
               </li>

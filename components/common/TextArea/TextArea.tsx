@@ -22,7 +22,11 @@ const TextArea = (props: {
     <div
       role="textbox"
       contentEditable
-      className="mb-2 h-[150px] overflow-y-auto break-words rounded-sm bg-back_4 py-2 px-3 text-text_1 hover:cursor-text focus:outline-none focus:ring focus:ring-back_2 md:w-[300px]"
+      suppressContentEditableWarning
+      className={
+        `${className}` +
+        ' mb-2 inline h-[150px] overflow-y-auto break-words rounded-sm bg-back_4 py-2 px-3 text-text_1 hover:cursor-text focus:outline-none focus:ring focus:ring-back_2'
+      }
     >
       {text}
     </div>

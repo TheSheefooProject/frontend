@@ -77,11 +77,9 @@ const SettingsPage = (props: {
           <h2 className="text-xl ">Reduced motion</h2>
           <Switch
             name="setting_motion"
-            onClick={(e: { target: { checked: boolean } }) => (
-              console.log(settings),
-              console.log(typeof settings),
+            onClick={(e: { target: { checked: boolean } }) =>
               props.saveSettings('reduced_motion', e.target.checked)
-            )}
+            }
             initialState={settings?.reduced_motion}
           ></Switch>
         </div>
@@ -93,10 +91,9 @@ const SettingsPage = (props: {
           <h2 className="text-xl ">Disable video/GIF autoplay</h2>
           <Switch
             name="setting_autoplay"
-            onClick={(e: { target: { checked: boolean } }) => (
-              console.log(settings),
+            onClick={(e: { target: { checked: boolean } }) =>
               props.saveSettings('disable_autoplay', e.target.checked)
-            )}
+            }
             initialState={settings?.disable_autoplay}
           ></Switch>
         </div>
@@ -108,10 +105,9 @@ const SettingsPage = (props: {
           <h2 className="text-xl ">Disable sounds</h2>
           <Switch
             name="setting_sound"
-            onClick={(e: { target: { checked: boolean } }) => (
-              console.log(settings),
+            onClick={(e: { target: { checked: boolean } }) =>
               props.saveSettings('disable_sounds', e.target.checked)
-            )}
+            }
             initialState={settings?.disable_sounds}
           ></Switch>
         </div>
@@ -126,10 +122,9 @@ const SettingsPage = (props: {
           <h2 className="text-xl ">Profile visibility</h2>
           <Switch
             name="setting_visibility"
-            onClick={(e: { target: { checked: boolean } }) => (
-              console.log(settings),
+            onClick={(e: { target: { checked: boolean } }) =>
               props.saveSettings('profile_private', e.target.checked)
-            )}
+            }
             initialState={settings?.profile_private}
           ></Switch>
         </div>
@@ -140,10 +135,9 @@ const SettingsPage = (props: {
           <h2 className="text-xl ">Receive direct messages from</h2>
           <Switch
             name="setting_dms"
-            onClick={(e: { target: { checked: boolean } }) => (
-              console.log(settings),
+            onClick={(e: { target: { checked: boolean } }) =>
               props.saveSettings('dms_from_strangers', e.target.checked)
-            )}
+            }
             initialState={settings?.dms_from_strangers}
           ></Switch>
         </div>
@@ -154,10 +148,9 @@ const SettingsPage = (props: {
           <h2 className="text-xl ">Disable push notifications</h2>
           <Switch
             name="setting_notifications"
-            onClick={(e: { target: { checked: boolean } }) => (
-              console.log(settings),
+            onClick={(e: { target: { checked: boolean } }) =>
               props.saveSettings('disable_notifications', e.target.checked)
-            )}
+            }
             initialState={settings?.disable_notifications}
           ></Switch>
         </div>
