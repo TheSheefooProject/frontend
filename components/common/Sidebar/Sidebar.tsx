@@ -55,8 +55,9 @@ const Sidebar = (props: {}) => {
           }
         >
           <Link href="/">
-            <a className="relative drop-shadow-lg hover:top-[1px] hover:drop-shadow-none">
+            <a className="has-tooltip relative mt-3 px-3 drop-shadow-lg hover:top-[1px] hover:drop-shadow-none">
               <Image src="/logo.svg" width={64} height={64}></Image>
+              <Tooltip text="Home" side="right"></Tooltip>
             </a>
           </Link>
           <button className=" has-tooltip relative mt-5 drop-shadow-lg hover:top-[1px] hover:cursor-pointer hover:text-accent_2 hover:drop-shadow-none">
