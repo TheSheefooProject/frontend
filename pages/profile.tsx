@@ -17,7 +17,7 @@ const Profile: NextPage = () => {
       <div className="mb-4 flex flex-col justify-between rounded-lg border-0 bg-back_2 p-6 font-body md:mb-0 md:flex-row md:border-2">
         <div
           id="userimage"
-          className="group relative mr-8 h-full min-h-[12rem] w-full min-w-[12rem] cursor-pointer overflow-hidden rounded-md border-2 border-back_4 hover:brightness-75"
+          className="group relative mr-8 h-full min-h-[12rem] w-full min-w-[12rem] basis-4 cursor-pointer overflow-hidden rounded-md border-2 border-back_4 hover:brightness-75"
         >
           <Image
             src="/images/thispersondoesnotexist.jpg"
