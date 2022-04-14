@@ -60,10 +60,12 @@ const Sidebar = (props: {}) => {
               <Tooltip text="Home" side="right"></Tooltip>
             </a>
           </Link>
-          <button className=" has-tooltip relative mt-5 drop-shadow-lg hover:top-[1px] hover:cursor-pointer hover:text-accent_2 hover:drop-shadow-none">
-            <FiMessageSquare size="3.5em"></FiMessageSquare>
-            <Tooltip text="Messages" side="right"></Tooltip>
-          </button>
+          <Link href="/messages">
+            <a className=" has-tooltip relative mt-5 drop-shadow-lg hover:top-[1px] hover:cursor-pointer hover:text-accent_2 hover:drop-shadow-none">
+              <FiMessageSquare size="3.5em"></FiMessageSquare>
+              <Tooltip text="Messages" side="right"></Tooltip>
+            </a>
+          </Link>
 
           {/* Free space */}
 
