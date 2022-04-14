@@ -1,4 +1,12 @@
-const DMFragment = () => {
+import { NextPage } from 'next'
+
+export interface Props {
+  // prop_name:prop_type
+  // prop_name:prop_type
+  // prop_name:prop_type
+}
+
+const DMFragment: NextPage<Props> = (props) => {
   const userID = 'Test User'
   return (
     <>
@@ -13,7 +21,7 @@ const DMFragment = () => {
         </p>
         <p itemType="outgoing" className="my-2 max-w-[90%]">
           <div className=" w-fit rounded-lg rounded-bl-none bg-back_4 px-4 py-2">
-            Test Message 3 that is very long so that it can test the wrapping
+            Test Message 2 that is very long so that it can test the wrapping
             style on different screen widths. It has to be really long so that
             it even activates a wrap on the widest screen size.
           </div>

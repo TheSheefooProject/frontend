@@ -23,7 +23,10 @@ const DirectMessagesPage: NextPage = () => {
             </div>
           )
         )}
-        <div className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-3xl border-2 border-text_1 md:h-16 md:w-16">
+        <div
+          className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-3xl border-2 border-text_1 hover:cursor-pointer md:h-16 md:w-16"
+          title="Start new conversation"
+        >
           <FiPlus size={46}></FiPlus>
         </div>
       </div>
