@@ -2,6 +2,8 @@ import type { NextPage } from 'next'
 import Image from 'next/image'
 import Button from '../components/common/Button'
 
+import { general_api, login_api } from '../helpers/api_helper'
+
 const Login: NextPage = () => {
   return (
     <main className="static flex min-h-screen w-[100%] flex-col justify-between overflow-x-hidden bg-back_3 px-10 pt-12 text-text_1 md:min-w-[320px]  md:px-[calc(25vw+5rem)]">
@@ -39,6 +41,18 @@ const Login: NextPage = () => {
                 text="Login"
                 type="neutral"
                 className="mb-5 md:mb-0"
+                onClick = {async (e:any)=>{
+                  e.preventDefault();
+                  //TODO this function should set the access and refresh tokens
+                  // UI update needs to be done so that if it fails then update the ui to have errors
+                  //Also code to get the user input instead of hard coded values is needed
+                  const statusObj = await login_api('jeesonjohnson100@gmail.com','AASDADASDasdad12313');
+                  if(statusObj=='success'){
+                    //code to redict the user into the loged in page...
+                  }else{
+                    //code to show the user that their value as not worked
+                  }
+                }}
               ></Button>
             </li>
           </ul>
