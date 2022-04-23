@@ -34,7 +34,11 @@ const DirectMessagesPage: NextPage = () => {
       <div className="b-2 mb-12 h-full w-full overflow-y-auto rounded-md bg-back_3">
         <DMFragment></DMFragment>
         <div className="fixed bottom-0 left-0 flex w-full items-center border-t-2 border-back_1 bg-back_3 p-2">
-          <TextBox className="ml-auto w-3/4"></TextBox>
+          <TextBox
+            name="msgInput"
+            type="text"
+            className="ml-auto w-3/4"
+          ></TextBox>
           <FiSend
             title="Send Message"
             className=" mr-auto ml-4 text-accent_2 hover:cursor-pointer"
