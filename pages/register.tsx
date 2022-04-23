@@ -3,14 +3,20 @@ import Image from 'next/image'
 import { useState } from 'react'
 import Button from '../components/common/Button'
 import TextBox from '../components/common/TextBox'
+import { FiCheckCircle, FiXCircle } from 'react-icons/fi'
 
-import { general_api, login_api } from '../helpers/api_helper'
+import {
+  general_api,
+  login_api,
+  check_username_api,
+} from '../helpers/api_helper'
 
 const Register: NextPage = () => {
   const [inUsername, setInUsername] = useState('')
   const [inPassword, setInPassword] = useState('')
   const [inEmail, setInEmail] = useState('')
   const [inFullName, setInFullName] = useState('')
+  const [userNameTaken, setUserNameTaken] = useState<boolean>(false)
   return (
     <main className="static flex min-h-screen w-[100%] flex-col justify-between overflow-x-hidden bg-back_3 px-10 pt-12 text-text_1 md:min-w-[320px]  md:px-[25vw]">
       {/* Profile Container */}
@@ -36,13 +42,30 @@ const Register: NextPage = () => {
                 name="fullName"
               ></TextBox>
             </li>
-            <li className="flex flex-col gap-1">
+            <li className="relative flex flex-col gap-1">
               <TextBox
                 placeholder="Username"
                 required
                 type="text"
                 name="username"
+                onChange={async (e: any) => {
+                  e.preventDefault()
+                  setUserNameTaken(await check_username_api(e.target.value))
+                  console.log(userNameTaken)
+                }}
               ></TextBox>
+              <div className="absolute right-2 top-1/2 -translate-y-1/2 ">
+                <FiCheckCircle
+                  className={`${
+                    userNameTaken ? 'hidden' : 'visible text-green-400'
+                  }`}
+                ></FiCheckCircle>
+                <FiXCircle
+                  className={`${
+                    userNameTaken ? 'visible text-red-400' : 'hidden'
+                  }`}
+                ></FiXCircle>
+              </div>
             </li>
             <li className="flex flex-col gap-1">
               <TextBox
