@@ -10,6 +10,7 @@ import {
   login_api,
   check_username_api,
 } from '../helpers/api_helper'
+import Tooltip from '../components/common/Tooltip'
 
 const Register: NextPage = () => {
   const [inUsername, setInUsername] = useState('')
@@ -42,7 +43,7 @@ const Register: NextPage = () => {
                 name="fullName"
               ></TextBox>
             </li>
-            <li className="relative flex flex-col gap-1">
+            <li className=" relative flex flex-col gap-1">
               <TextBox
                 placeholder="Username"
                 required
@@ -54,14 +55,16 @@ const Register: NextPage = () => {
                   console.log(userNameTaken)
                 }}
               ></TextBox>
-              <div className="absolute right-2 top-1/2 h-5 w-5 -translate-y-1/2 ">
+              <div className=" absolute right-2 top-1/2 h-5 w-5 -translate-y-1/2">
                 <FiCheckCircle
                   size={20}
+                  title="Username available"
                   className={`${
                     userNameTaken ? 'hidden' : 'visible text-green-400'
                   }`}
                 ></FiCheckCircle>
                 <FiXCircle
+                  title="Username unavailable"
                   size={20}
                   className={`${
                     userNameTaken ? 'visible text-red-400' : 'hidden'
