@@ -9,6 +9,7 @@ import {
   general_api,
   login_api,
   check_username_api,
+  register_api,
 } from '../helpers/api_helper'
 import Tooltip from '../components/common/Tooltip'
 import Link from 'next/link'
@@ -19,6 +20,8 @@ const Register: NextPage = () => {
   const [inEmail, setInEmail] = useState('')
   const [inFullName, setInFullName] = useState('')
   const [userNameTaken, setUserNameTaken] = useState<boolean>(false)
+  const [userNameFieldChanged, setuserNameFieldChanged] =
+    useState<boolean>(false)
   return (
     <main className="static flex min-h-screen w-[100%] flex-col justify-center overflow-x-hidden bg-back_3 px-10 pt-0 text-text_1 md:min-w-[320px]  md:px-[25vw]">
       {/* Profile Container */}
@@ -36,6 +39,9 @@ const Register: NextPage = () => {
                 required
                 type="text"
                 name="email"
+                onChange={(e: any) => {
+                  setInEmail(e.target.value)
+                }}
               ></TextBox>
             </li>
             <li className="flex flex-col gap-1">
@@ -44,6 +50,9 @@ const Register: NextPage = () => {
                 required
                 type="text"
                 name="fullName"
+                onChange={(e: any) => {
+                  setInFullName(e.target.value)
+                }}
               ></TextBox>
             </li>
             <li className=" relative flex flex-col gap-1">
@@ -54,24 +63,30 @@ const Register: NextPage = () => {
                 name="username"
                 onChange={async (e: any) => {
                   e.preventDefault()
+                  setuserNameFieldChanged(true)
+                  setInUsername(e.target.value)
                   setUserNameTaken(await check_username_api(e.target.value))
-                  console.log(userNameTaken)
                 }}
               ></TextBox>
-              <div className=" absolute right-2 top-1/2 h-5 w-5 -translate-y-1/2">
+              <div
+                className={
+                  `${userNameFieldChanged ? 'visible' : 'hidden'}` +
+                  ' absolute right-2 top-1/2 h-5 w-5 -translate-y-1/2'
+                }
+              >
                 <FiCheckCircle
                   size={20}
-                  title="Username available"
-                  className={`${
-                    userNameTaken ? 'hidden' : 'visible text-green-400'
-                  }`}
+                  className={
+                    `${userNameTaken ? 'opacity-0' : ' opacity-100'}` +
+                    ' absolute text-green-400 transition-opacity'
+                  }
                 ></FiCheckCircle>
                 <FiXCircle
-                  title="Username unavailable"
                   size={20}
-                  className={`${
-                    userNameTaken ? 'visible text-red-400' : 'hidden'
-                  }`}
+                  className={
+                    `${userNameTaken ? 'opacity-100 ' : 'opacity-0'}` +
+                    ' absolute text-red-400 transition-opacity'
+                  }
                 ></FiXCircle>
               </div>
             </li>
@@ -81,6 +96,9 @@ const Register: NextPage = () => {
                 required
                 type="password"
                 name="password"
+                onChange={(e: any) => {
+                  setInPassword(e.target.value)
+                }}
               ></TextBox>
             </li>
             <li className="flex justify-between gap-1 text-blue-500 underline">
@@ -94,17 +112,28 @@ const Register: NextPage = () => {
                 className=" md:mb-0"
                 onClick={async (e: any) => {
                   e.preventDefault()
-                  //TODO this function should set the access and refresh tokens
-                  // UI update needs to be done so that if it fails then update the ui to have errors
-                  //Also code to get the user input instead of hard coded values is needed
-                  const statusObj = await login_api(
-                    'jeesonjohnson100@gmail.com',
-                    'AASDADASDasdad12313'
-                  )
-                  if (statusObj == 'success') {
-                    //code to redict the user into the loged in page...
+                  // Clientside userNameTaken check
+                  if (!userNameTaken) {
+                    if (
+                      inUsername.length >= 3 &&
+                      inEmail.length >= 3 &&
+                      inPassword.length >= 3 &&
+                      inFullName.length >= 3
+                    ) {
+                      const statusObj = await register_api(
+                        inUsername,
+                        inEmail,
+                        inPassword,
+                        // WHEN BACKEND IS CHANGED TO FULL NAME, REMOVE ONE OF THESE
+                        inFullName,
+                        inFullName
+                      )
+                      console.log(statusObj)
+                    } else {
+                      alert('All fields must be at least 3 characters long.')
+                    }
                   } else {
-                    //code to show the user that their value as not worked
+                    alert('Username is taken. Please pick another.')
                   }
                 }}
               ></Button>

@@ -20,6 +20,25 @@ export async function login_api(username_email: string, password: string) {
   }
 }
 
+export async function register_api(username: string, email: string, password: string,firstName: string,lastName: string) {
+  const CONNECTION_STRING = 'http://localhost:3000/v1/auth/register/'
+  let registerData: { username: string; email: string; password: string;firstName: string;lastName: string } = {
+    email: email,
+    username: username,
+    password: password,
+    firstName: firstName,
+    lastName: lastName
+  }
+
+  try {
+    const response = await axios.post(CONNECTION_STRING, registerData)
+    
+    return response
+  } catch (e) {
+    return e
+  }
+}
+
 export async function check_username_api(username: string) {
   const CONNECTION_STRING = 'http://localhost:3000/v1/user/' + username
 let outcome = false;
