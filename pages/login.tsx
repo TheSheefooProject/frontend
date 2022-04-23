@@ -1,46 +1,41 @@
 import type { NextPage } from 'next'
 import Image from 'next/image'
 import Button from '../components/common/Button'
+import TextBox from '../components/common/TextBox'
 
 import { general_api, login_api } from '../helpers/api_helper'
 
 const Login: NextPage = () => {
   return (
-    <main className="static flex min-h-screen w-[100%] flex-col justify-between overflow-x-hidden bg-back_3 px-10 pt-12 text-text_1 md:min-w-[320px]  md:px-[calc(25vw+5rem)]">
+    <main className="static flex min-h-screen w-[100%] flex-col justify-between overflow-x-hidden bg-back_3 px-10 pt-12 text-text_1 md:px-[25vw]">
       {/* Profile Container */}
-      <div className="flex flex-col items-center justify-between self-center font-body md:flex-row">
-        <div
-          id="loginlogo"
-          className="mb-10 h-48 w-48 overflow-hidden md:mr-10 md:mb-0"
-        >
-          <Image src="/logo.svg" width={500} height={500}></Image>
+      <div className="flex min-w-max flex-col items-center font-body md:flex-row">
+        <div id="loginlogo" className="m-3 h-48 w-48 drop-shadow-xl">
+          <Image src="/logo.svg" width={200} height={200}></Image>
         </div>
-        <div className="self-center rounded border-0 bg-back_1 p-6">
-          <ul>
-            <li className="flex flex-col gap-1 md:w-96">
-              <label>Username </label>
-              <input
-                className="rounded bg-back_4"
-                type="text"
-                name="username"
+        <div className="self-center rounded border-0 bg-back_1 p-6 drop-shadow-xl">
+          <ul className="flex flex-col gap-3">
+            <li className="flex flex-col gap-1">
+              <TextBox
+                placeholder="E-Mail Address"
                 required
-              />
+                name="email"
+              ></TextBox>
             </li>
-            <li className="mt-3 flex flex-col gap-1">
-              <label>Password </label>
-              <input
-                className="rounded bg-back_4"
-                type="password"
+            <li className="flex flex-col gap-1">
+              <TextBox
+                placeholder="Password"
+                required
                 name="password"
-                required
-              />
+              ></TextBox>
             </li>
-            <li className="mt-4 flex flex-col gap-1">
+
+            <li className="mt-2 flex flex-col gap-1">
               <Button
                 noMargin
                 text="Login"
-                type="neutral"
-                className="mb-5 md:mb-0"
+                type="positive"
+                className=" md:mb-0"
                 onClick={async (e: any) => {
                   e.preventDefault()
                   //TODO this function should set the access and refresh tokens

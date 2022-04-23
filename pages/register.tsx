@@ -49,7 +49,7 @@ const Register: NextPage = () => {
                 noMargin
                 text="Register"
                 type="positive"
-                className="mb-5 md:mb-0"
+                className=" md:mb-0"
                 onClick={async (e: any) => {
                   e.preventDefault()
                   //TODO this function should set the access and refresh tokens
