@@ -14,13 +14,15 @@ const Login: NextPage = () => {
   const [inPassword, setInPassword] = useState('')
 
   return (
-    <main className="static flex min-h-screen w-[100%] flex-col justify-between overflow-x-hidden bg-back_3 px-10 pt-12 text-text_1 md:px-[25vw]">
+    <main className="static flex min-h-screen w-[100%] flex-col justify-center overflow-x-hidden bg-back_3 px-10 pt-0 text-text_1 md:px-[25vw]">
       {/* Profile Container */}
       <div className="flex min-w-max flex-col items-center font-body md:flex-row">
         <div id="loginlogo" className="m-3 h-48 w-48 drop-shadow-xl">
           <Image src="/logo.svg" width={200} height={200}></Image>
         </div>
         <div className="self-center rounded border-0 bg-back_1 p-6 drop-shadow-xl">
+          <h1 className="mb-6 text-center font-heading text-4xl">Login</h1>
+
           <ul className="flex flex-col gap-3">
             <li className="flex flex-col gap-1">
               <TextBox
