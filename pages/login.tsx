@@ -1,11 +1,18 @@
 import type { NextPage } from 'next'
 import Image from 'next/image'
+import { SetStateAction, useState } from 'react'
 import Button from '../components/common/Button'
 import TextBox from '../components/common/TextBox'
+import { useRouter } from 'next/router'
 
 import { general_api, login_api } from '../helpers/api_helper'
 
 const Login: NextPage = () => {
+  const router = useRouter()
+
+  const [inEmail, setInEmail] = useState('')
+  const [inPassword, setInPassword] = useState('')
+
   return (
     <main className="static flex min-h-screen w-[100%] flex-col justify-between overflow-x-hidden bg-back_3 px-10 pt-12 text-text_1 md:px-[25vw]">
       {/* Profile Container */}
@@ -17,16 +24,28 @@ const Login: NextPage = () => {
           <ul className="flex flex-col gap-3">
             <li className="flex flex-col gap-1">
               <TextBox
-                placeholder="E-Mail Address"
+                placeholder="E-Mail or Username"
                 required
+                type="text"
                 name="email"
+                onChange={(e: {
+                  target: { value: SetStateAction<string> }
+                }) => {
+                  setInEmail(e.target.value)
+                }}
               ></TextBox>
             </li>
             <li className="flex flex-col gap-1">
               <TextBox
                 placeholder="Password"
                 required
+                type="password"
                 name="password"
+                onChange={(e: {
+                  target: { value: SetStateAction<string> }
+                }) => {
+                  setInPassword(e.target.value)
+                }}
               ></TextBox>
             </li>
 
@@ -41,14 +60,29 @@ const Login: NextPage = () => {
                   //TODO this function should set the access and refresh tokens
                   // UI update needs to be done so that if it fails then update the ui to have errors
                   //Also code to get the user input instead of hard coded values is needed
-                  const statusObj = await login_api(
-                    'jeesonjohnson100@gmail.com',
-                    'AASDADASDasdad12313'
-                  )
-                  if (statusObj == 'success') {
-                    //code to redict the user into the loged in page...
-                    console.log(statusObj)
+                  let inputValues = []
+                  if (inEmail == '' && inPassword == '') {
+                    // Default values if fields are left empty (DEBUGGING ONLY)
+                    inputValues = [
+                      'jeesonjohnson100@gmail.com',
+                      'AASDADASDasdad12313',
+                    ]
                   } else {
+                    inputValues = [inEmail, inPassword]
+                  }
+                  const statusObj = await login_api(
+                    inputValues[0],
+                    inputValues[1]
+                  )
+                  console.log(inEmail, inPassword)
+
+                  if (statusObj == 'success') {
+                    router.push('/')
+                    //code to redict the user into the logged in page...
+                  } else {
+                    alert(
+                      "The details you entered don't match an existing account."
+                    )
                     //code to show the user that their value as not worked
                   }
                 }}

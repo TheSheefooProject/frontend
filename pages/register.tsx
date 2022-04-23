@@ -1,11 +1,16 @@
 import type { NextPage } from 'next'
 import Image from 'next/image'
+import { useState } from 'react'
 import Button from '../components/common/Button'
 import TextBox from '../components/common/TextBox'
 
 import { general_api, login_api } from '../helpers/api_helper'
 
 const Register: NextPage = () => {
+  const [inUsername, setInUsername] = useState('')
+  const [inPassword, setInPassword] = useState('')
+  const [inEmail, setInEmail] = useState('')
+  const [inFullName, setInFullName] = useState('')
   return (
     <main className="static flex min-h-screen w-[100%] flex-col justify-between overflow-x-hidden bg-back_3 px-10 pt-12 text-text_1 md:min-w-[320px]  md:px-[25vw]">
       {/* Profile Container */}
@@ -19,6 +24,7 @@ const Register: NextPage = () => {
               <TextBox
                 placeholder="E-Mail Address"
                 required
+                type="text"
                 name="email"
               ></TextBox>
             </li>
@@ -26,6 +32,7 @@ const Register: NextPage = () => {
               <TextBox
                 placeholder="Full Name"
                 required
+                type="text"
                 name="fullName"
               ></TextBox>
             </li>
@@ -33,6 +40,7 @@ const Register: NextPage = () => {
               <TextBox
                 placeholder="Username"
                 required
+                type="text"
                 name="username"
               ></TextBox>
             </li>
@@ -40,6 +48,7 @@ const Register: NextPage = () => {
               <TextBox
                 placeholder="Password"
                 required
+                type="password"
                 name="password"
               ></TextBox>
             </li>
@@ -61,7 +70,6 @@ const Register: NextPage = () => {
                   )
                   if (statusObj == 'success') {
                     //code to redict the user into the loged in page...
-                    console.log(statusObj)
                   } else {
                     //code to show the user that their value as not worked
                   }

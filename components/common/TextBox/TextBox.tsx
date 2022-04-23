@@ -6,14 +6,18 @@ const TextBox = (props: {
   className?: string
   placeholder?: string
   name: string
+  type: string
   required?: boolean
+  onChange?: any | (() => {})
 }) => {
   // Default prop values
   const {
     placeholder = '',
     className = '',
+    type = 'text',
     text = '',
     name = '',
+    onChange = () => {},
     required = false,
     ...restProps
   } = props
@@ -28,7 +32,8 @@ const TextBox = (props: {
       placeholder={placeholder}
       name={name}
       required={required}
-      type="text"
+      type={type}
+      onChange={onChange}
     ></input>
   )
 }

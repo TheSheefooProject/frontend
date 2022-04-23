@@ -6,6 +6,7 @@ export async function login_api(username_email: string, password: string) {
     username: username_email,
     password: password,
   }
+  // email format validation check
   if (username_email.includes('@')) {
     loginData = { email: username_email, password }
   }
