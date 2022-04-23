@@ -11,6 +11,7 @@ import {
   check_username_api,
 } from '../helpers/api_helper'
 import Tooltip from '../components/common/Tooltip'
+import Link from 'next/link'
 
 const Register: NextPage = () => {
   const [inUsername, setInUsername] = useState('')
@@ -82,7 +83,9 @@ const Register: NextPage = () => {
                 name="password"
               ></TextBox>
             </li>
-
+            <li className="flex justify-between gap-1 text-blue-500 underline">
+              <Link href="/login">Log In</Link>
+            </li>
             <li className="mt-2 flex flex-col gap-1">
               <Button
                 noMargin

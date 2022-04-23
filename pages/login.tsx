@@ -6,6 +6,7 @@ import TextBox from '../components/common/TextBox'
 import { useRouter } from 'next/router'
 
 import { general_api, login_api } from '../helpers/api_helper'
+import Link from 'next/link'
 
 const Login: NextPage = () => {
   const router = useRouter()
@@ -50,7 +51,10 @@ const Login: NextPage = () => {
                 }}
               ></TextBox>
             </li>
-
+            <li className="flex justify-between gap-1 text-blue-500 underline">
+              <Link href="">Forgot Password?</Link>
+              <Link href="/register">Sign Up</Link>
+            </li>
             <li className="mt-2 flex flex-col gap-1">
               <Button
                 noMargin
