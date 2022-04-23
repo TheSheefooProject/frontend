@@ -4,20 +4,17 @@ import Button from '../components/common/Button'
 
 import { general_api, login_api } from '../helpers/api_helper'
 
-const Login: NextPage = () => {
+const Register: NextPage = () => {
   return (
     <main className="static flex min-h-screen w-[100%] flex-col justify-between overflow-x-hidden bg-back_3 px-10 pt-12 text-text_1 md:min-w-[320px]  md:px-[calc(25vw+5rem)]">
       {/* Profile Container */}
-      <div className="flex flex-col items-center justify-between self-center font-body md:flex-row">
-        <div
-          id="loginlogo"
-          className="mb-10 h-48 w-48 overflow-hidden md:mr-10 md:mb-0"
-        >
-          <Image src="/logo.svg" width={500} height={500}></Image>
+      <div className="flex w-96 flex-col items-center font-body md:flex-row">
+        <div id="loginlogo" className="h-12 w-12">
+          <Image src="/logo.svg" width={200} height={200}></Image>
         </div>
         <div className="self-center rounded border-0 bg-back_1 p-6">
           <ul>
-            <li className="flex flex-col gap-1 md:w-96">
+            <li className="flex flex-col gap-1">
               <label>Username </label>
               <input
                 className="rounded bg-back_4"
@@ -35,6 +32,27 @@ const Login: NextPage = () => {
                 required
               />
             </li>
+            <div className=" flex flex-row">
+              <li className="flex flex-col gap-1 ">
+                <label>First Name </label>
+                <input
+                  className="rounded bg-back_4"
+                  type="text"
+                  name="username"
+                  required
+                />
+              </li>
+              <li className="flex flex-col gap-1">
+                <label>Last Name </label>
+                <input
+                  className="rounded bg-back_4"
+                  type="text"
+                  name="username"
+                  required
+                />
+              </li>
+            </div>
+
             <li className="mt-4 flex flex-col gap-1">
               <Button
                 noMargin
@@ -66,4 +84,4 @@ const Login: NextPage = () => {
   )
 }
 
-export default Login
+export default Register
