@@ -1,63 +1,54 @@
 import type { NextPage } from 'next'
 import Image from 'next/image'
 import Button from '../components/common/Button'
+import TextBox from '../components/common/TextBox'
 
 import { general_api, login_api } from '../helpers/api_helper'
 
 const Register: NextPage = () => {
   return (
-    <main className="static flex min-h-screen w-[100%] flex-col justify-between overflow-x-hidden bg-back_3 px-10 pt-12 text-text_1 md:min-w-[320px]  md:px-[calc(25vw+5rem)]">
+    <main className="static flex min-h-screen w-[100%] flex-col justify-between overflow-x-hidden bg-back_3 px-10 pt-12 text-text_1 md:min-w-[320px]  md:px-[25vw]">
       {/* Profile Container */}
-      <div className="flex w-96 flex-col items-center font-body md:flex-row">
-        <div id="loginlogo" className="h-12 w-12">
+      <div className="flex min-w-max flex-col items-center font-body md:flex-row">
+        <div id="loginlogo" className="m-3 h-48 w-48 drop-shadow-xl">
           <Image src="/logo.svg" width={200} height={200}></Image>
         </div>
-        <div className="self-center rounded border-0 bg-back_1 p-6">
-          <ul>
+        <div className="self-center rounded border-0 bg-back_1 p-6 drop-shadow-xl">
+          <ul className="flex flex-col gap-3">
             <li className="flex flex-col gap-1">
-              <label>Username </label>
-              <input
-                className="rounded bg-back_4"
-                type="text"
+              <TextBox
+                placeholder="E-Mail Address"
+                required
+                name="email"
+              ></TextBox>
+            </li>
+            <li className="flex flex-col gap-1">
+              <TextBox
+                placeholder="Full Name"
+                required
+                name="fullName"
+              ></TextBox>
+            </li>
+            <li className="flex flex-col gap-1">
+              <TextBox
+                placeholder="Username"
+                required
                 name="username"
-                required
-              />
+              ></TextBox>
             </li>
-            <li className="mt-3 flex flex-col gap-1">
-              <label>Password </label>
-              <input
-                className="rounded bg-back_4"
-                type="password"
+            <li className="flex flex-col gap-1">
+              <TextBox
+                placeholder="Password"
+                required
                 name="password"
-                required
-              />
+              ></TextBox>
             </li>
-            <div className=" flex flex-row">
-              <li className="flex flex-col gap-1 ">
-                <label>First Name </label>
-                <input
-                  className="rounded bg-back_4"
-                  type="text"
-                  name="username"
-                  required
-                />
-              </li>
-              <li className="flex flex-col gap-1">
-                <label>Last Name </label>
-                <input
-                  className="rounded bg-back_4"
-                  type="text"
-                  name="username"
-                  required
-                />
-              </li>
-            </div>
 
-            <li className="mt-4 flex flex-col gap-1">
+            <li className="mt-2 flex flex-col gap-1">
               <Button
                 noMargin
-                text="Login"
-                type="neutral"
+                text="Register"
+                type="positive"
                 className="mb-5 md:mb-0"
                 onClick={async (e: any) => {
                   e.preventDefault()

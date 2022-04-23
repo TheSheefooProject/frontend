@@ -5,18 +5,29 @@ const TextBox = (props: {
   text?: string
   className?: string
   placeholder?: string
+  name: string
+  required?: boolean
 }) => {
   // Default prop values
-  const { placeholder = '', className = '', text = '', ...restProps } = props
+  const {
+    placeholder = '',
+    className = '',
+    text = '',
+    name = '',
+    required = false,
+    ...restProps
+  } = props
 
   return (
     <input
       className={
-        `${'rounded-sm bg-back_4 py-1 px-3 text-text_1 placeholder:text-text_1 focus:outline-none focus:ring focus:ring-back_2'} ` +
+        `${'placeholder:text-text_3 rounded-sm bg-back_4 py-1 px-3 text-text_1 focus:outline-none focus:ring focus:ring-back_2'} ` +
         className
       }
       defaultValue={text}
       placeholder={placeholder}
+      name={name}
+      required={required}
       type="text"
     ></input>
   )
