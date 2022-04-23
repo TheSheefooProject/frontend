@@ -31,7 +31,11 @@ const Profile: NextPage = () => {
             <ul>
               <li className=" inline-flex w-full flex-col gap-1">
                 <label>Username </label>
-                <TextBox placeholder="(Current Username)"></TextBox>
+                <TextBox
+                  type="text"
+                  placeholder="(Current Username)"
+                  name="username"
+                ></TextBox>
               </li>
               <li className=" mt-4 inline-flex w-full flex-col gap-1">
                 <label>About Me </label>
