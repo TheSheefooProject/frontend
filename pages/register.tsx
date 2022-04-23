@@ -54,13 +54,15 @@ const Register: NextPage = () => {
                   console.log(userNameTaken)
                 }}
               ></TextBox>
-              <div className="absolute right-2 top-1/2 -translate-y-1/2 ">
+              <div className="absolute right-2 top-1/2 h-5 w-5 -translate-y-1/2 ">
                 <FiCheckCircle
+                  size={20}
                   className={`${
                     userNameTaken ? 'hidden' : 'visible text-green-400'
                   }`}
                 ></FiCheckCircle>
                 <FiXCircle
+                  size={20}
                   className={`${
                     userNameTaken ? 'visible text-red-400' : 'hidden'
                   }`}
