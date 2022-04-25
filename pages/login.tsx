@@ -5,10 +5,15 @@ import Button from '../components/common/Button'
 import TextBox from '../components/common/TextBox'
 import { useRouter } from 'next/router'
 
-import { general_api, login_api } from '../helpers/api_helper'
+import {
+  general_api,
+  get_user_details_api,
+  login_api,
+} from '../helpers/api_helper'
 import Link from 'next/link'
 
-const Login: NextPage = () => {
+const Login = (props: { localStorage: Storage }) => {
+  const { localStorage = null, ...restProps } = props
   const router = useRouter()
 
   const [inEmail, setInEmail] = useState('')
@@ -80,9 +85,23 @@ const Login: NextPage = () => {
                     inputValues[0],
                     inputValues[1]
                   )
-                  console.log(inEmail, inPassword)
+
+                  // TODO FIX API TO USE CORRECT TOKEN TO RETURN USER DETAILS
+                  const userDetails = await get_user_details_api(
+                    localStorage?.refresh_token
+                  )
+                  console.log(userDetails)
+                  // TODO
 
                   if (statusObj == 'success') {
+                    console.log(statusObj)
+
+                    if (localStorage) {
+                      localStorage.userDetails = JSON.stringify({
+                        email: inEmail,
+                        password: inPassword,
+                      })
+                    }
                     router.push('/')
                     //code to redict the user into the logged in page...
                   } else {

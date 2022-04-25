@@ -39,6 +39,20 @@ export async function register_api(username: string, email: string, password: st
   }
 }
 
+// TODO FIX API TO USE CORRECT TOKEN TO RETURN USER DETAILS
+export async function get_user_details_api(token:string) {
+  const CONNECTION_STRING = 'http://localhost:3000/v1/user/'
+
+  try {
+    const response = await axios.get(CONNECTION_STRING,{headers: {refresh_token:token}})
+    
+    return response
+  } catch (e) {
+    return e
+  }
+}
+//TODO
+
 export async function check_username_api(username: string) {
   const CONNECTION_STRING = 'http://localhost:3000/v1/user/' + username
 let outcome = false;

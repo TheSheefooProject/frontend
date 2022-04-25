@@ -121,6 +121,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
   return (
     <div className="flex flex-row-reverse bg-back_1 text-text_1">
       <Component
+        localStorage={localStorage}
         is_dark={is_dark}
         setDark={setDark}
         settings={settings}
