@@ -86,20 +86,15 @@ const Login = (props: { localStorage: Storage }) => {
                     inputValues[1]
                   )
 
-                  // TODO FIX API TO USE CORRECT TOKEN TO RETURN USER DETAILS
-                  const userDetails = await get_user_details_api(
-                    localStorage?.refresh_token
-                  )
-                  console.log(userDetails)
-                  // TODO
-
                   if (statusObj == 'success') {
-                    console.log(statusObj)
-
+                    const api_response = await get_user_details_api()
                     if (localStorage) {
                       localStorage.userDetails = JSON.stringify({
                         email: inEmail,
-                        password: inPassword,
+                        id: api_response.userData._id,
+                        username: api_response.userData.username,
+                        first_name: api_response.userData.first_name,
+                        last_name: api_response.userData.last_name,
                       })
                     }
                     router.push('/')

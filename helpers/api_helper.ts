@@ -20,19 +20,31 @@ export async function login_api(username_email: string, password: string) {
   }
 }
 
-export async function register_api(username: string, email: string, password: string,firstName: string,lastName: string) {
+export async function register_api(
+  username: string,
+  email: string,
+  password: string,
+  firstName: string,
+  lastName: string
+) {
   const CONNECTION_STRING = 'http://localhost:3000/v1/auth/register/'
-  let registerData: { username: string; email: string; password: string;firstName: string;lastName: string } = {
+  let registerData: {
+    username: string
+    email: string
+    password: string
+    firstName: string
+    lastName: string
+  } = {
     email: email,
     username: username,
     password: password,
     firstName: firstName,
-    lastName: lastName
+    lastName: lastName,
   }
 
   try {
     const response = await axios.post(CONNECTION_STRING, registerData)
-    
+
     return response
   } catch (e) {
     return e
@@ -40,12 +52,12 @@ export async function register_api(username: string, email: string, password: st
 }
 
 // TODO FIX API TO USE CORRECT TOKEN TO RETURN USER DETAILS
-export async function get_user_details_api(token:string) {
+export async function get_user_details_api() {
   const CONNECTION_STRING = 'http://localhost:3000/v1/user/'
 
   try {
-    const response = await axios.get(CONNECTION_STRING,{headers: {refresh_token:token}})
-    
+    const response = await general_api(CONNECTION_STRING)
+
     return response
   } catch (e) {
     return e
@@ -55,17 +67,17 @@ export async function get_user_details_api(token:string) {
 
 export async function check_username_api(username: string) {
   const CONNECTION_STRING = 'http://localhost:3000/v1/user/' + username
-let outcome = false;
+  let outcome = false
   try {
     const response = await axios.get(CONNECTION_STRING)
-    
-    if(response.data.status == 'success') {
-      outcome = false;
+
+    if (response.data.status == 'success') {
+      outcome = false
     }
   } catch (e) {
     outcome = true
   }
-  return outcome;
+  return outcome
 }
 type API_TYPES = 'GET' | 'POST' | 'PATCH' | 'DELETE'
 export async function general_api(
