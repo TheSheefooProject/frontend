@@ -18,7 +18,7 @@ const Sidebar = (props: { localStorage: Storage }) => {
 
   useEffect(() => {
     try {
-      setUsername(JSON.parse(localStorage.userDetails).email)
+      setUsername(JSON.parse(localStorage.userDetails).username)
     } catch (e) {}
   }, [localStorage])
 
@@ -80,12 +80,14 @@ const Sidebar = (props: { localStorage: Storage }) => {
           {/* Free space */}
 
           <Link href="/profile">
-            <div>
-              <div className=" has-tooltip relative mt-auto justify-self-end drop-shadow-lg hover:top-[1px] hover:cursor-pointer hover:text-accent_2 hover:drop-shadow-none">
+            <div className="relative mt-auto justify-self-end drop-shadow-lg">
+              <div className=" has-tooltip  hover:top-[1px] hover:cursor-pointer hover:text-accent_2 hover:drop-shadow-none ">
                 <FiUser size="3.5em"></FiUser>
                 <Tooltip text="Profile" side="right"></Tooltip>
               </div>
-              <h3>{username}</h3>
+              <h3 className="absolute -top-6 max-w-[3.5em] overflow-clip overflow-ellipsis text-center">
+                {username}
+              </h3>
             </div>
           </Link>
           <Link href="/settings">

@@ -90,12 +90,12 @@ const Login = (props: { localStorage: Storage }) => {
       const userDetails = await get_user_details_api(
         localStorage?.refresh_token
       )
-      console.log(userDetails)
 
       if (statusObj == 'success') {
         console.log(statusObj)
         if (localStorage) {
           localStorage.userDetails = JSON.stringify({
+            username: userDetails.userData.username,
             email: inEmail,
             password: inPassword,
           })
