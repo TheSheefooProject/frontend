@@ -7,7 +7,9 @@ import Sidebar from '../components/common/Sidebar'
 import Head from 'next/head'
 
 import Button from '../components/common/Button'
-import { withRouter } from 'next/router'
+import { useRouter } from 'next/router'
+import { get_user_details_api } from '../helpers/api_helper'
+
 let body: HTMLBodyElement | null = null
 let localStorage: Storage
 
@@ -31,10 +33,10 @@ const defaultSettings = {
   dms_from_strangers: false,
   disable_notifications: false,
 }
+
 function MyApp({ Component, pageProps, router }: AppProps) {
   const [is_dark, setIsDark] = useState<boolean>()
   const [settings, setSettings] = useState<ISettings>()
-
   const saveSettings = (key: string, val: number | boolean) => {
     if (localStorage !== undefined) {
       switch (key) {
@@ -99,7 +101,19 @@ function MyApp({ Component, pageProps, router }: AppProps) {
     body = document.querySelector('body')
     localStorage = window.localStorage
 
-    console.log(localStorage.settings)
+    // User Logged in check
+    const fetchUserDetails = async () => {
+      const is_logged_in = localStorage.userDetails ? true : false
+      if (is_logged_in) {
+        const userDetails = await get_user_details_api(
+          localStorage.refresh_token
+        )
+        console.log(userDetails.status)
+      } else {
+        router.push('/login')
+      }
+    }
+    fetchUserDetails().catch(console.error)
 
     if (localStorage.settings !== undefined) {
       setSettings(JSON.parse(localStorage.settings))
@@ -129,7 +143,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
         {...pageProps}
       />
       {!(router.pathname === '/register' || router.pathname === '/login') && (
-        <Sidebar></Sidebar>
+        <Sidebar localStorage={localStorage}></Sidebar>
       )}
     </div>
   )
