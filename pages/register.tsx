@@ -82,11 +82,12 @@ const Register: NextPage = () => {
   return (
     <main className="static flex min-h-screen w-[100%] flex-col justify-center overflow-x-hidden bg-back_3 px-10 pt-0 text-text_1 md:min-w-[320px]  md:px-[25vw]">
       {/* Profile Container */}
-      <div className="flex min-w-max flex-col items-center font-body md:flex-row">
+      <div className="flex min-w-max flex-col items-center border-2 border-gray-200 bg-gray-300 p-2 font-body drop-shadow-lg md:flex-row">
         <div id="loginlogo" className="m-3 h-48 w-48 drop-shadow-xl">
           <Image src="/logo.svg" width={200} height={200}></Image>
         </div>
         <div className="relative">
+          {/* Info Popup */}
           <div
             className={
               `${
@@ -96,7 +97,7 @@ const Register: NextPage = () => {
               }` +
               ' ' +
               `${infoPopup?.type_colour}` +
-              ' absolute -top-0 left-0 block h-20 w-full rounded-t-sm text-black transition-transform'
+              ' absolute -top-0 left-0 block h-20 w-full rounded-t-sm text-black transition-transform '
             }
           >
             <div className=" relative flex w-full flex-row justify-center gap-1 p-2">
