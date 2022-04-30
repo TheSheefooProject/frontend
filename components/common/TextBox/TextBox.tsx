@@ -9,6 +9,7 @@ const TextBox = (props: {
   type: string
   required?: boolean
   onChange?: any | (() => {})
+  onKeyUp?: any | (() => {})
 }) => {
   // Default prop values
   const {
@@ -18,6 +19,7 @@ const TextBox = (props: {
     text = '',
     name = '',
     onChange = () => {},
+    onKeyUp = () => {},
     required = false,
     ...restProps
   } = props
@@ -34,6 +36,7 @@ const TextBox = (props: {
       required={required}
       type={type}
       onChange={onChange}
+      onKeyUp={onKeyUp}
     ></input>
   )
 }

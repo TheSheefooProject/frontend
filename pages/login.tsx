@@ -65,10 +65,57 @@ const Login = (props: { localStorage: Storage }) => {
       })
     }, 5000)
   }
+
+  const handleKeyUp = (e: any) => {
+    if (e.key == 'Enter') {
+      handleLogin(e)
+    }
+  }
+  const handleLogin = async (e: { preventDefault: () => void }) => {
+    e.preventDefault()
+    //TODO this function should set the access and refresh tokens
+    // UI update needs to be done so that if it fails then update the ui to have errors
+    //Also code to get the user input instead of hard coded values is needed
+    let inputValues = []
+    if (inEmail == '' && inPassword == '') {
+      // Default values if fields are left empty (DEBUGGING ONLY)
+      inputValues = ['jeesonjohnson100@gmail.com', 'AASDADASDasdad12313']
+    } else {
+      inputValues = [inEmail, inPassword]
+    }
+
+    // email format validation check
+    if (inputValues[0].includes('@')) {
+      const statusObj = await login_api(inputValues[0], inputValues[1])
+
+      // TODO FIX API TO USE CORRECT TOKEN TO RETURN USER DETAILS
+      const userDetails = await get_user_details_api(
+        localStorage?.refresh_token
+      )
+      console.log(userDetails)
+      // TODO
+
+      if (statusObj == 'success') {
+        console.log(statusObj)
+
+        if (localStorage) {
+          localStorage.userDetails = JSON.stringify({
+            email: inEmail,
+            password: inPassword,
+          })
+        }
+        router.push('/')
+      } else {
+        flashPopup("Your details didn't match an account", TYPE.Error)
+      }
+    } else {
+      flashPopup('Please enter a valid e-mail address', TYPE.Warning)
+    }
+  }
   return (
     <main className="static flex min-h-screen w-[100%] flex-col justify-center overflow-x-hidden bg-back_3 px-10 pt-0 text-text_1 md:px-[25vw]">
       {/* Profile Container */}
-      <div className="flex min-w-max flex-col items-center border-2 border-gray-200 bg-gray-300 p-2 font-body drop-shadow-lg md:flex-row">
+      <div className="flex min-w-max flex-col items-center border-2 border-gray-200 bg-gray-300 p-2 font-body drop-shadow-lg dark:border-gray-500 dark:bg-gray-600 md:flex-row">
         <div id="loginlogo" className="m-3 h-48 w-48 drop-shadow-xl">
           <Image src="/logo.svg" width={200} height={200}></Image>
         </div>
@@ -116,6 +163,7 @@ const Login = (props: { localStorage: Storage }) => {
                   required
                   type="text"
                   name="email"
+                  onKeyUp={(e: any) => handleKeyUp(e)}
                   onChange={(e: {
                     target: { value: SetStateAction<string> }
                   }) => {
@@ -129,6 +177,7 @@ const Login = (props: { localStorage: Storage }) => {
                   required
                   type="password"
                   name="password"
+                  onKeyUp={(e: any) => handleKeyUp(e)}
                   onChange={(e: {
                     target: { value: SetStateAction<string> }
                   }) => {
@@ -137,8 +186,8 @@ const Login = (props: { localStorage: Storage }) => {
                 ></TextBox>
               </li>
               <li className="flex justify-between gap-1 text-blue-500 underline">
-                <Link href="">Forgot Password?</Link>
-                <Link href="/register">Sign Up</Link>
+                <Link href="">Forgot Password </Link>
+                <Link href="/register">Register</Link>
               </li>
               <li className="mt-2 flex flex-col gap-1">
                 <Button
@@ -146,50 +195,7 @@ const Login = (props: { localStorage: Storage }) => {
                   text="Login"
                   type="positive"
                   className=" md:mb-0"
-                  onClick={async (e: any) => {
-                    e.preventDefault()
-                    //TODO this function should set the access and refresh tokens
-                    // UI update needs to be done so that if it fails then update the ui to have errors
-                    //Also code to get the user input instead of hard coded values is needed
-                    let inputValues = []
-                    if (inEmail == '' && inPassword == '') {
-                      // Default values if fields are left empty (DEBUGGING ONLY)
-                      inputValues = [
-                        'jeesonjohnson100@gmail.com',
-                        'AASDADASDasdad12313',
-                      ]
-                    } else {
-                      inputValues = [inEmail, inPassword]
-                    }
-                    const statusObj = await login_api(
-                      inputValues[0],
-                      inputValues[1]
-                    )
-
-                    // TODO FIX API TO USE CORRECT TOKEN TO RETURN USER DETAILS
-                    const userDetails = await get_user_details_api(
-                      localStorage?.refresh_token
-                    )
-                    console.log(userDetails)
-                    // TODO
-
-                    if (statusObj == 'success') {
-                      console.log(statusObj)
-
-                      if (localStorage) {
-                        localStorage.userDetails = JSON.stringify({
-                          email: inEmail,
-                          password: inPassword,
-                        })
-                      }
-                      router.push('/')
-                    } else {
-                      flashPopup(
-                        "Your details didn't match an account",
-                        TYPE.Error
-                      )
-                    }
-                  }}
+                  onClick={async (e: any) => handleLogin(e)}
                 ></Button>
               </li>
             </ul>

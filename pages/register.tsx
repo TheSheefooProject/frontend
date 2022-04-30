@@ -79,10 +79,40 @@ const Register: NextPage = () => {
       })
     }, 5000)
   }
+
+  const handleRegisterEvent = async (e: { preventDefault: () => void }) => {
+    e.preventDefault()
+    // Clientside userNameTaken check
+    if (!userNameTaken) {
+      if (
+        inUsername.length >= 3 &&
+        inEmail.length >= 3 &&
+        inPassword.length >= 3 &&
+        inFullName.length >= 3
+      ) {
+        const statusObj = await register_api(
+          inUsername,
+          inEmail,
+          inPassword,
+          // WHEN BACKEND IS CHANGED TO FULL NAME, REMOVE ONE OF THESE
+          inFullName,
+          inFullName
+        )
+        console.log(statusObj)
+      } else {
+        flashPopup(
+          'All fields must be at least 3 characters long.',
+          TYPE.Warning
+        )
+      }
+    } else {
+      flashPopup('Username is taken. Please pick another.', TYPE.Info)
+    }
+  }
   return (
-    <main className="static flex min-h-screen w-[100%] flex-col justify-center overflow-x-hidden bg-back_3 px-10 pt-0 text-text_1 md:min-w-[320px]  md:px-[25vw]">
+    <main className="static flex min-h-screen w-[100%] flex-col justify-center overflow-x-hidden bg-back_3 px-10 pt-0 text-text_1 md:min-w-[320px] md:px-[25vw]">
       {/* Profile Container */}
-      <div className="flex min-w-max flex-col items-center border-2 border-gray-200 bg-gray-300 p-2 font-body drop-shadow-lg md:flex-row">
+      <div className="flex min-w-max flex-col items-center border-2 border-gray-200 bg-gray-300 p-2 font-body drop-shadow-lg dark:border-gray-500 dark:bg-gray-600 md:flex-row">
         <div id="loginlogo" className="m-3 h-48 w-48 drop-shadow-xl">
           <Image src="/logo.svg" width={200} height={200}></Image>
         </div>
@@ -201,36 +231,7 @@ const Register: NextPage = () => {
                   type="positive"
                   className=" md:mb-0"
                   onClick={async (e: any) => {
-                    e.preventDefault()
-                    // Clientside userNameTaken check
-                    if (!userNameTaken) {
-                      if (
-                        inUsername.length >= 3 &&
-                        inEmail.length >= 3 &&
-                        inPassword.length >= 3 &&
-                        inFullName.length >= 3
-                      ) {
-                        const statusObj = await register_api(
-                          inUsername,
-                          inEmail,
-                          inPassword,
-                          // WHEN BACKEND IS CHANGED TO FULL NAME, REMOVE ONE OF THESE
-                          inFullName,
-                          inFullName
-                        )
-                        console.log(statusObj)
-                      } else {
-                        flashPopup(
-                          'All fields must be at least 3 characters long.',
-                          TYPE.Warning
-                        )
-                      }
-                    } else {
-                      flashPopup(
-                        'Username is taken. Please pick another.',
-                        TYPE.Info
-                      )
-                    }
+                    handleRegisterEvent(e)
                   }}
                 ></Button>
               </li>
