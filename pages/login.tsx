@@ -15,7 +15,7 @@ const Login: NextPage = () => {
   const [inPassword, setInPassword] = useState('')
 
   return (
-    <main className="static flex min-h-screen w-[100%] flex-col justify-center overflow-x-hidden bg-back_3 px-10 pt-0 text-text_1 md:px-[25vw]">
+    <main className="static flex min-h-screen w-[100%] flex-col items-center justify-center overflow-x-hidden bg-back_3 px-10 pt-0 text-text_1 md:px-[25vw]">
       {/* Profile Container */}
       <div className="flex min-w-max flex-col items-center font-body md:flex-row">
         <div id="loginlogo" className="m-3 h-48 w-48 drop-shadow-xl">
