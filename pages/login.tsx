@@ -5,11 +5,7 @@ import Button from '../components/common/Button'
 import TextBox from '../components/common/TextBox'
 import { useRouter } from 'next/router'
 
-import {
-  general_api,
-  get_user_details_api,
-  login_api,
-} from '../helpers/api_helper'
+import { get_user_details_api, login_api } from '../helpers/api_helper'
 import Link from 'next/link'
 
 const Login = (props: { localStorage: Storage }) => {
@@ -32,7 +28,7 @@ const Login = (props: { localStorage: Storage }) => {
           <ul className="flex flex-col gap-3">
             <li className="flex flex-col gap-1">
               <TextBox
-                placeholder="E-Mail or Username"
+                placeholder="E-Mail Address"
                 required
                 type="text"
                 name="email"

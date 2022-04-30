@@ -1,3 +1,4 @@
+import React from 'react'
 import styles from './button.module.scss'
 
 const typeColours = {
@@ -15,6 +16,7 @@ const Button = (props: {
   noMargin?: boolean
   fixedWidth?: boolean
   iconOnly?: boolean
+  icon?: React.ReactElement
 }) => {
   // Default prop values
   const {
