@@ -87,17 +87,13 @@ const Login = (props: { localStorage: Storage }) => {
     // email format validation check
     if (inputValues[0].includes('@')) {
       const statusObj = await login_api(inputValues[0], inputValues[1])
-
-      // TODO FIX API TO USE CORRECT TOKEN TO RETURN USER DETAILS
       const userDetails = await get_user_details_api(
         localStorage?.refresh_token
       )
       console.log(userDetails)
-      // TODO
 
       if (statusObj == 'success') {
         console.log(statusObj)
-
         if (localStorage) {
           localStorage.userDetails = JSON.stringify({
             email: inEmail,

@@ -13,7 +13,14 @@ import { logout_api } from '../../../helpers/api_helper'
 const Sidebar = (props: { localStorage: Storage }) => {
   const { localStorage, ...restProps } = props
   const [sidebar_visible, setSidebarVisible] = useState<boolean>()
+  const [username, setUsername] = useState('')
   const router = useRouter()
+
+  useEffect(() => {
+    try {
+      setUsername(JSON.parse(localStorage.userDetails).email)
+    } catch (e) {}
+  }, [localStorage])
 
   return (
     <>
@@ -73,9 +80,12 @@ const Sidebar = (props: { localStorage: Storage }) => {
           {/* Free space */}
 
           <Link href="/profile">
-            <div className=" has-tooltip relative mt-auto justify-self-end drop-shadow-lg hover:top-[1px] hover:cursor-pointer hover:text-accent_2 hover:drop-shadow-none">
-              <FiUser size="3.5em"></FiUser>
-              <Tooltip text="Profile" side="right"></Tooltip>
+            <div>
+              <div className=" has-tooltip relative mt-auto justify-self-end drop-shadow-lg hover:top-[1px] hover:cursor-pointer hover:text-accent_2 hover:drop-shadow-none">
+                <FiUser size="3.5em"></FiUser>
+                <Tooltip text="Profile" side="right"></Tooltip>
+              </div>
+              <h3>{username}</h3>
             </div>
           </Link>
           <Link href="/settings">
@@ -88,7 +98,7 @@ const Sidebar = (props: { localStorage: Storage }) => {
             className=" has-tooltip relative mt-5 h-[3.5em] w-[3.5em] justify-self-end bg-transparent drop-shadow-lg hover:top-[1px] hover:cursor-pointer hover:text-accent_2 hover:drop-shadow-none"
             onClick={async (e: any) => {
               e.preventDefault()
-              console.log(localStorage.userDetails)
+              console.log(localStorage)
 
               const status = await logout_api(
                 JSON.parse(localStorage.userDetails).email
