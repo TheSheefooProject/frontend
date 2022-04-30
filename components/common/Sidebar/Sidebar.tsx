@@ -85,7 +85,7 @@ const Sidebar = (props: { localStorage: Storage }) => {
                 <FiUser size="3.5em"></FiUser>
                 <Tooltip text="Profile" side="right"></Tooltip>
               </div>
-              <h3 className="absolute -top-6 max-w-[3.5em] overflow-clip overflow-ellipsis text-center">
+              <h3 className="absolute -top-6 left-1/2 max-w-[3.5em] -translate-x-1/2 overflow-clip overflow-ellipsis text-center">
                 {username}
               </h3>
             </div>
