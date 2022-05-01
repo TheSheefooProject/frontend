@@ -7,6 +7,7 @@ import { FiPlus, FiSend } from 'react-icons/fi'
 import TextBox from '../../components/common/TextBox'
 import DMFragment from './DMFragment'
 import io from 'socket.io-client'
+import axios from 'axios'
 
 type MessageObject = {
   message: string
@@ -19,14 +20,15 @@ const socketConnection = io('http://localhost:3005', {
 
 const DirectMessagesPage: NextPage = (props) => {
   const [activeDMS, setActiveDMS] = useState([
-    { roomName: 'room', roomID: 'stocks' },
+    { roomName: 'Global Chat', roomID: 'global' },
   ])
   const [currentTypedMessage, setCurrentTypedMessage] = useState('')
-  const [currentRoomName, setCurrentRoom] = useState('jeeson')
+  const [currentRoomName, setCurrentRoom] = useState('global')
   const [messages, setMessages] = React.useState([
     { message: 'test', id: 'asda', type: 'OUTGOING' },
   ])
   const [loading, setLoading] = React.useState(true)
+  const [loadingOldMessages, setLoadingOldMessages] = React.useState(true)
 
   //SORRY I KNOW THIS IS SPAGETTI CODE :,( BUT TIME CONSTRAINTS AND THAT.
   React.useEffect(() => {
@@ -37,8 +39,21 @@ const DirectMessagesPage: NextPage = (props) => {
     const user_id = window.localStorage.user_id
     const user_name = window.localStorage.user_username
     const id = `${user_id}:${Date.now()}`
-    console.log(user_name, user_id)
-    //TODO Add stuff about getting previous messages that were said in a group
+
+    axios
+      .get(`http://localhost:3005/v1/messages/${currentRoomName}`)
+      .then((result) => {
+        const messagesFormatted: Array<any> = []
+        const messagesArr = result.data.messages
+        for (let x = 0; x < messagesArr.length; x++) {
+          console.log(messagesArr[x])
+          const type = messagesArr[x].user_id == user_id ? 'INCOMING' : 'OUTGOING'
+          messagesFormatted.push({ ...messagesArr[x], type })
+        }
+        setMessages(messagesFormatted)
+        setLoadingOldMessages(false)
+      })
+
     socketConnection.emit(
       'join',
       { id, name: user_name, room: currentRoomName, user_id },
@@ -46,8 +61,8 @@ const DirectMessagesPage: NextPage = (props) => {
     )
     socketConnection.on('message', (message) => {
       // @ts-ignore: Unreachable code error
-      const type = message.id==user_id?'INCOMING':'OUTGOING'
-      setMessages((messages) => [...messages, {...message,type}])
+      const type = message.id == user_id ? 'INCOMING' : 'OUTGOING'
+      setMessages((messages) => [...messages, { ...message, type }])
     })
 
     socketConnection.on('roomData', ({ users }) => {
@@ -93,7 +108,11 @@ const DirectMessagesPage: NextPage = (props) => {
       </div>
       {/* Direct Message Embed Fragment */}
       <div className="b-2 mb-12 h-full w-full overflow-y-auto rounded-md bg-back_3">
-        <DMFragment messages={messages} loading={loading}></DMFragment>
+        <DMFragment
+          messages={messages}
+          loading={loading || loadingOldMessages}
+          roomName={currentRoomName}
+        ></DMFragment>
         <div className="fixed bottom-0 left-0 flex w-full items-center border-t-2 border-back_1 bg-back_3 p-2">
           <TextBox
             name="msgInput"
@@ -109,9 +128,17 @@ const DirectMessagesPage: NextPage = (props) => {
             title="Send Message"
             className=" mr-auto ml-4 text-accent_2 hover:cursor-pointer"
             size={32}
-            onClick={(e) => {
+            onClick={async (e) => {
               e.preventDefault()
               if (currentTypedMessage != '') {
+                const user_id = window.localStorage.user_id
+                const user_name = window.localStorage.user_username
+                await axios.post('http://localhost:3005/v1/messages/', {
+                  chat_room_id: currentRoomName,
+                  user_id,
+                  user_name,
+                  message: currentTypedMessage,
+                })
                 socketConnection.emit('sendMessage', currentTypedMessage, () =>
                   setCurrentTypedMessage('')
                 )

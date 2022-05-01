@@ -4,6 +4,7 @@ import { SetStateAction, useState } from 'react'
 import Button from '../components/common/Button'
 import TextBox from '../components/common/TextBox'
 import { useRouter } from 'next/router'
+import axios from 'axios'
 
 import {
   general_api,
@@ -88,6 +89,7 @@ const Login = (props: { localStorage: Storage }) => {
 
                   if (statusObj == 'success') {
                     const api_response = await get_user_details_api();
+                    console.log('API response',api_response)
                     if (localStorage) {
                       localStorage.user_id = api_response.userData._id;
                       localStorage.user_username = api_response.userData.username;
@@ -97,6 +99,11 @@ const Login = (props: { localStorage: Storage }) => {
                         username: api_response.userData.username,
                         first_name: api_response.userData.first_name,
                         last_name: api_response.userData.last_name,
+                      })
+
+                      await axios.post('http://localhost:3005/v1/livechat/room/', {
+                        chat_room_id: 'global',
+                        user_id: api_response.userData._id
                       })
                     }
                     router.push('/')
