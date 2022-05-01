@@ -20,6 +20,22 @@ export async function login_api(username_email: string, password: string) {
   }
 }
 
+export async function logout_api(email: string) {
+  const CONNECTION_STRING = 'http://localhost:3000/v1/auth/logout/'
+  let logoutData: { email?: string} = {
+    email: email
+  }
+
+  try {
+    const userDetails = await general_api(CONNECTION_STRING,"POST", logoutData)
+    console.log(userDetails);
+    
+    return 'success'
+  } catch (e) {
+    return 'failed'
+  }
+}
+
 export async function register_api(username: string, email: string, password: string,firstName: string,lastName: string) {
   const CONNECTION_STRING = 'http://localhost:3000/v1/auth/register/'
   let registerData: { username: string; email: string; password: string;firstName: string;lastName: string } = {
@@ -39,20 +55,40 @@ export async function register_api(username: string, email: string, password: st
   }
 }
 
-export async function check_username_api(username: string) {
-  const CONNECTION_STRING = 'http://localhost:3000/v1/user/' + username
-let outcome = false;
+// TODO FIX API TO USE CORRECT TOKEN TO RETURN USER DETAILS
+export async function get_user_details_api(token:string) {
+  const CONNECTION_STRING = 'http://localhost:3000/v1/user/'
+
   try {
-    const response = await axios.get(CONNECTION_STRING)
+    const response = await general_api(CONNECTION_STRING,"GET",{headers: {refresh_token:token}})
+    console.log(response);
     
-    if(response.data.status == 'success') {
+    return response
+  } catch (e) {
+    return e
+  }
+}
+//TODO
+
+export async function check_username_api(username: string) {
+
+  const CONNECTION_STRING = 'http://localhost:3000/v1/user/' + username
+  let outcome = false;
+  try {
+    const response = await general_api(CONNECTION_STRING,"GET")
+
+    if(response.status == 'success') {
       outcome = false;
     }
-  } catch (e) {
+  } catch (e) { 
+    
     outcome = true
   }
+  
   return outcome;
 }
+
+
 type API_TYPES = 'GET' | 'POST' | 'PATCH' | 'DELETE'
 export async function general_api(
   url: string,

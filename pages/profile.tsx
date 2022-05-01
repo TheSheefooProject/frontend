@@ -10,7 +10,26 @@ import TextBox from '../components/common/TextBox'
 
 import { FiEdit } from 'react-icons/fi'
 
-const Profile: NextPage = () => {
+const Profile = (props: { localStorage: Storage }) => {
+  const { localStorage, ...restProps } = props
+
+  interface IDetails {
+    username: string
+    email: string
+    biography?: string
+  }
+  const [details, setDetails] = useState<IDetails>()
+
+  useEffect(() => {
+    try {
+      let lsDetails = JSON.parse(localStorage.userDetails)
+      setDetails({
+        username: lsDetails.username,
+        email: lsDetails.email,
+      })
+    } catch (e) {}
+  }, [localStorage])
+
   return (
     <main className="static flex min-h-screen w-[100%] min-w-[320px] flex-col justify-between overflow-x-hidden bg-back_3 px-10 pt-12 text-text_1 md:pl-[calc(5vw+10rem)] md:pr-[calc(5vw+5rem)]">
       {/* Profile Container */}
@@ -33,7 +52,7 @@ const Profile: NextPage = () => {
                 <label>Username </label>
                 <TextBox
                   type="text"
-                  placeholder="(Current Username)"
+                  placeholder={details?.username}
                   name="username"
                 ></TextBox>
               </li>

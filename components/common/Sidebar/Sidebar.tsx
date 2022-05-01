@@ -7,10 +7,20 @@ import { useState } from 'react'
 import { GiHamburgerMenu } from 'react-icons/gi'
 import { FiSettings, FiUser, FiLogOut, FiMessageSquare } from 'react-icons/fi'
 import Tooltip from '../Tooltip'
+import Button from '../Button'
+import { logout_api } from '../../../helpers/api_helper'
 
-const Sidebar = (props: {}) => {
-  const { ...restProps } = props
+const Sidebar = (props: { localStorage: Storage }) => {
+  const { localStorage, ...restProps } = props
   const [sidebar_visible, setSidebarVisible] = useState<boolean>()
+  const [username, setUsername] = useState('')
+  const router = useRouter()
+
+  useEffect(() => {
+    try {
+      setUsername(JSON.parse(localStorage.userDetails).username)
+    } catch (e) {}
+  }, [localStorage])
 
   return (
     <>
@@ -70,9 +80,14 @@ const Sidebar = (props: {}) => {
           {/* Free space */}
 
           <Link href="/profile">
-            <div className=" has-tooltip relative mt-auto justify-self-end drop-shadow-lg hover:top-[1px] hover:cursor-pointer hover:text-accent_2 hover:drop-shadow-none">
-              <FiUser size="3.5em"></FiUser>
-              <Tooltip text="Profile" side="right"></Tooltip>
+            <div className="relative mt-auto justify-self-end drop-shadow-lg">
+              <div className=" has-tooltip  hover:top-[1px] hover:cursor-pointer hover:text-accent_2 hover:drop-shadow-none ">
+                <FiUser size="3.5em"></FiUser>
+                <Tooltip text="Profile" side="right"></Tooltip>
+              </div>
+              <h3 className="absolute -top-6 left-1/2 max-w-[3.5em] -translate-x-1/2 overflow-clip overflow-ellipsis text-center">
+                {username}
+              </h3>
             </div>
           </Link>
           <Link href="/settings">
@@ -81,12 +96,27 @@ const Sidebar = (props: {}) => {
               <Tooltip text="Settings" side="right"></Tooltip>
             </div>
           </Link>
-          <Link href="/login">
-            <div className=" has-tooltip relative mt-5 justify-self-end drop-shadow-lg hover:top-[1px] hover:cursor-pointer hover:text-accent_2 hover:drop-shadow-none">
+          <button
+            className=" has-tooltip relative mt-5 h-[3.5em] w-[3.5em] justify-self-end bg-transparent drop-shadow-lg hover:top-[1px] hover:cursor-pointer hover:text-accent_2 hover:drop-shadow-none"
+            onClick={async (e: any) => {
+              e.preventDefault()
+              console.log(localStorage)
+
+              const status = await logout_api(
+                JSON.parse(localStorage.userDetails).email
+              )
+              if (status == 'success') {
+                localStorage.removeItem('userDetails')
+                // TODO REMOVE ACCESS/REFRESH TOKEN? ON LOGOUT
+                router.push('/login')
+              }
+            }}
+          >
+            <div className=" ">
               <FiLogOut size="3.5em"></FiLogOut>
               <Tooltip text="Log Out" side="right"></Tooltip>
             </div>
-          </Link>
+          </button>
         </div>
       </div>
     </>
