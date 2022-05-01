@@ -20,6 +20,7 @@ import {
 import Tooltip from '../components/common/Tooltip'
 import Link from 'next/link'
 import { emitWarning } from 'process'
+import { useRouter } from 'next/router'
 
 const Register: NextPage = () => {
   const [inUsername, setInUsername] = useState('')
@@ -30,6 +31,7 @@ const Register: NextPage = () => {
   const [userNameFieldChanged, setuserNameFieldChanged] =
     useState<boolean>(false)
 
+  const router = useRouter()
   // Info Popup Code
   enum TYPE {
     Info,
@@ -79,14 +81,46 @@ const Register: NextPage = () => {
       })
     }, 5000)
   }
+
+  const handleRegisterEvent = async (e: { preventDefault: () => void }) => {
+    e.preventDefault()
+    // Clientside userNameTaken check
+    if (!userNameTaken) {
+      if (
+        inUsername.length >= 3 &&
+        inEmail.length >= 3 &&
+        inPassword.length >= 3 &&
+        inFullName.length >= 3
+      ) {
+        const statusObj = await register_api(
+          inUsername,
+          inEmail,
+          inPassword,
+          inFullName
+        )
+        console.log(statusObj)
+        if (statusObj.data.status == 'success') {
+          router.push('/login')
+        }
+      } else {
+        flashPopup(
+          'All fields must be at least 3 characters long.',
+          TYPE.Warning
+        )
+      }
+    } else {
+      flashPopup('Username is taken. Please pick another.', TYPE.Info)
+    }
+  }
   return (
-    <main className="static flex min-h-screen w-[100%] flex-col justify-center overflow-x-hidden bg-back_3 px-10 pt-0 text-text_1 md:min-w-[320px]  md:px-[25vw]">
+    <main className="static flex min-h-screen w-[100%] flex-col items-center justify-center overflow-x-hidden bg-back_3 px-10 pt-0 text-text_1  md:min-w-[320px] md:px-[25vw]">
       {/* Profile Container */}
-      <div className="flex min-w-max flex-col items-center font-body md:flex-row">
+      <div className="flex min-w-max flex-col items-center border-2 border-gray-200 bg-gray-300 p-2 font-body drop-shadow-lg dark:border-gray-500 dark:bg-gray-600 md:flex-row">
         <div id="loginlogo" className="m-3 h-48 w-48 drop-shadow-xl">
           <Image src="/logo.svg" width={200} height={200}></Image>
         </div>
         <div className="relative">
+          {/* Info Popup */}
           <div
             className={
               `${
@@ -96,7 +130,7 @@ const Register: NextPage = () => {
               }` +
               ' ' +
               `${infoPopup?.type_colour}` +
-              ' absolute -top-0 left-0 block h-20 w-full rounded-t-sm text-black transition-transform'
+              ' absolute -top-0 left-0 block h-20 w-full rounded-t-sm text-black transition-transform '
             }
           >
             <div className=" relative flex w-full flex-row justify-center gap-1 p-2">
@@ -200,36 +234,7 @@ const Register: NextPage = () => {
                   type="positive"
                   className=" md:mb-0"
                   onClick={async (e: any) => {
-                    e.preventDefault()
-                    // Clientside userNameTaken check
-                    if (!userNameTaken) {
-                      if (
-                        inUsername.length >= 3 &&
-                        inEmail.length >= 3 &&
-                        inPassword.length >= 3 &&
-                        inFullName.length >= 3
-                      ) {
-                        const statusObj = await register_api(
-                          inUsername,
-                          inEmail,
-                          inPassword,
-                          // WHEN BACKEND IS CHANGED TO FULL NAME, REMOVE ONE OF THESE
-                          inFullName,
-                          inFullName
-                        )
-                        console.log(statusObj)
-                      } else {
-                        flashPopup(
-                          'All fields must be at least 3 characters long.',
-                          TYPE.Warning
-                        )
-                      }
-                    } else {
-                      flashPopup(
-                        'Username is taken. Please pick another.',
-                        TYPE.Info
-                      )
-                    }
+                    handleRegisterEvent(e)
                   }}
                 ></Button>
               </li>
