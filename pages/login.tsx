@@ -4,6 +4,7 @@ import { ReactElement, SetStateAction, useState } from 'react'
 import Button from '../components/common/Button'
 import TextBox from '../components/common/TextBox'
 import { useRouter } from 'next/router'
+import axios from 'axios'
 
 import { get_user_details_api, login_api } from '../helpers/api_helper'
 import Link from 'next/link'

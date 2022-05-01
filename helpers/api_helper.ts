@@ -19,7 +19,6 @@ export async function login_api(username_email: string, password: string) {
     return 'failed'
   }
 }
-
 export async function logout_api(email: string) {
   const CONNECTION_STRING = 'http://localhost:3000/v1/auth/logout/'
   let logoutData: { email?: string} = {
@@ -50,6 +49,7 @@ export async function register_api(username: string, email: string, password: st
     const res = await axios.post(CONNECTION_STRING, registerData)
     
     response = res
+
   } catch (e) {
     response = e
   }
@@ -57,13 +57,14 @@ export async function register_api(username: string, email: string, password: st
 }
 
 // TODO FIX API TO USE CORRECT TOKEN TO RETURN USER DETAILS
-export async function get_user_details_api(token:string) {
+export async function get_user_details_api() {
   const CONNECTION_STRING = 'http://localhost:3000/v1/user/'
 
   try {
+
     const response = await general_api(CONNECTION_STRING,"GET",{headers: {refresh_token:token}})
     console.log(response);
-    
+
     return response
   } catch (e) {
     return e
@@ -74,6 +75,7 @@ export async function get_user_details_api(token:string) {
 export async function check_username_api(username: string) {
 
   const CONNECTION_STRING = 'http://localhost:3000/v1/user/' + username
+
   let outcome = false;
 
   try {
@@ -81,13 +83,15 @@ export async function check_username_api(username: string) {
 
     if(response.data.status == 'success') {
       outcome = false;
+
     }
   } catch (e) { 
     console.log(e);
     outcome = true
   }
-  
+
   return outcome;
+
 }
 
 
