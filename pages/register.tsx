@@ -20,6 +20,7 @@ import {
 import Tooltip from '../components/common/Tooltip'
 import Link from 'next/link'
 import { emitWarning } from 'process'
+import { useRouter } from 'next/router'
 
 const Register: NextPage = () => {
   const [inUsername, setInUsername] = useState('')
@@ -30,6 +31,7 @@ const Register: NextPage = () => {
   const [userNameFieldChanged, setuserNameFieldChanged] =
     useState<boolean>(false)
 
+  const router = useRouter()
   // Info Popup Code
   enum TYPE {
     Info,
@@ -94,11 +96,12 @@ const Register: NextPage = () => {
           inUsername,
           inEmail,
           inPassword,
-          // WHEN BACKEND IS CHANGED TO FULL NAME, REMOVE ONE OF THESE
-          inFullName,
           inFullName
         )
         console.log(statusObj)
+        if (statusObj.data.status == 'success') {
+          router.push('/login')
+        }
       } else {
         flashPopup(
           'All fields must be at least 3 characters long.',

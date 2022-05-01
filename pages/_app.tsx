@@ -110,7 +110,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
         )
         console.log(userDetails.status)
       } else {
-        router.push('/login')
+        if (router.asPath != '/register') router.push('/login')
       }
     }
     fetchUserDetails().catch(console.error)

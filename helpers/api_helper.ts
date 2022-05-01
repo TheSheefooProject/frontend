@@ -36,23 +36,24 @@ export async function logout_api(email: string) {
   }
 }
 
-export async function register_api(username: string, email: string, password: string,firstName: string,lastName: string) {
+export async function register_api(username: string, email: string, password: string,fullName: string) {
   const CONNECTION_STRING = 'http://localhost:3000/v1/auth/register/'
-  let registerData: { username: string; email: string; password: string;firstName: string;lastName: string } = {
+  let response:any = 'No response'
+  let registerData: { username: string; email: string; password: string;full_name: string} = {
     email: email,
     username: username,
     password: password,
-    firstName: firstName,
-    lastName: lastName
+    full_name: fullName,
   }
 
   try {
-    const response = await axios.post(CONNECTION_STRING, registerData)
+    const res = await axios.post(CONNECTION_STRING, registerData)
     
-    return response
+    response = res
   } catch (e) {
-    return e
+    response = e
   }
+  return response
 }
 
 // TODO FIX API TO USE CORRECT TOKEN TO RETURN USER DETAILS
@@ -74,14 +75,15 @@ export async function check_username_api(username: string) {
 
   const CONNECTION_STRING = 'http://localhost:3000/v1/user/' + username
   let outcome = false;
-  try {
-    const response = await general_api(CONNECTION_STRING,"GET")
 
-    if(response.status == 'success') {
+  try {
+    const response = await axios.get(CONNECTION_STRING)
+
+    if(response.data.status == 'success') {
       outcome = false;
     }
   } catch (e) { 
-    
+    console.log(e);
     outcome = true
   }
   
