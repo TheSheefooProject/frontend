@@ -17,7 +17,7 @@ type MessageObject = {
 }
 
 const DMFragment: NextPage<Props> = (props) => {
-  const { messages, loading, roomName } = props
+  const { messages = [], loading = false, roomName } = props
 
   return (
     <>
@@ -27,15 +27,14 @@ const DMFragment: NextPage<Props> = (props) => {
       <div id="messages_container" className="flex flex-col p-2 md:p-4">
         {loading ? (
           <Image
-            src="/images/loading.gif" //TODO note this is a temp image, plz change
+            src="/images/spinner.svg"
             width={400}
             height={600}
+            quality={100}
           ></Image>
         ) : (
           <div className="flex flex-col gap-6">
             {messages.map(function (message: MessageObject, idx) {
-              console.log(message)
-
               if (message.type == 'INCOMING') {
                 return (
                   <p
