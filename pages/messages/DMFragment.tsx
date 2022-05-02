@@ -10,7 +10,7 @@ export interface Props {
 }
 
 type MessageObject = {
-  userName: string
+  user_name: string
   message: string
   id: string
   type: 'INCOMING' | 'OUTGOING'
@@ -21,7 +21,7 @@ const DMFragment: NextPage<Props> = (props) => {
 
   return (
     <>
-      <p className="pt-4 text-center font-heading text-xl">
+      <p className="sticky top-0 pt-4 text-center font-heading text-xl">
         Now talking to {roomName}
       </p>
       <div id="messages_container" className="flex flex-col p-2 md:p-4">
@@ -32,13 +32,15 @@ const DMFragment: NextPage<Props> = (props) => {
             height={600}
           ></Image>
         ) : (
-          <div>
+          <div className="flex flex-col gap-1">
             {messages.map(function (message: MessageObject, idx) {
+              console.log(message)
+
               if (message.type == 'INCOMING') {
                 return (
                   <p
                     itemType="incoming"
-                    className="my-2 ml-auto max-w-[90%]"
+                    className="self-end"
                     id={message.id + idx}
                   >
                     <div className="w-fit rounded-lg rounded-br-none bg-accent_1 px-4 py-2 text-black">
@@ -48,11 +50,7 @@ const DMFragment: NextPage<Props> = (props) => {
                 )
               }
               return (
-                <p
-                  itemType="outgoing"
-                  className="my-2 max-w-[90%]"
-                  id={message.id + idx}
-                >
+                <p itemType="outgoing" className="" id={message.id + idx}>
                   <div className=" w-fit rounded-lg rounded-bl-none bg-back_4 px-4 py-2">
                     {message.message}
                   </div>

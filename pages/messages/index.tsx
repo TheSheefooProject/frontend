@@ -101,7 +101,7 @@ const DirectMessagesPage: NextPage = (props) => {
     }
   }
   return (
-    <main className="flex min-h-screen w-[100%] flex-col items-stretch bg-back_2 py-2 pl-2 pr-2 md:pl-24 md:pr-4 md:pt-4">
+    <main className="flex max-h-screen min-h-screen w-[100%] flex-col items-stretch bg-back_2 py-2 pl-2 pr-2 md:pl-24 md:pr-4 md:pt-4">
       {/* Direct Message user bubbles */}
       <div className="relative flex h-20 w-full flex-row justify-end gap-3">
         {activeDMS.map(({ roomID, roomName }, idx) => (
@@ -112,16 +112,10 @@ const DirectMessagesPage: NextPage = (props) => {
               setCurrentRoom(roomID)
             }}
           >
-            <Image
-              src={'https://picsum.photos/seed/' + idx + 1 + '/200'}
-              layout="fill"
-              objectFit="cover"
-            ></Image>
-            {/* //TODO since we do not currently have room images maybe its worth setting the name of the room instead */}
-            <h1>{roomName}</h1>
+            <h1 className="z-10">{roomName}</h1>
           </div>
         ))}
-        )
+
         <div
           className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-3xl border-2 border-text_1 hover:cursor-pointer md:h-16 md:w-16"
           title="Start new conversation"
