@@ -93,9 +93,10 @@ const DirectMessagesPage: NextPage = (props) => {
           user_name,
           message: currentTypedMessage,
         })
-        socketConnection.emit('sendMessage', currentTypedMessage, () =>
+        socketConnection.emit('sendMessage', currentTypedMessage, () => {
           setCurrentTypedMessage('')
-        )
+          console.log(currentTypedMessage)
+        })
       }
     }
   }

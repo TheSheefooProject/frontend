@@ -37,6 +37,7 @@ const TextBox = (props: {
       type={type}
       onChange={onChange}
       onKeyUp={onKeyUp}
+      value={text}
     ></input>
   )
 }
