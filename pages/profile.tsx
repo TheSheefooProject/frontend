@@ -51,6 +51,7 @@ const Profile = (props: { localStorage: Storage }) => {
               <li className=" inline-flex w-full flex-col gap-1">
                 <label>Username </label>
                 <TextBox
+                  controlledInput={false}
                   type="text"
                   placeholder={details?.username}
                   name="username"
