@@ -10,6 +10,7 @@ const TextBox = (props: {
   required?: boolean
   onChange?: any | (() => {})
   onKeyUp?: any | (() => {})
+  controlledInput: boolean
 }) => {
   // Default prop values
   const {
@@ -21,6 +22,7 @@ const TextBox = (props: {
     onChange = () => {},
     onKeyUp = () => {},
     required = false,
+    controlledInput = false,
     ...restProps
   } = props
 
@@ -30,14 +32,14 @@ const TextBox = (props: {
         `${'placeholder:text-text_3 rounded-sm bg-back_4 py-1 px-3 text-text_1 focus:outline-none focus:ring focus:ring-back_2'} ` +
         className
       }
-      defaultValue={text}
       placeholder={placeholder}
       name={name}
       required={required}
       type={type}
       onChange={onChange}
       onKeyUp={onKeyUp}
-      value={text}
+      defaultValue={controlledInput ? undefined : text}
+      value={controlledInput ? text : undefined}
     ></input>
   )
 }

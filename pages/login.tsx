@@ -166,6 +166,7 @@ const Login = (props: { localStorage: Storage }) => {
                   }) => {
                     setInEmail(e.target.value)
                   }}
+                  controlledInput={false}
                 ></TextBox>
               </li>
               <li className="flex flex-col gap-1">
@@ -180,6 +181,7 @@ const Login = (props: { localStorage: Storage }) => {
                   }) => {
                     setInPassword(e.target.value)
                   }}
+                  controlledInput={false}
                 ></TextBox>
               </li>
               <li className="flex justify-between gap-1 text-blue-500 underline">

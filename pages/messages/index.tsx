@@ -146,6 +146,7 @@ const DirectMessagesPage: NextPage = (props) => {
             }}
             text={currentTypedMessage}
             onKeyUp={(e: any) => handleSendMessage(e)}
+            controlledInput={true}
           ></TextBox>
           <FiSend
             title="Send Message"
