@@ -62,7 +62,7 @@ export async function get_user_details_api(token:string) {
 
   try {
 
-    const response = await general_api(CONNECTION_STRING,"GET",{headers: {refresh_token:token}})
+    const response = await general_api(CONNECTION_STRING,"GET")
     console.log(response);
 
     return response

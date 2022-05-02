@@ -82,8 +82,7 @@ const Register: NextPage = () => {
     }, 5000)
   }
 
-  const handleRegisterEvent = async (e: { preventDefault: () => void }) => {
-    e.preventDefault()
+  const handleRegisterEvent = async (e: any) => {
     // Clientside userNameTaken check
     if (!userNameTaken) {
       if (
@@ -110,6 +109,11 @@ const Register: NextPage = () => {
       }
     } else {
       flashPopup('Username is taken. Please pick another.', TYPE.Info)
+    }
+  }
+  const handleKeyUp = (e: any) => {
+    if (e.key == 'Enter') {
+      handleRegisterEvent(e)
     }
   }
   return (
@@ -162,9 +166,11 @@ const Register: NextPage = () => {
                   required
                   type="text"
                   name="email"
+                  onKeyUp={(e: any) => handleKeyUp(e)}
                   onChange={(e: any) => {
                     setInEmail(e.target.value)
                   }}
+                  controlledInput={false}
                 ></TextBox>
               </li>
               <li className="flex flex-col gap-1">
@@ -173,9 +179,11 @@ const Register: NextPage = () => {
                   required
                   type="text"
                   name="fullName"
+                  onKeyUp={(e: any) => handleKeyUp(e)}
                   onChange={(e: any) => {
                     setInFullName(e.target.value)
                   }}
+                  controlledInput={false}
                 ></TextBox>
               </li>
               <li className=" relative flex flex-col gap-1">
@@ -184,12 +192,14 @@ const Register: NextPage = () => {
                   required
                   type="text"
                   name="username"
+                  onKeyUp={(e: any) => handleKeyUp(e)}
                   onChange={async (e: any) => {
                     e.preventDefault()
                     setuserNameFieldChanged(true)
                     setInUsername(e.target.value)
                     setUserNameTaken(await check_username_api(e.target.value))
                   }}
+                  controlledInput={false}
                 ></TextBox>
                 <div
                   className={
@@ -219,9 +229,11 @@ const Register: NextPage = () => {
                   required
                   type="password"
                   name="password"
+                  onKeyUp={(e: any) => handleKeyUp(e)}
                   onChange={(e: any) => {
                     setInPassword(e.target.value)
                   }}
+                  controlledInput={false}
                 ></TextBox>
               </li>
               <li className="flex justify-between gap-1 text-blue-500 underline">

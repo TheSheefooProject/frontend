@@ -5,24 +5,23 @@ import io from 'socket.io-client'
 
 export interface Props {
   messages: Array<any>
-  roomName:string
+  roomName: string
   loading: boolean
 }
 
-
 type MessageObject = {
-  userName:string
+  user_name: string
   message: string
   id: string
   type: 'INCOMING' | 'OUTGOING'
 }
 
 const DMFragment: NextPage<Props> = (props) => {
-  const {messages,loading,roomName} = props
+  const { messages, loading, roomName } = props
 
   return (
     <>
-      <p className="pt-4 text-center font-heading text-xl">
+      <p className="sticky top-0 pt-4 text-center font-heading text-xl">
         Now talking to {roomName}
       </p>
       <div id="messages_container" className="flex flex-col p-2 md:p-4">
@@ -33,13 +32,15 @@ const DMFragment: NextPage<Props> = (props) => {
             height={600}
           ></Image>
         ) : (
-          <div>
+          <div className="flex flex-col gap-6">
             {messages.map(function (message: MessageObject, idx) {
+              console.log(message)
+
               if (message.type == 'INCOMING') {
                 return (
                   <p
                     itemType="incoming"
-                    className="my-2 ml-auto max-w-[90%]"
+                    className="relative self-end"
                     id={message.id + idx}
                   >
                     <div className="w-fit rounded-lg rounded-br-none bg-accent_1 px-4 py-2 text-black">
@@ -51,11 +52,17 @@ const DMFragment: NextPage<Props> = (props) => {
               return (
                 <p
                   itemType="outgoing"
-                  className="my-2 max-w-[90%]"
+                  className="relative"
                   id={message.id + idx}
                 >
-                  <div className=" w-fit rounded-lg rounded-bl-none bg-back_4 px-4 py-2">
+                  <div className="ml-6 w-fit rounded-lg rounded-bl-none bg-back_4 px-4 py-2">
                     {message.message}
+                    <span className="absolute left-0 -bottom-5 text-sm text-gray-400">
+                      {message.user_name}
+                    </span>
+                    <span className="absolute left-2 -bottom-0 text-sm text-gray-400">
+                      ⮣
+                    </span>
                   </div>
                 </p>
               )
