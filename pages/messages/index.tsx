@@ -103,21 +103,21 @@ const DirectMessagesPage: NextPage = (props) => {
   return (
     <main className="flex max-h-screen min-h-screen w-[100%] flex-col items-stretch bg-back_2 py-2 pl-2 pr-2 md:pl-24 md:pr-4 md:pt-4">
       {/* Direct Message user bubbles */}
-      <div className="relative flex h-20 w-full flex-row justify-end gap-3">
+      <div className="relative flex h-16 w-full flex-row items-center justify-end gap-2 py-2">
         {activeDMS.map(({ roomID, roomName }, idx) => (
           <div
-            className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-3xl border-2 border-text_1 transition-all hover:translate-y-1 hover:cursor-pointer hover:rounded-md md:h-16 md:w-16"
+            className="flex h-[50px] items-center border-2 border-gray-400 px-2 py-1 text-gray-400 transition-all hover:animate-pulse hover:cursor-pointer hover:rounded-md hover:border-accent_1 hover:text-accent_1"
             onClick={(e) => {
               e.preventDefault()
               setCurrentRoom(roomID)
             }}
           >
-            <h1 className="z-10">{roomName}</h1>
+            <h3 className="font-semibold">{roomName}</h3>
           </div>
         ))}
 
         <div
-          className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-3xl border-2 border-text_1 hover:cursor-pointer md:h-16 md:w-16"
+          className="border-2 border-gray-100 transition-all hover:animate-pulse hover:cursor-pointer hover:rounded-md hover:border-accent_1 hover:text-accent_1"
           title="Start new conversation"
         >
           <FiPlus size={46}></FiPlus>
