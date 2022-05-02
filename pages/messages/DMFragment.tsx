@@ -1,6 +1,6 @@
 import { NextPage } from 'next'
 import Image from 'next/image'
-import React from 'react'
+import React, { useRef } from 'react'
 import io from 'socket.io-client'
 
 export interface Props {
@@ -39,10 +39,10 @@ const DMFragment: NextPage<Props> = (props) => {
                 return (
                   <p
                     itemType="incoming"
-                    className="relative self-end"
+                    className="relative max-w-[50%] self-end "
                     id={message.id + idx}
                   >
-                    <div className="w-fit rounded-lg rounded-br-none bg-accent_1 px-4 py-2 text-black">
+                    <div className="w-fit max-w-[100%] overflow-hidden overflow-ellipsis rounded-lg rounded-br-none bg-accent_1 px-4 py-2 text-black">
                       {message.message}
                     </div>
                   </p>
@@ -51,10 +51,10 @@ const DMFragment: NextPage<Props> = (props) => {
               return (
                 <p
                   itemType="outgoing"
-                  className="relative"
+                  className="relative max-w-[50%]"
                   id={message.id + idx}
                 >
-                  <div className="ml-6 w-fit rounded-lg rounded-bl-none bg-back_4 px-4 py-2">
+                  <div className="ml-6 w-fit max-w-[100%] overflow-hidden overflow-ellipsis rounded-lg rounded-bl-none bg-back_4 px-4 py-2">
                     {message.message}
                     <span className="absolute left-0 -bottom-5 text-sm text-gray-400">
                       {message.user_name}

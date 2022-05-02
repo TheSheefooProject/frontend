@@ -1,6 +1,6 @@
 import { NextPage } from 'next'
 import Image from 'next/image'
-import { SetStateAction } from 'react'
+import { SetStateAction, useRef } from 'react'
 import { useState } from 'react'
 import React from 'react'
 import { FiPlus, FiSend } from 'react-icons/fi'
@@ -30,18 +30,21 @@ const DirectMessagesPage: NextPage = (props) => {
   const [loading, setLoading] = React.useState(true)
   const [loadingOldMessages, setLoadingOldMessages] = React.useState(true)
   const [users, setUsers] = React.useState([])
+  const messages_div = useRef<any>(null)
 
   //SORRY I KNOW THIS IS SPAGETTI CODE :,( BUT TIME CONSTRAINTS AND THAT.
   React.useEffect(() => {
+    //scroll to bottom of messages div
+    setTimeout(() => {
+      messages_div.current.scroll(0, messages_div.current.scrollHeight)
+    }, 250)
+    //
     socketConnection.on('new-message', (data) => {
       console.log('Here is new message', data)
     })
 
     const user_id = JSON.parse(window.localStorage.userDetails).user_id
     const user_name = JSON.parse(window.localStorage.userDetails).username
-    console.log('LOCALSTORAGE INSTANCE:')
-    console.log(user_id)
-    console.log(user_name)
 
     const id = `${user_id}:${Date.now()}`
 
@@ -51,7 +54,7 @@ const DirectMessagesPage: NextPage = (props) => {
         const messagesFormatted: Array<any> = []
         const messagesArr = result.data.messages
         for (let x = 0; x < messagesArr.length; x++) {
-          console.log(messagesArr[x])
+          // console.log(messagesArr[x])
           const type =
             messagesArr[x].user_id == user_id ? 'INCOMING' : 'OUTGOING'
           messagesFormatted.push({ ...messagesArr[x], type })
@@ -95,7 +98,7 @@ const DirectMessagesPage: NextPage = (props) => {
         })
         socketConnection.emit('sendMessage', currentTypedMessage, () => {
           setCurrentTypedMessage('')
-          console.log(currentTypedMessage)
+          messages_div.current.scroll(0, messages_div.current.scrollHeight)
         })
       }
     }
@@ -123,8 +126,12 @@ const DirectMessagesPage: NextPage = (props) => {
           <FiPlus size={46}></FiPlus>
         </div>
       </div>
+
       {/* Direct Message Embed Fragment */}
-      <div className="b-2 mb-12 h-full w-full overflow-y-auto rounded-md bg-back_3">
+      <div
+        ref={messages_div}
+        className="b-2 mb-12 h-full w-full overflow-y-auto scroll-smooth rounded-md bg-back_3 "
+      >
         <DMFragment
           messages={messages}
           loading={loading || loadingOldMessages}
