@@ -93,9 +93,9 @@ const Login = (props: { localStorage: Storage }) => {
       )
 
       if (statusObj == 'success') {
-        console.log(statusObj)
         if (localStorage) {
           localStorage.userDetails = JSON.stringify({
+            user_id: userDetails.userData._id,
             username: userDetails.userData.username,
             email: inEmail,
             password: inPassword,

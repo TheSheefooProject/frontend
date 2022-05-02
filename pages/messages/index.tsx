@@ -29,6 +29,7 @@ const DirectMessagesPage: NextPage = (props) => {
   ])
   const [loading, setLoading] = React.useState(true)
   const [loadingOldMessages, setLoadingOldMessages] = React.useState(true)
+  const [users, setUsers] = React.useState([])
 
   //SORRY I KNOW THIS IS SPAGETTI CODE :,( BUT TIME CONSTRAINTS AND THAT.
   React.useEffect(() => {
@@ -36,8 +37,12 @@ const DirectMessagesPage: NextPage = (props) => {
       console.log('Here is new message', data)
     })
 
-    const user_id = window.localStorage.user_id
-    const user_name = window.localStorage.user_username
+    const user_id = JSON.parse(window.localStorage.userDetails).user_id
+    const user_name = JSON.parse(window.localStorage.userDetails).username
+    console.log('LOCALSTORAGE INSTANCE:')
+    console.log(user_id)
+    console.log(user_name)
+
     const id = `${user_id}:${Date.now()}`
 
     axios
@@ -47,7 +52,8 @@ const DirectMessagesPage: NextPage = (props) => {
         const messagesArr = result.data.messages
         for (let x = 0; x < messagesArr.length; x++) {
           console.log(messagesArr[x])
-          const type = messagesArr[x].user_id == user_id ? 'INCOMING' : 'OUTGOING'
+          const type =
+            messagesArr[x].user_id == user_id ? 'INCOMING' : 'OUTGOING'
           messagesFormatted.push({ ...messagesArr[x], type })
         }
         setMessages(messagesFormatted)
@@ -76,7 +82,23 @@ const DirectMessagesPage: NextPage = (props) => {
     }
   }, [props, currentRoomName])
 
-  const [users, setUsers] = React.useState([])
+  const handleSendMessage = async (e: any) => {
+    if (currentTypedMessage != '') {
+      if (e.key == 'Enter' || e.key == undefined) {
+        const user_id = JSON.parse(window.localStorage.userDetails).user_id
+        const user_name = JSON.parse(window.localStorage.userDetails).username
+        await axios.post('http://localhost:3005/v1/messages/', {
+          chat_room_id: currentRoomName,
+          user_id,
+          user_name,
+          message: currentTypedMessage,
+        })
+        socketConnection.emit('sendMessage', currentTypedMessage, () =>
+          setCurrentTypedMessage('')
+        )
+      }
+    }
+  }
   return (
     <main className="flex min-h-screen w-[100%] flex-col items-stretch bg-back_2 py-2 pl-2 pr-2 md:pl-24 md:pr-4 md:pt-4">
       {/* Direct Message user bubbles */}
@@ -122,28 +144,13 @@ const DirectMessagesPage: NextPage = (props) => {
               setCurrentTypedMessage(e.target.value)
             }}
             text={currentTypedMessage}
-            //TODO ADD ability to press enter and send message (This not sure what else needs to be changed to do this)
+            onKeyUp={(e: any) => handleSendMessage(e)}
           ></TextBox>
           <FiSend
             title="Send Message"
             className=" mr-auto ml-4 text-accent_2 hover:cursor-pointer"
             size={32}
-            onClick={async (e) => {
-              e.preventDefault()
-              if (currentTypedMessage != '') {
-                const user_id = window.localStorage.user_id
-                const user_name = window.localStorage.user_username
-                await axios.post('http://localhost:3005/v1/messages/', {
-                  chat_room_id: currentRoomName,
-                  user_id,
-                  user_name,
-                  message: currentTypedMessage,
-                })
-                socketConnection.emit('sendMessage', currentTypedMessage, () =>
-                  setCurrentTypedMessage('')
-                )
-              }
-            }}
+            onClick={(e: any) => handleSendMessage(e)}
           ></FiSend>
         </div>
       </div>

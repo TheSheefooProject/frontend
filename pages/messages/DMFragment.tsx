@@ -5,20 +5,19 @@ import io from 'socket.io-client'
 
 export interface Props {
   messages: Array<any>
-  roomName:string
+  roomName: string
   loading: boolean
 }
 
-
 type MessageObject = {
-  userName:string
+  userName: string
   message: string
   id: string
   type: 'INCOMING' | 'OUTGOING'
 }
 
 const DMFragment: NextPage<Props> = (props) => {
-  const {messages,loading,roomName} = props
+  const { messages, loading, roomName } = props
 
   return (
     <>
