@@ -32,7 +32,7 @@ const DMFragment: NextPage<Props> = (props) => {
             height={600}
           ></Image>
         ) : (
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-6">
             {messages.map(function (message: MessageObject, idx) {
               console.log(message)
 
@@ -40,7 +40,7 @@ const DMFragment: NextPage<Props> = (props) => {
                 return (
                   <p
                     itemType="incoming"
-                    className="self-end"
+                    className="relative self-end"
                     id={message.id + idx}
                   >
                     <div className="w-fit rounded-lg rounded-br-none bg-accent_1 px-4 py-2 text-black">
@@ -50,9 +50,19 @@ const DMFragment: NextPage<Props> = (props) => {
                 )
               }
               return (
-                <p itemType="outgoing" className="" id={message.id + idx}>
-                  <div className=" w-fit rounded-lg rounded-bl-none bg-back_4 px-4 py-2">
+                <p
+                  itemType="outgoing"
+                  className="relative"
+                  id={message.id + idx}
+                >
+                  <div className="ml-6 w-fit rounded-lg rounded-bl-none bg-back_4 px-4 py-2">
                     {message.message}
+                    <span className="absolute left-0 -bottom-5 text-sm text-gray-400">
+                      {message.user_name}
+                    </span>
+                    <span className="absolute left-2 -bottom-0 text-sm text-gray-400">
+                      ⮣
+                    </span>
                   </div>
                 </p>
               )
