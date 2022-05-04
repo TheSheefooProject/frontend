@@ -39,6 +39,18 @@ function MyApp({ Component, pageProps, router }: AppProps) {
   const [settings, setSettings] = useState<ISettings>()
   const [reduced_motion, setReduced_motion] = useState<boolean>()
 
+  const resetSettings = () => {
+    localStorage.settings = JSON.stringify({
+      text_size: 5,
+      dark: false,
+      reduced_motion: false,
+      disable_autoplay: false,
+      disable_sounds: false,
+      profile_private: false,
+      dms_from_strangers: false,
+      disable_notifications: false,
+    })
+  }
   const saveSettings = (key: string, val: number | boolean) => {
     if (localStorage !== undefined) {
       switch (key) {
@@ -54,17 +66,6 @@ function MyApp({ Component, pageProps, router }: AppProps) {
       let tempCachedSettings = JSON.parse(localStorage.settings)
       tempCachedSettings[key] = val
       localStorage.settings = JSON.stringify(tempCachedSettings)
-
-      // localStorage.settings = JSON.stringify({
-      //   text_size: text_size,
-      //   dark: dark,
-      //   reduced_motion: reduced_motion,
-      //   disable_autoplay: disable_autoplay,
-      //   disable_sounds: disable_sounds,
-      //   profile_private: profile_private,
-      //   dms_from_strangers: dms_from_strangers,
-      //   disable_notifications: disable_notifications,
-      // })
     }
   }
   // Light/Dark theme switching function
@@ -147,6 +148,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
         setDark={setDark}
         settings={settings}
         saveSettings={saveSettings}
+        resetSettings={resetSettings}
         {...pageProps}
       />
       {!(router.pathname === '/register' || router.pathname === '/login') && (
