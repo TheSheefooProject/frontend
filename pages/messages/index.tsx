@@ -150,7 +150,7 @@ const DirectMessagesPage = (props: { localStorage: Storage }) => {
       <div className="relative flex h-16 w-full flex-row items-center justify-end gap-2 py-2">
         {activeDMS.map(({ roomID, roomName }, idx) => (
           <div
-            className="flex h-[50px] items-center border-2 border-gray-400 px-2 py-1 text-gray-400 transition-all hover:animate-pulse hover:cursor-pointer hover:rounded-md hover:border-accent_1 hover:text-accent_1"
+            className="flex h-[50px] items-center border-2 border-gray-400 px-2 py-1 text-gray-400 transition-all hover:animate-pulse hover:cursor-pointer hover:rounded-md hover:border-accent_1 hover:text-accent_1 motion-reduce:animate-none motion-reduce:transition-none"
             onClick={(e) => {
               e.preventDefault()
               setCurrentRoom(roomID)
@@ -161,7 +161,7 @@ const DirectMessagesPage = (props: { localStorage: Storage }) => {
         ))}
 
         <div
-          className="border-2 border-gray-100 transition-all hover:animate-pulse hover:cursor-pointer hover:rounded-md hover:border-accent_1 hover:text-accent_1"
+          className="border-2 border-gray-100 transition-all hover:animate-pulse hover:cursor-pointer hover:rounded-md hover:border-accent_1 hover:text-accent_1 motion-reduce:animate-none motion-reduce:transition-none"
           title="Start new conversation"
         >
           <FiPlus size={46}></FiPlus>
