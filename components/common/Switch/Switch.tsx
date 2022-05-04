@@ -27,18 +27,18 @@ const Switch = (props: {
 
   useEffect(() => {
     setChecked(initialState)
-    console.log('initial checked state: ', initialState, checked)
+    // console.log('initial checked state: ', initialState, checked)
   }, [initialState])
 
   useEffect(() => {
-    console.log('new checked state: ', checked)
+    // console.log('new checked state: ', checked)
   }, [checked])
 
   const [playOn] = useSound(uncheck_sound, { volume: 1 })
   const [playOff] = useSound(check_sound, { volume: 1 })
 
   const handleClick = (e: any) => {
-    console.log('E.Target.Checked?: ', e.target.checked)
+    // console.log('E.Target.Checked?: ', e.target.checked)
     if (e.target.checked == true) {
       setChecked(true)
     } else {
