@@ -7,6 +7,7 @@ import Image from 'next/image'
 import Button from '../components/common/Button'
 import Switch from '../components/common/Switch'
 import { ISettings } from './_app'
+import AudioPlayer from '../components/common/AudioPlayer'
 let body: HTMLBodyElement | null = null
 let localStorage: Storage
 
@@ -40,14 +41,14 @@ const SettingsPage = (props: {
       {/* Settings Container */}
       <form
         id="settings_container"
-        className="container mx-auto flex flex-col text-text_1"
+        className="container mx-auto flex flex-col justify-between text-text_1"
       >
-        <h2 className=" border-b-[1px] border-back_2 pb-2 text-left font-heading text-2xl  text-text_2">
+        <h2 className="  pb-2 text-left font-heading text-2xl  text-text_2">
           Appearance
         </h2>
-
+        {/* Divider */}
+        <span className="relative bottom-0 mb-4 mt-1 h-[1px] w-auto bg-back_2 opacity-100 "></span>
         <br />
-
         {/* Dark Theme Toggle */}
         <div className="flex flex-row items-center justify-between">
           <h2 className="text-xl ">Dark theme</h2>
@@ -59,6 +60,21 @@ const SettingsPage = (props: {
             initialState={is_dark}
           ></Switch>
         </div>
+
+        {/* Divider */}
+        <span className="relative bottom-0 my-4 h-[1px] w-auto bg-back_4 opacity-20 "></span>
+        {/* Disable Sound toggle */}
+        <div className="flex flex-row items-center justify-between">
+          <h2 className="text-xl ">Disable sounds</h2>
+          <Switch
+            name="setting_sound"
+            onClick={(e: { target: { checked: boolean } }) =>
+              props.saveSettings('disable_sounds', e.target.checked)
+            }
+            initialState={settings?.disable_sounds}
+          ></Switch>
+        </div>
+        <AudioPlayer></AudioPlayer>
 
         {/* Divider */}
         <span className="relative bottom-0 my-4 h-[1px] w-auto bg-back_4 opacity-20 "></span>
@@ -80,20 +96,6 @@ const SettingsPage = (props: {
               </span>
             </div>
           )}
-        </div>
-
-        {/* Divider */}
-        <span className="relative bottom-0 my-4 h-[1px] w-auto bg-back_4 opacity-20 "></span>
-        {/* Disable Sound toggle */}
-        <div className="flex flex-row items-center justify-between">
-          <h2 className="text-xl ">Disable sounds</h2>
-          <Switch
-            name="setting_sound"
-            onClick={(e: { target: { checked: boolean } }) =>
-              props.saveSettings('disable_sounds', e.target.checked)
-            }
-            initialState={settings?.disable_sounds}
-          ></Switch>
         </div>
 
         {/* Divider */}
