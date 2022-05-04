@@ -189,6 +189,7 @@ const DirectMessagesPage = (props: { localStorage: Storage }) => {
             text={currentTypedMessage}
             onKeyUp={(e: any) => handleSendMessage(e)}
             controlledInput={true}
+            autofocus
           ></TextBox>
           <FiSend
             title="Send Message"
