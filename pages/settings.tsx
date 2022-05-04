@@ -7,7 +7,7 @@ import Image from 'next/image'
 import Button from '../components/common/Button'
 import Switch from '../components/common/Switch'
 import { ISettings } from './_app'
-import AudioPlayer from '../components/common/AudioPlayer'
+
 let body: HTMLBodyElement | null = null
 let localStorage: Storage
 
@@ -17,6 +17,7 @@ const SettingsPage = (props: {
   setDark: Function
   settings: ISettings
   saveSettings: Function
+  resetSettings: Function
 }) => {
   // Default prop values
   const {
@@ -25,8 +26,14 @@ const SettingsPage = (props: {
     setDark = null,
     settings = null,
     saveSettings = null,
+    resetSettings = null,
     ...restProps
   } = props
+
+  const [settingsState, setSettingsState] = useState(settings)
+  useEffect(() => {
+    setSettingsState(settings)
+  }, [settings])
 
   return (
     <main className="md:[5vw] static min-h-screen w-[100%] min-w-[320px] overflow-x-hidden bg-back_3 px-10 pt-12 md:px-[calc(20vw+5rem)]">
@@ -57,7 +64,7 @@ const SettingsPage = (props: {
             onClick={(e: { target: { checked: any } }) =>
               props.saveSettings('dark', e.target.checked)
             }
-            initialState={is_dark}
+            initialState={settingsState?.dark}
           ></Switch>
         </div>
 
@@ -68,13 +75,14 @@ const SettingsPage = (props: {
           <h2 className="text-xl ">Disable sounds</h2>
           <Switch
             name="setting_sound"
-            onClick={(e: { target: { checked: boolean } }) =>
+            onClick={(e: { target: { checked: boolean } }) => {
               props.saveSettings('disable_sounds', e.target.checked)
-            }
-            initialState={settings?.disable_sounds}
+            }}
+            check_sound="/sounds/ping.mp3"
+            uncheck_sound="/sounds/ping.mp3"
+            initialState={settingsState?.disable_sounds}
           ></Switch>
         </div>
-        <AudioPlayer></AudioPlayer>
 
         {/* Divider */}
         <span className="relative bottom-0 my-4 h-[1px] w-auto bg-back_4 opacity-20 "></span>
@@ -106,7 +114,11 @@ const SettingsPage = (props: {
           <Button
             text="DEFAULTS"
             type="negative"
-            onClick={() => alert('☠️ Default Settings Restored ☠️')}
+            onClick={() => {
+              if (resetSettings != null) {
+                resetSettings()
+              }
+            }}
             noMargin
             fixedWidth
           ></Button>
