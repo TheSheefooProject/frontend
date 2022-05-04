@@ -7,6 +7,7 @@ import Image from 'next/image'
 import Button from '../components/common/Button'
 import Switch from '../components/common/Switch'
 import { ISettings } from './_app'
+import { useRouter } from 'next/router'
 
 let body: HTMLBodyElement | null = null
 let localStorage: Storage
@@ -30,10 +31,15 @@ const SettingsPage = (props: {
     ...restProps
   } = props
 
+  const router = useRouter()
   const [settingsState, setSettingsState] = useState(settings)
   useEffect(() => {
     setSettingsState(settings)
   }, [settings])
+
+  useEffect(() => {
+    router.replace(router.asPath)
+  }, [])
 
   return (
     <main className="md:[5vw] static min-h-screen w-[100%] min-w-[320px] overflow-x-hidden bg-back_3 px-10 pt-12 md:px-[calc(20vw+5rem)]">

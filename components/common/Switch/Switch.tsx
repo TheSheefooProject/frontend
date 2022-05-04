@@ -10,17 +10,7 @@ const Switch = (props: {
   onClick?: any
   initialState?: boolean
 }) => {
-  const [checked, setChecked] = useState<boolean>(true)
-
-  useEffect(() => {
-    setChecked(initialState)
-    console.log(checked)
-  }, [])
-
-  useEffect(() => {
-    console.log(checked)
-  }, [checked])
-
+  const [checked, setChecked] = useState<boolean>()
   // Default prop values
   const {
     name = 'setting_default',
@@ -31,15 +21,28 @@ const Switch = (props: {
     ...restProps
   } = props
 
-  const [playActive] = useSound('/sounds/sounds_on.mp3', { volume: 0.25 })
-  const [playOn] = useSound(uncheck_sound, { volume: 0.25 })
-  const [playOff] = useSound(check_sound, { volume: 0.25 })
+  useEffect(() => {
+    setChecked(false)
+  }, [])
+
+  useEffect(() => {
+    setChecked(initialState)
+    console.log('initial checked state: ', initialState, checked)
+  }, [initialState])
+
+  useEffect(() => {
+    console.log('new checked state: ', checked)
+  }, [checked])
+
+  const [playOn] = useSound(uncheck_sound, { volume: 1 })
+  const [playOff] = useSound(check_sound, { volume: 1 })
 
   const handleClick = (e: any) => {
+    console.log('E.Target.Checked?: ', e.target.checked)
     if (e.target.checked == true) {
-      setChecked(false)
-    } else {
       setChecked(true)
+    } else {
+      setChecked(false)
     }
     onClick(e)
     checked ? playOff() : playOn()
