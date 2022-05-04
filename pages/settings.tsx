@@ -12,6 +12,7 @@ let localStorage: Storage
 
 const SettingsPage = (props: {
   is_dark: boolean
+  reduced_motion: boolean
   setDark: Function
   settings: ISettings
   saveSettings: Function
@@ -19,6 +20,7 @@ const SettingsPage = (props: {
   // Default prop values
   const {
     is_dark = false,
+    reduced_motion = false,
     setDark = null,
     settings = null,
     saveSettings = null,
@@ -45,27 +47,15 @@ const SettingsPage = (props: {
         </h2>
 
         <br />
-        {/* Font Size Slider */}
-        <div className="flex flex-row items-center justify-between">
-          <h2 className="text-xl ">Text size</h2>
-          <input
-            type="range"
-            min="1"
-            max="100"
-            defaultValue="50"
-            className="slider"
-            id="myRange"
-          ></input>
-        </div>
 
-        {/* Divider */}
-        <span className="relative bottom-0 my-4 h-[1px] w-auto bg-back_4 opacity-20 "></span>
         {/* Dark Theme Toggle */}
         <div className="flex flex-row items-center justify-between">
           <h2 className="text-xl ">Dark theme</h2>
           <Switch
             name="setting_theme"
-            onClick={() => props.setDark(!is_dark)}
+            onClick={(e: { target: { checked: any } }) =>
+              props.saveSettings('dark', e.target.checked)
+            }
             initialState={is_dark}
           ></Switch>
         </div>
@@ -75,27 +65,21 @@ const SettingsPage = (props: {
         {/* Reduced Motion Toggle */}
         <div className="flex flex-row items-center justify-between">
           <h2 className="text-xl ">Reduced motion</h2>
-          <Switch
-            name="setting_motion"
-            onClick={(e: { target: { checked: boolean } }) =>
-              props.saveSettings('reduced_motion', e.target.checked)
-            }
-            initialState={settings?.reduced_motion}
-          ></Switch>
-        </div>
-
-        {/* Divider */}
-        <span className="relative bottom-0 my-4 h-[1px] w-auto bg-back_4 opacity-20 "></span>
-        {/* Disable autoplay toggle */}
-        <div className="flex flex-row items-center justify-between">
-          <h2 className="text-xl ">Disable video/GIF autoplay</h2>
-          <Switch
-            name="setting_autoplay"
-            onClick={(e: { target: { checked: boolean } }) =>
-              props.saveSettings('disable_autoplay', e.target.checked)
-            }
-            initialState={settings?.disable_autoplay}
-          ></Switch>
+          {reduced_motion ? (
+            <div className="group visible relative z-10 border-2 border-[#2b4049] bg-[#8C9EDB] px-2 py-1 font-semibold text-black ">
+              Motion is turned OFF
+              <span className="absolute top-20 -left-24 z-10 w-40 rounded-sm border-2 border-accent_1 bg-back_1 px-2 py-1 text-text_1 opacity-0 group-hover:opacity-100 sm:-top-0 sm:-left-44">
+                Change motion settings in your OS' accessibility options
+              </span>
+            </div>
+          ) : (
+            <div className="group visible relative z-10 animate-bounce border-2 border-[#2b4049] bg-[#8C9EDB] px-2 py-1 font-semibold text-black ">
+              Motion is turned ON
+              <span className="absolute top-20 -left-24 z-10 w-40 rounded-sm border-2 border-accent_1 bg-back_1 px-2 py-1 text-text_1 opacity-0 transition-opacity group-hover:opacity-100 sm:-top-0 sm:-left-44">
+                Change motion settings in your OS' accessibility options
+              </span>
+            </div>
+          )}
         </div>
 
         {/* Divider */}
@@ -109,49 +93,6 @@ const SettingsPage = (props: {
               props.saveSettings('disable_sounds', e.target.checked)
             }
             initialState={settings?.disable_sounds}
-          ></Switch>
-        </div>
-
-        <h2 className=" mt-10 border-b-[1px] border-back_2 pb-2 text-left font-heading text-2xl text-text_2">
-          Privacy
-        </h2>
-        <br />
-
-        {/* Reduced Motion Toggle */}
-        <div className="flex flex-row items-center justify-between">
-          <h2 className="text-xl ">Profile visibility</h2>
-          <Switch
-            name="setting_visibility"
-            onClick={(e: { target: { checked: boolean } }) =>
-              props.saveSettings('profile_private', e.target.checked)
-            }
-            initialState={settings?.profile_private}
-          ></Switch>
-        </div>
-        {/* Divider */}
-        <span className="relative bottom-0 my-4 h-[1px] w-auto bg-back_4 opacity-20 "></span>
-        {/* Reduced Motion Toggle */}
-        <div className="flex flex-row items-center justify-between">
-          <h2 className="text-xl ">Receive direct messages from</h2>
-          <Switch
-            name="setting_dms"
-            onClick={(e: { target: { checked: boolean } }) =>
-              props.saveSettings('dms_from_strangers', e.target.checked)
-            }
-            initialState={settings?.dms_from_strangers}
-          ></Switch>
-        </div>
-        {/* Divider */}
-        <span className="relative bottom-0 my-4 h-[1px] w-auto bg-back_4 opacity-20 "></span>
-        {/* Reduced Motion Toggle */}
-        <div className="flex flex-row items-center justify-between">
-          <h2 className="text-xl ">Disable push notifications</h2>
-          <Switch
-            name="setting_notifications"
-            onClick={(e: { target: { checked: boolean } }) =>
-              props.saveSettings('disable_notifications', e.target.checked)
-            }
-            initialState={settings?.disable_notifications}
           ></Switch>
         </div>
 

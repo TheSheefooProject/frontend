@@ -25,7 +25,12 @@ const DirectMessagesPage: NextPage = (props) => {
   const [currentTypedMessage, setCurrentTypedMessage] = useState('')
   const [currentRoomName, setCurrentRoom] = useState('global')
   const [messages, setMessages] = React.useState([
-    { message: 'test', id: 'asda', type: 'OUTGOING' },
+    {
+      message: 'test',
+      id: 'asda',
+      type: 'OUTGOING',
+      user_name: 'testusername',
+    },
   ])
   const [loading, setLoading] = React.useState(true)
   const [loadingOldMessages, setLoadingOldMessages] = React.useState(true)

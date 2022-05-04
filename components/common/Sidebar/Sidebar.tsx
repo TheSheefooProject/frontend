@@ -27,7 +27,7 @@ const Sidebar = (props: { localStorage: Storage }) => {
       <div
         className={
           `${sidebar_visible ? 'w-20' : 'w-0'}` +
-          ' fixed left-0 top-0 z-50 h-[100vh] drop-shadow-lg md:w-20'
+          '  fixed left-0 top-0 z-50 h-[100vh] drop-shadow-lg md:w-20'
         }
       >
         {/* Dark Overlay */}
@@ -65,13 +65,13 @@ const Sidebar = (props: { localStorage: Storage }) => {
           }
         >
           <Link href="/">
-            <a className="has-tooltip relative mt-3 px-3 drop-shadow-lg hover:top-[1px] hover:drop-shadow-none">
+            <a className="has-tooltip has-motion relative mt-3 px-3 drop-shadow-lg hover:top-[1px] hover:drop-shadow-none">
               <Image src="/logo.svg" width={64} height={64}></Image>
               <Tooltip text="Home" side="right"></Tooltip>
             </a>
           </Link>
           <Link href="/messages">
-            <a className=" has-tooltip relative mt-5 drop-shadow-lg hover:top-[1px] hover:cursor-pointer hover:text-accent_2 hover:drop-shadow-none">
+            <a className=" has-tooltip has-motion relative mt-5 drop-shadow-lg hover:top-[1px] hover:cursor-pointer hover:text-accent_2 hover:drop-shadow-none">
               <FiMessageSquare size="3.5em"></FiMessageSquare>
               <Tooltip text="Messages" side="right"></Tooltip>
             </a>

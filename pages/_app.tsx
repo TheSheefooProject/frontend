@@ -37,24 +37,15 @@ const defaultSettings = {
 function MyApp({ Component, pageProps, router }: AppProps) {
   const [is_dark, setIsDark] = useState<boolean>()
   const [settings, setSettings] = useState<ISettings>()
+  const [reduced_motion, setReduced_motion] = useState<boolean>()
+
   const saveSettings = (key: string, val: number | boolean) => {
     if (localStorage !== undefined) {
       switch (key) {
-        case 'text_size':
-          break
         case 'dark':
-          break
-        case 'reduced_motion':
-          break
-        case 'disable_autoplay':
+          setDark(val)
           break
         case 'disable_sounds':
-          break
-        case 'profile_private':
-          break
-        case 'dms_from_strangers':
-          break
-        case 'disable_notifications':
           break
 
         default:
@@ -63,6 +54,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
       let tempCachedSettings = JSON.parse(localStorage.settings)
       tempCachedSettings[key] = val
       localStorage.settings = JSON.stringify(tempCachedSettings)
+
       // localStorage.settings = JSON.stringify({
       //   text_size: text_size,
       //   dark: dark,
@@ -76,14 +68,14 @@ function MyApp({ Component, pageProps, router }: AppProps) {
     }
   }
   // Light/Dark theme switching function
-  const setDark = (val: boolean) => {
+  const setDark = (val: boolean | number) => {
     if (body != null) {
       // Set Dark
       if (val == true) {
         body.classList.add('theme-dark')
         body.classList.remove('theme-light')
         setIsDark(true)
-        localStorage.theme = 'dark'
+        JSON.parse(localStorage.settings).dark = JSON.stringify(true)
       }
 
       //Set Light
@@ -91,7 +83,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
         body.classList.add('theme-light')
         body.classList.remove('theme-dark')
         setIsDark(false)
-        localStorage.theme = 'light'
+        JSON.parse(localStorage.settings).dark = JSON.stringify(false)
       }
     }
   }
@@ -100,6 +92,19 @@ function MyApp({ Component, pageProps, router }: AppProps) {
   useEffect(() => {
     body = document.querySelector('body')
     localStorage = window.localStorage
+
+    // If user has reduced motion switched on in OS settings =>
+    if (window && window.matchMedia) {
+      let mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+      console.log(mediaQuery)
+
+      if (mediaQuery.matches == true) {
+        setReduced_motion(true)
+      } else {
+        setReduced_motion(false)
+      }
+      console.log('redmo', reduced_motion)
+    }
 
     // User Logged in check
     const fetchUserDetails = async () => {
@@ -127,7 +132,8 @@ function MyApp({ Component, pageProps, router }: AppProps) {
     // If theme saved in LocalStorage is dark, swap client theme
     if (
       body != null &&
-      (localStorage.theme === 'dark' || !('theme' in localStorage))
+      (JSON.parse(localStorage.settings).dark === true ||
+        !('settings' in localStorage))
     ) {
       setDark(true)
     }
@@ -137,6 +143,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
       <Component
         localStorage={localStorage}
         is_dark={is_dark}
+        reduced_motion={reduced_motion}
         setDark={setDark}
         settings={settings}
         saveSettings={saveSettings}
