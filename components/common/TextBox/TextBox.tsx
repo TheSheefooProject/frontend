@@ -11,7 +11,7 @@ const TextBox = (props: {
   onChange?: any | (() => {})
   onKeyUp?: any | (() => {})
   controlledInput: boolean
-  autofocus: boolean
+  autofocus?: boolean
 }) => {
   // Default prop values
   const {
