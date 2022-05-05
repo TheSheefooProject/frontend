@@ -93,6 +93,51 @@ export async function check_username_api(username: string) {
   return outcome;
 
 }
+// POSTS FEED HELPER FUNCTIONS
+export async function get_all_posts(token:string) {
+  const CONNECTION_STRING = 'http://localhost:3001/v1/posts/'
+
+  try {
+
+    const response = await general_api(CONNECTION_STRING,"GET")
+    return response
+  } catch (e) {
+    return e
+  }
+}
+
+export async function get_userdetails_by_id(id:string) {
+  const CONNECTION_STRING = 'http://localhost:3000/v1/user/userdetails/' + id
+
+  try {
+
+    const response = await general_api(CONNECTION_STRING,"GET")
+    return response
+  } catch (e) {
+    return e
+  }
+}
+
+export async function create_post(title: string,content: string,first_hashtag: string,second_hashtag: string,third_hashtag: string,imageURL?: string,) {
+  const CONNECTION_STRING = 'http://localhost:3001/v1/posts/'
+  let postData: { title: string,content: string,first_hashtag: string,second_hashtag: string,third_hashtag: string,imageURL?: string,} = {
+    title,
+    content,
+    first_hashtag,
+    second_hashtag,
+    third_hashtag,
+    imageURL
+  }
+
+  try {
+    const response = await general_api(CONNECTION_STRING,"POST", postData)
+    console.log(response);
+    
+    return 'success'
+  } catch (e) {
+    return 'failed'
+  }
+}
 
 
 type API_TYPES = 'GET' | 'POST' | 'PATCH' | 'DELETE'
