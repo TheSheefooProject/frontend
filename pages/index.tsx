@@ -14,11 +14,19 @@ import TextBox from '../components/common/TextBox'
 import { FiPlus, FiX } from 'react-icons/fi'
 import Tag from '../components/common/Tag'
 import { get_all_posts, get_user_details_api } from '../helpers/api_helper'
+import e from 'cors'
 
 const Home: NextPage = () => {
   const [modal_showing, setModalShowing] = useState<boolean>()
   const [posts, setPosts] = useState([])
+  const [users, setUsers] = useState([])
+  const [tagToAdd, setTagToAdd] = useState('')
+
+  const [createPostImgURL, setCreatePostImgURL] = useState<string>('xVpI0.jpeg')
+
   const [textboxHeight, setTextboxHeight] = useState(40)
+
+  const [postTags, setPostTags] = useState<Array<string>>([])
 
   const showModal = (val: boolean) => {
     if (val === true) {
@@ -35,8 +43,16 @@ const Home: NextPage = () => {
 
   const refreshPosts = async () => {
     await get_all_posts(localStorage?.refresh_token).then((e) => {
-      console.log('Post retrieval', e.status)
-      setPosts(e.allPosts)
+      var valid_posts: any = []
+      e.allPosts.map((post: any) => {
+        // If valid fields in post
+        console.log(Object.keys(post).length)
+        if (Object.keys(post).length >= 10) {
+          valid_posts.push(post)
+        }
+      })
+
+      setPosts(valid_posts)
     })
   }
 
@@ -49,6 +65,47 @@ const Home: NextPage = () => {
     console.log(output)
 
     return output
+  }
+  const getCreatePostImageURL = () => {
+    let tempval = createPostImgURL
+    var value = 'http://i.imgur.com/' + tempval
+    if (
+      tempval.substring(tempval.length - 4, tempval.length) ==
+      ('.jpg' || '.png')
+    ) {
+      value = 'http://i.imgur.com/' + tempval
+    } else {
+      value = 'http://i.imgur.com/' + tempval + '.jpg'
+    }
+    return value
+  }
+  const addPostTag = (e?: any) => {
+    if (e != undefined) {
+      if (e.key == 'Enter') {
+        if (postTags.includes(tagToAdd)) {
+          return 'Tag already exists'
+        } else {
+          if (postTags.length <= 2) {
+            setPostTags([...postTags, tagToAdd])
+          } else {
+            return 'Maximum Tags reached'
+          }
+        }
+      }
+    } else {
+      if (postTags.includes(tagToAdd)) {
+        return 'Tag already exists'
+      } else {
+        if (postTags.length <= 2) {
+          setPostTags([...postTags, tagToAdd])
+        } else {
+          return 'Maximum Tags reached'
+        }
+      }
+    }
+  }
+  const removePostTag = (itemToRemove: any) => {
+    setPostTags(postTags.filter((item) => item !== itemToRemove))
   }
   return (
     <main className=" flex h-screen min-h-screen w-full flex-row items-stretch overflow-x-hidden bg-back_2 md:pl-20">
@@ -70,7 +127,10 @@ const Home: NextPage = () => {
         >
           <div id="feed" className=" flex flex-col  pt-2 ">
             {posts.map((post: any) => (
-              <div key={post._id} className="flex flex-row rounded-md p-2">
+              <div
+                key={post._id}
+                className="relative flex flex-row rounded-md p-2"
+              >
                 {/* Profile Picture */}
                 <div className="relative mr-2 h-12 w-12 overflow-hidden rounded-full">
                   <Image
@@ -79,16 +139,50 @@ const Home: NextPage = () => {
                   ></Image>
                 </div>
                 {/* Post */}
-                <div className="w-full rounded-md bg-back_4 p-2">
+                <div className="grid w-full grid-cols-[auto_minmax(900px,_1fr)] rounded-md bg-back_4 p-2">
                   {/* Post Picture */}
-                  <div className="relative h-24 w-24 overflow-hidden">
-                    <Image
-                      src="/images/thispersondoesnotexist.jpg"
-                      layout="fill"
-                    ></Image>
+                  {post.imageURL != undefined ? (
+                    <div className="relative h-24 w-24 overflow-hidden">
+                      <div
+                        style={{
+                          backgroundImage:
+                            'url(' + post.imageURL + ')' ||
+                            'url(/images/thispersondoesnotexist.jpg)',
+                        }}
+                        className="h-full w-full bg-cover bg-center bg-no-repeat"
+                      ></div>
+                    </div>
+                  ) : (
+                    <div className="w-0"></div>
+                  )}
+
+                  <div className="ml-2">
+                    {/* Post Title */}
+                    <div className=" font-heading text-lg font-semibold tracking-widest text-accent_2 ">
+                      {post.title}
+                    </div>
+                    {/* Post Content */}
+                    <div className="font-body">{post.content}</div>
+                    {/* Tags */}
+                    <div className=" absolute -top-1 right-4 flex gap-1 font-heading">
+                      {post.first_hashtag != '' && (
+                        <span className="rounded-sm bg-accent_1 px-2 py-0.5 text-black">
+                          {post.first_hashtag}
+                        </span>
+                      )}
+
+                      {post.second_hashtag != '' && (
+                        <span className="rounded-sm bg-accent_1 px-2 py-0.5 text-black">
+                          {post.third_hashtag}
+                        </span>
+                      )}
+                      {post.third_hashtag != '' && (
+                        <span className="rounded-sm bg-accent_1 px-2 py-0.5 text-black">
+                          {post.second_hashtag}
+                        </span>
+                      )}
+                    </div>
                   </div>
-                  {/* Post Title */}
-                  <div>{'Lorem voluptate velit est officia.'}</div>
                 </div>
               </div>
             ))}
@@ -157,20 +251,36 @@ const Home: NextPage = () => {
             }
           >
             {/* Upload Image GRID */}
-            <div className=" mb-3 flex w-[100%] flex-col md:w-[auto]">
+            <div className=" mb-3 flex w-[100%] flex-col rounded-md bg-back_2 md:w-[auto]">
               {/* Uploaded Image */}
               <div
                 id="image_container"
-                className="m-auto mt-2 mb-2 flex w-[100%] items-center justify-center rounded-md bg-back_4 p-2"
+                className="m-auto mt-2 mb-2 flex w-max items-center justify-center rounded-md bg-back_4 p-2 drop-shadow-md"
               >
-                <Image src="/logo.svg" width={200} height={200}></Image>
+                <Image
+                  className="shadow-lg"
+                  src={getCreatePostImageURL()}
+                  width={300}
+                  height={300}
+                ></Image>
               </div>
-              <Button
-                type="neutral"
-                text="ADD IMAGE"
-                className="justify-self-start"
-                noMargin
-              ></Button>
+              <div className="flex flex-row">
+                <span className=" text-text_1md:w-64 mt-1 mr-1 ml-1 h-8 w-[100%] rounded-l-md bg-back_4 pl-4 pr-1 leading-8 ">
+                  https://i.imgur.com/
+                </span>
+                <input
+                  type="text"
+                  placeholder="scajbuz.jpg"
+                  className=" placeholder:text-text_3 mt-1 mr-1 h-8 w-[100%] rounded-r-md bg-back_4 pl-1 pr-4 text-text_1 focus:outline-none focus:ring focus:ring-back_2 md:w-64"
+                  onChange={(e) => setCreatePostImgURL(e.target.value)}
+                ></input>
+                <Button
+                  type="neutral"
+                  text="ADD IMAGE"
+                  className="justify-self-start"
+                  // onClick={setCreatePostImgURLStatic(createPostImgURL)}
+                ></Button>
+              </div>
             </div>
 
             {/* Tags GRID */}
@@ -187,43 +297,32 @@ const Home: NextPage = () => {
                   type="text"
                   placeholder="Add Tag"
                   className=" mt-1 h-8 w-[100%] rounded-md bg-back_4 px-4 text-text_1 placeholder:text-text_1 focus:outline-none focus:ring focus:ring-back_2 md:w-64"
+                  onChange={(e) => setTagToAdd(e.target.value)}
+                  onKeyUp={(e: any) => {
+                    addPostTag(e)
+                  }}
                 ></input>
                 <Button
                   iconOnly
                   noMargin
-                  type="positive"
+                  type="neutral"
                   fixedWidth
                   icon={<FiPlus></FiPlus>}
                   className="absolute right-0 bottom-0"
+                  onClick={() => {
+                    addPostTag()
+                  }}
                 ></Button>
               </div>
 
               <div className="flex flex-col-reverse items-end " id="tags">
-                <span className=" my-1 inline-flex h-7 w-64 flex-row items-center  whitespace-nowrap rounded-md bg-back_2 py-0.5 pr-3 ">
-                  <div className="flex h-7 w-7 items-center rounded-l-md px-1 text-accent_1 hover:cursor-pointer hover:bg-red-600">
-                    <FiX className="m-auto block"></FiX>
-                  </div>
-                  <p className="overflow-hidden overflow-ellipsis border-l-2 border-back_3 pl-2">
-                    Example Tag 1
-                  </p>
-                </span>
-                <span className=" my-1 inline-flex h-7 w-64 flex-row items-center  whitespace-nowrap rounded-md bg-back_2 py-0.5 pr-3 ">
-                  <div className="flex h-7 w-7 items-center rounded-l-md px-1 text-accent_1 hover:cursor-pointer hover:bg-red-600">
-                    <FiX className="m-auto block"></FiX>
-                  </div>
-                  <p className="overflow-hidden overflow-ellipsis border-l-2 border-back_3 pl-2">
-                    Example Tag 2 with a long name
-                  </p>
-                </span>
-                <Tag text="Example Tag from Tag component"></Tag>
-                <span className=" my-1 inline-flex h-7 w-64 flex-row items-center  whitespace-nowrap rounded-md bg-back_2 py-0.5 pr-3 ">
-                  <div className="flex h-7 w-7 items-center rounded-l-md px-1 align-middle text-accent_1 hover:cursor-pointer hover:bg-red-600">
-                    <FiX className="m-auto block"></FiX>
-                  </div>
-                  <p className="overflow-hidden overflow-ellipsis border-l-2 border-back_3 pl-2">
-                    Example Tag 3 😳
-                  </p>
-                </span>
+                {postTags.map((tag) => (
+                  <Tag
+                    key={postTags.indexOf(tag)}
+                    text={tag}
+                    onClick={() => removePostTag(tag)}
+                  ></Tag>
+                ))}
               </div>
             </div>
           </div>
