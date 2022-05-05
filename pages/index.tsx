@@ -5,6 +5,7 @@ import {
   ReactFragment,
   ReactPortal,
   useEffect,
+  useRef,
   useState,
 } from 'react'
 import Link from 'next/link'
@@ -20,6 +21,7 @@ import {
   get_user_details_api,
 } from '../helpers/api_helper'
 import e from 'cors'
+import { useRouter } from 'next/router'
 
 const Home: NextPage = () => {
   const [modal_showing, setModalShowing] = useState<boolean>()
@@ -38,6 +40,10 @@ const Home: NextPage = () => {
   const [contentToAdd, setContentToAdd] = useState('')
   const [titleToAdd, setTitleToAdd] = useState('')
 
+  const posts_div = useRef<any>(null)
+
+  const router = useRouter()
+
   const showModal = (val: boolean) => {
     if (val === true) {
       setModalShowing(true)
@@ -48,8 +54,10 @@ const Home: NextPage = () => {
   }
 
   useEffect(() => {
-    console.log('posts:', posts)
     refreshPosts()
+    setTimeout(() => {
+      posts_div.current.scroll(0, posts_div.current.scrollHeight)
+    }, 500)
   }, [])
 
   const refreshPosts = async () => {
@@ -139,8 +147,8 @@ const Home: NextPage = () => {
     // console.log(postTags, getCreatePostImageURL(), titleToAdd, contentToAdd)
 
     var postObject: IPost = {
-      title: titleToAdd,
-      content: contentToAdd,
+      title: titleToAdd || 'Default Title',
+      content: contentToAdd || 'Default Content',
       first_hashtag: postTags[0],
       second_hashtag: postTags[1],
       third_hashtag: postTags[2],
@@ -156,6 +164,12 @@ const Home: NextPage = () => {
       postObject.imageURL
     )
   }
+
+  const convertTime = (time_in: string) => {
+    let time_out = ''
+    time_out = time_in.substring(0, time_in.indexOf('T'))
+    return time_out
+  }
   return (
     <main className=" flex h-screen min-h-screen w-full flex-row items-stretch overflow-x-hidden bg-back_2 md:pl-20">
       <Head>
@@ -165,6 +179,7 @@ const Home: NextPage = () => {
       <div className="relative mx-2 my-2 flex h-auto w-full flex-col rounded-md bg-back_3 px-2 md:mx-4 md:my-4">
         {/* Homescreen Feed */}
         <div
+          ref={posts_div}
           className={
             `${
               modal_showing
@@ -212,11 +227,16 @@ const Home: NextPage = () => {
                       {post.title}
                     </div>
                     {/* Post Content */}
-                    <div className="font-body">{post.content}</div>
+                    <div className="font-body">
+                      {post.content}{' '}
+                      <span className="absolute bottom-3 right-4 text-sm text-gray-400">
+                        {convertTime(post.createdAt) || '...'}
+                      </span>
+                    </div>
                     {/* Tags */}
                     <div className=" absolute -top-1 right-4 flex gap-1 font-heading">
                       {post.first_hashtag != '' && (
-                        <span className="rounded-sm bg-accent_1 px-2 py-0.5 text-black">
+                        <span className="rounded-sm bg-accent_1 px-2 py-0.5 text-black ">
                           {post.first_hashtag}
                         </span>
                       )}
@@ -270,7 +290,9 @@ const Home: NextPage = () => {
               className="mx-0.5"
               onClick={() => {
                 createPost()
-                refreshPosts()
+                setModalShowing(false)
+                posts_div.current.scroll(0, posts_div.current.scrollHeight)
+                router.reload()
               }}
             ></Button>
             <Button
@@ -282,7 +304,6 @@ const Home: NextPage = () => {
               className="mx-0.5"
               onClick={() => {
                 showModal(false)
-                alert('⚠️ Are you sure you wish to cancel your post? ⚠️')
               }}
             ></Button>
           </div>
