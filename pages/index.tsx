@@ -14,6 +14,7 @@ import TextBox from '../components/common/TextBox'
 import { FiPlus, FiX } from 'react-icons/fi'
 import Tag from '../components/common/Tag'
 import {
+  create_post,
   get_all_posts,
   get_userdetails_by_id,
   get_user_details_api,
@@ -26,13 +27,16 @@ const Home: NextPage = () => {
   const [posts, setPosts] = useState([])
 
   const [users, setUsers] = useState([])
-  const [tagToAdd, setTagToAdd] = useState('')
 
   const [createPostImgURL, setCreatePostImgURL] = useState<string>('xVpI0.jpeg')
 
   const [textboxHeight, setTextboxHeight] = useState(40)
 
+  const [tagToAdd, setTagToAdd] = useState('')
   const [postTags, setPostTags] = useState<Array<string>>([])
+
+  const [contentToAdd, setContentToAdd] = useState('')
+  const [titleToAdd, setTitleToAdd] = useState('')
 
   const showModal = (val: boolean) => {
     if (val === true) {
@@ -60,7 +64,6 @@ const Home: NextPage = () => {
             if (data.status == 'success') {
               post.username = data.data.username
               post.avatar = data.data.profile_pic_url
-              console.log(valid_posts)
 
               valid_posts.push(post)
               setValPosts([...valPosts, post])
@@ -78,7 +81,6 @@ const Home: NextPage = () => {
   const calculateModalOffset = () => {
     let value = textboxHeight + 16
     let output = value + 'px'
-    console.log(output)
 
     return output
   }
@@ -134,14 +136,25 @@ const Home: NextPage = () => {
       third_hashtag: string
       imageURL: string
     }
+    // console.log(postTags, getCreatePostImageURL(), titleToAdd, contentToAdd)
+
     var postObject: IPost = {
-      title: 'Test Title',
-      content: 'Test Content',
-      first_hashtag: 'De',
-      second_hashtag: 'fa',
-      third_hashtag: 'ult',
-      imageURL: 'https://i.imgur.com/scajbuz.jpeg',
+      title: titleToAdd,
+      content: contentToAdd,
+      first_hashtag: postTags[0],
+      second_hashtag: postTags[1],
+      third_hashtag: postTags[2],
+      imageURL: getCreatePostImageURL(),
     }
+
+    create_post(
+      postObject.title,
+      postObject.content,
+      postObject.first_hashtag,
+      postObject.second_hashtag,
+      postObject.third_hashtag,
+      postObject.imageURL
+    )
   }
   return (
     <main className=" flex h-screen min-h-screen w-full flex-row items-stretch overflow-x-hidden bg-back_2 md:pl-20">
@@ -239,7 +252,10 @@ const Home: NextPage = () => {
             title="Create New Post"
             className=" max-h-[28vh] w-[100%] overflow-y-auto break-all rounded-md bg-back_1 py-2 pr-[165px] pl-3  text-text_1 focus:outline-none focus:ring focus:ring-back_2"
             onFocus={() => showModal(true)}
-            onKeyUp={(e) => recalculateHeight(e)}
+            onKeyUp={(e: any) => {
+              recalculateHeight(e)
+              setContentToAdd(e.target.innerText)
+            }}
             // onBlur={() => showModal(false)}
           ></div>
           <div
@@ -254,6 +270,7 @@ const Home: NextPage = () => {
               className="mx-0.5"
               onClick={() => {
                 createPost()
+                refreshPosts()
               }}
             ></Button>
             <Button
@@ -284,7 +301,7 @@ const Home: NextPage = () => {
                   ? ' opacity-1 pointer-events-auto '
                   : ' pointer-events-none opacity-0 '
               }` +
-              '  mt-auto flex flex-col-reverse items-center transition-opacity md:flex-row md:items-end'
+              '  mt-auto flex flex-col-reverse items-center pr-4 transition-opacity md:flex-row md:items-end md:pr-0'
             }
           >
             {/* Upload Image GRID */}
@@ -308,58 +325,63 @@ const Home: NextPage = () => {
                 <input
                   type="text"
                   placeholder="scajbuz.jpg"
-                  className=" placeholder:text-text_3 mt-1 mr-1 h-8 w-[100%] rounded-r-md bg-back_4 pl-1 pr-4 text-text_1 focus:outline-none focus:ring focus:ring-back_2 md:w-64"
+                  className=" placeholder:text-text_3 mt-1 mb-1 mr-1 h-8 w-[100%] rounded-r-md bg-back_4 pl-1 pr-4 text-text_1 focus:outline-none focus:ring focus:ring-back_2 md:w-64"
                   onChange={(e) => setCreatePostImgURL(e.target.value)}
                 ></input>
-                <Button
-                  type="neutral"
-                  text="ADD IMAGE"
-                  className="justify-self-start"
-                  // onClick={setCreatePostImgURLStatic(createPostImgURL)}
-                ></Button>
               </div>
             </div>
-
-            {/* Tags GRID */}
-            <div
-              className={
-                'mb-0 flex w-[100%] flex-col-reverse items-end rounded-md text-text_1 md:mb-3 '
-              }
-            >
-              <div
-                className="relative w-[100%] md:w-64"
-                id="tag_input_container"
-              >
+            {/* Title + Tags Container */}
+            <div className=" flex w-full flex-col-reverse sm:mr-6 lg:mr-0 lg:flex-row">
+              {/* Title GRID */}
+              <div className="mb-0 flex w-[100%] flex-col-reverse items-end rounded-md text-text_1 md:mb-1">
                 <input
                   type="text"
-                  placeholder="Add Tag"
-                  className=" mt-1 h-8 w-[100%] rounded-md bg-back_4 px-4 text-text_1 placeholder:text-text_1 focus:outline-none focus:ring focus:ring-back_2 md:w-64"
-                  onChange={(e) => setTagToAdd(e.target.value)}
-                  onKeyUp={(e: any) => {
-                    addPostTag(e)
-                  }}
-                ></input>
-                <Button
-                  iconOnly
-                  noMargin
-                  type="neutral"
-                  fixedWidth
-                  icon={<FiPlus></FiPlus>}
-                  className="absolute right-0 bottom-0"
-                  onClick={() => {
-                    addPostTag()
-                  }}
-                ></Button>
+                  placeholder="Enter a Title"
+                  className="placeholder:text-text_4 my-2 h-8 w-[100%] rounded-md bg-back_4 px-4 text-text_1 focus:outline-none focus:ring focus:ring-back_2 md:w-64"
+                  onChange={(e) => setTitleToAdd(e.target.value)}
+                />
               </div>
+              {/* Tags GRID */}
+              <div
+                className={
+                  'mb-0 flex w-[100%] flex-col-reverse items-end rounded-md text-text_1 md:mb-3 '
+                }
+              >
+                <div
+                  className="relative w-[100%] md:w-64"
+                  id="tag_input_container"
+                >
+                  <input
+                    type="text"
+                    placeholder="Add Tag"
+                    className=" mt-1 h-8 w-[100%] rounded-md bg-back_4 px-4 text-text_1 placeholder:text-text_1 focus:outline-none focus:ring focus:ring-back_2 md:w-64"
+                    onChange={(e) => setTagToAdd(e.target.value)}
+                    onKeyUp={(e: any) => {
+                      addPostTag(e)
+                    }}
+                  ></input>
+                  <Button
+                    iconOnly
+                    noMargin
+                    type="neutral"
+                    fixedWidth
+                    icon={<FiPlus></FiPlus>}
+                    className="absolute right-0 bottom-0"
+                    onClick={() => {
+                      addPostTag()
+                    }}
+                  ></Button>
+                </div>
 
-              <div className="flex flex-col-reverse items-end " id="tags">
-                {postTags.map((tag) => (
-                  <Tag
-                    key={postTags.indexOf(tag)}
-                    text={tag}
-                    onClick={() => removePostTag(tag)}
-                  ></Tag>
-                ))}
+                <div className="flex flex-col-reverse items-end " id="tags">
+                  {postTags.map((tag) => (
+                    <Tag
+                      key={postTags.indexOf(tag)}
+                      text={tag}
+                      onClick={() => removePostTag(tag)}
+                    ></Tag>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
