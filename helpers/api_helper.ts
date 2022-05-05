@@ -93,6 +93,18 @@ export async function check_username_api(username: string) {
   return outcome;
 
 }
+// POSTS FEED HELPER FUNCTIONS
+export async function get_all_posts(token:string) {
+  const CONNECTION_STRING = 'http://localhost:3001/v1/posts/'
+
+  try {
+
+    const response = await general_api(CONNECTION_STRING,"GET")
+    return response
+  } catch (e) {
+    return e
+  }
+}
 
 
 type API_TYPES = 'GET' | 'POST' | 'PATCH' | 'DELETE'
