@@ -106,6 +106,18 @@ export async function get_all_posts(token:string) {
   }
 }
 
+export async function get_userdetails_by_id(id:string) {
+  const CONNECTION_STRING = 'http://localhost:3000/v1/user/userdetails/' + id
+
+  try {
+
+    const response = await general_api(CONNECTION_STRING,"GET")
+    return response
+  } catch (e) {
+    return e
+  }
+}
+
 
 type API_TYPES = 'GET' | 'POST' | 'PATCH' | 'DELETE'
 export async function general_api(

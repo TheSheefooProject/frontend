@@ -13,12 +13,18 @@ import Button from '../components/common/Button'
 import TextBox from '../components/common/TextBox'
 import { FiPlus, FiX } from 'react-icons/fi'
 import Tag from '../components/common/Tag'
-import { get_all_posts, get_user_details_api } from '../helpers/api_helper'
+import {
+  get_all_posts,
+  get_userdetails_by_id,
+  get_user_details_api,
+} from '../helpers/api_helper'
 import e from 'cors'
 
 const Home: NextPage = () => {
   const [modal_showing, setModalShowing] = useState<boolean>()
+  const [valPosts, setValPosts] = useState<any>([])
   const [posts, setPosts] = useState([])
+
   const [users, setUsers] = useState([])
   const [tagToAdd, setTagToAdd] = useState('')
 
@@ -38,21 +44,31 @@ const Home: NextPage = () => {
   }
 
   useEffect(() => {
+    console.log('posts:', posts)
     refreshPosts()
   }, [])
 
   const refreshPosts = async () => {
+    var valid_posts: any = []
+
     await get_all_posts(localStorage?.refresh_token).then((e) => {
-      var valid_posts: any = []
       e.allPosts.map((post: any) => {
         // If valid fields in post
-        console.log(Object.keys(post).length)
+
         if (Object.keys(post).length >= 10) {
-          valid_posts.push(post)
+          get_userdetails_by_id(post.author).then((data) => {
+            if (data.status == 'success') {
+              post.username = data.data.username
+              post.avatar = data.data.profile_pic_url
+              console.log(valid_posts)
+
+              valid_posts.push(post)
+              setValPosts([...valPosts, post])
+              setPosts(valid_posts)
+            }
+          })
         }
       })
-
-      setPosts(valid_posts)
     })
   }
 
@@ -104,6 +120,7 @@ const Home: NextPage = () => {
       }
     }
   }
+
   const removePostTag = (itemToRemove: any) => {
     setPostTags(postTags.filter((item) => item !== itemToRemove))
   }
@@ -128,16 +145,17 @@ const Home: NextPage = () => {
           <div id="feed" className=" flex flex-col  pt-2 ">
             {posts.map((post: any) => (
               <div
-                key={post._id}
+                key={post.createdAt + new Date().toLocaleTimeString()}
                 className="relative flex flex-row rounded-md p-2"
               >
                 {/* Profile Picture */}
-                <div className="relative mr-2 h-12 w-12 overflow-hidden rounded-full">
-                  <Image
-                    src="/images/thispersondoesnotexist.jpg"
-                    layout="fill"
-                  ></Image>
+                <div>
+                  <div className="relative mr-2 h-12 w-12 overflow-hidden rounded-full">
+                    <img src={post.avatar}></img>
+                  </div>
+                  <span>{post.username || '...'}</span>
                 </div>
+
                 {/* Post */}
                 <div className="grid w-full grid-cols-[auto_minmax(900px,_1fr)] rounded-md bg-back_4 p-2">
                   {/* Post Picture */}
