@@ -58,7 +58,7 @@ const Home: NextPage = () => {
             ' flex  flex-1 flex-col items-stretch overflow-y-scroll transition-all'
           }
         >
-          <div id="feed" className=" flex flex-col  pt-2">
+          <div id="feed" className=" flex flex-col  pt-2 ">
             {posts.map((post: any) => (
               <div key={post._id} className="flex flex-row rounded-md p-2">
                 {/* Profile Picture */}
@@ -89,19 +89,20 @@ const Home: NextPage = () => {
           id="text_input_container"
           className={
             `${modal_showing ? ' mt-0' : 'mt-auto'}` +
-            ' relative bottom-0 max-h-[30vh] w-[100%]'
+            ' relative mt-2 max-h-[30vh] w-[100%] border-t-2 border-accent_2 py-2'
           }
         >
           <div
             role="textbox"
             contentEditable
-            className=" mb-2 max-h-[28vh] w-[100%] overflow-y-auto break-all rounded-md bg-back_4 py-2 pr-[165px] pl-3  text-text_1 focus:outline-none focus:ring focus:ring-back_2"
+            title="Create New Post"
+            className=" max-h-[28vh] w-[100%] overflow-y-auto break-all rounded-md bg-back_1 py-2 pr-[165px] pl-3  text-text_1 focus:outline-none focus:ring focus:ring-back_2"
             onFocus={() => showModal(true)}
             // onBlur={() => showModal(false)}
           ></div>
           <div
             id="action_buttons_container"
-            className="absolute right-0 bottom-2 rounded-md bg-back_3 px-0.5 py-1 "
+            className="absolute right-0 bottom-2 rounded-l-md bg-back_3 px-0.5 py-1 "
           >
             <Button
               noMargin
@@ -127,6 +128,7 @@ const Home: NextPage = () => {
             ></Button>
           </div>
         </div>
+        {/* Modal Container */}
         <div
           id="modal_container"
           className={
