@@ -124,6 +124,25 @@ const Home: NextPage = () => {
   const removePostTag = (itemToRemove: any) => {
     setPostTags(postTags.filter((item) => item !== itemToRemove))
   }
+
+  const createPost = () => {
+    interface IPost {
+      title: string
+      content: string
+      first_hashtag: string
+      second_hashtag: string
+      third_hashtag: string
+      imageURL: string
+    }
+    var postObject: IPost = {
+      title: 'Test Title',
+      content: 'Test Content',
+      first_hashtag: 'De',
+      second_hashtag: 'fa',
+      third_hashtag: 'ult',
+      imageURL: 'https://i.imgur.com/scajbuz.jpeg',
+    }
+  }
   return (
     <main className=" flex h-screen min-h-screen w-full flex-row items-stretch overflow-x-hidden bg-back_2 md:pl-20">
       <Head>
@@ -234,7 +253,7 @@ const Home: NextPage = () => {
               text="Submit Post"
               className="mx-0.5"
               onClick={() => {
-                alert('🪴 Post Submitted 🏵️')
+                createPost()
               }}
             ></Button>
             <Button

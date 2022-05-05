@@ -118,6 +118,27 @@ export async function get_userdetails_by_id(id:string) {
   }
 }
 
+export async function create_post(title: string,content: string,first_hashtag: string,second_hashtag: string,third_hashtag: string,imageURL?: string,) {
+  const CONNECTION_STRING = 'http://localhost:3001/v1/posts/'
+  let postData: { title: string,content: string,first_hashtag: string,second_hashtag: string,third_hashtag: string,imageURL?: string,} = {
+    title,
+    content,
+    first_hashtag,
+    second_hashtag,
+    third_hashtag,
+    imageURL
+  }
+
+  try {
+    const response = await general_api(CONNECTION_STRING,"POST", postData)
+    console.log(response);
+    
+    return 'success'
+  } catch (e) {
+    return 'failed'
+  }
+}
+
 
 type API_TYPES = 'GET' | 'POST' | 'PATCH' | 'DELETE'
 export async function general_api(
