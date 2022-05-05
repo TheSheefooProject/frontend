@@ -18,6 +18,7 @@ import { get_all_posts, get_user_details_api } from '../helpers/api_helper'
 const Home: NextPage = () => {
   const [modal_showing, setModalShowing] = useState<boolean>()
   const [posts, setPosts] = useState([])
+  const [textboxHeight, setTextboxHeight] = useState(40)
 
   const showModal = (val: boolean) => {
     if (val === true) {
@@ -38,8 +39,17 @@ const Home: NextPage = () => {
       setPosts(e.allPosts)
     })
   }
-  console.log(posts)
 
+  const recalculateHeight = (e: any) => {
+    setTextboxHeight(e.target.offsetHeight)
+  }
+  const calculateModalOffset = () => {
+    let value = textboxHeight + 16
+    let output = value + 'px'
+    console.log(output)
+
+    return output
+  }
   return (
     <main className=" flex h-screen min-h-screen w-full flex-row items-stretch overflow-x-hidden bg-back_2 md:pl-20">
       <Head>
@@ -52,8 +62,8 @@ const Home: NextPage = () => {
           className={
             `${
               modal_showing
-                ? ' blur brightness-[.75]'
-                : ' blur-0 brightness-100'
+                ? ' pointer-events-none blur brightness-[.75]'
+                : ' pointer-events-auto blur-0 brightness-100'
             }` +
             ' flex  flex-1 flex-col items-stretch overflow-y-scroll transition-all'
           }
@@ -98,6 +108,7 @@ const Home: NextPage = () => {
             title="Create New Post"
             className=" max-h-[28vh] w-[100%] overflow-y-auto break-all rounded-md bg-back_1 py-2 pr-[165px] pl-3  text-text_1 focus:outline-none focus:ring focus:ring-back_2"
             onFocus={() => showModal(true)}
+            onKeyUp={(e) => recalculateHeight(e)}
             // onBlur={() => showModal(false)}
           ></div>
           <div
@@ -131,20 +142,16 @@ const Home: NextPage = () => {
         {/* Modal Container */}
         <div
           id="modal_container"
-          className={
-            `${
-              modal_showing ? ' pointer-events-auto ' : ' pointer-events-none '
-            }` +
-            ` pointer-events-none absolute flex h-[100%] w-[92%] flex-col justify-between`
-          }
+          className={` pointer-events-none absolute  flex h-[100%] w-[99%] flex-col justify-between`}
         >
           {/* Modal (shown when input is focused) */}
           <div
+            style={{ marginBottom: calculateModalOffset() }}
             className={
               `${
                 modal_showing
-                  ? ' opacity-1 pointer-events-auto'
-                  : ' pointer-events-none opacity-0'
+                  ? ' opacity-1 pointer-events-auto '
+                  : ' pointer-events-none opacity-0 '
               }` +
               '  mt-auto flex flex-col-reverse items-center transition-opacity md:flex-row md:items-end'
             }
