@@ -57,14 +57,12 @@ export async function register_api(username: string, email: string, password: st
 }
 
 // TODO FIX API TO USE CORRECT TOKEN TO RETURN USER DETAILS
-export async function get_user_details_api(token:string) {
+export async function get_user_details_api(token?:string) {
   const CONNECTION_STRING = 'http://localhost:3000/v1/user/'
 
   try {
 
     const response = await general_api(CONNECTION_STRING,"GET")
-    console.log(response);
-
     return response
   } catch (e) {
     return e
