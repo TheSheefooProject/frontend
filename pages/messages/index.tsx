@@ -50,6 +50,7 @@ const DirectMessagesPage = (props: { localStorage: Storage }) => {
 
   const [user_id, setUser_id] = useState('')
   const [user_name, setUser_name] = useState('')
+  const [user_rooms, setUser_rooms] = useState([])
 
   var sounds_disabled: boolean = false
 
@@ -77,12 +78,26 @@ const DirectMessagesPage = (props: { localStorage: Storage }) => {
   const getUserRooms = async () => {
     await get_rooms_by_user_id(user_id).then((response) => {
       if (response.status == 'success') {
-        console.log(response)
-
+        setUser_rooms(response.rooms)
         return response.rooms
       }
     })
   }
+
+  useEffect(() => {
+    console.log('user rooms:', user_rooms)
+    if (user_rooms != undefined) {
+      let roomBuilder = [{ roomName: 'Global Chat', roomID: 'global' }]
+
+      user_rooms.forEach((room: any) => {
+        roomBuilder.push({
+          roomName: room.chat_room_id,
+          roomID: room.chat_room_id,
+        })
+      })
+      setActiveDMS(roomBuilder)
+    }
+  }, [user_rooms])
 
   //SORRY I KNOW THIS IS SPAGETTI CODE :,( BUT TIME CONSTRAINTS AND THAT.
   React.useEffect(() => {
@@ -99,8 +114,7 @@ const DirectMessagesPage = (props: { localStorage: Storage }) => {
     setUser_name(JSON.parse(window.localStorage.userDetails).username)
 
     // Get User's chatrooms
-    let user_rooms = getUserRooms()
-    console.log('user rooms:', user_rooms)
+    getUserRooms()
 
     const id = `${user_id}:${Date.now()}`
     axios
