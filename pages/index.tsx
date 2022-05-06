@@ -175,7 +175,7 @@ const Home: NextPage = () => {
   return (
     <main className=" flex h-screen min-h-screen w-full flex-row items-stretch overflow-x-hidden bg-back_2 md:pl-20">
       <Head>
-        <title>Sheefoo</title>
+        <title>Sheefoo Feed</title>
       </Head>
       {/* Main Container */}
       <div className="relative mx-2 my-2 flex h-auto w-full flex-col rounded-md bg-back_3 px-2 md:mx-4 md:my-4">
@@ -188,7 +188,7 @@ const Home: NextPage = () => {
                 ? ' pointer-events-none blur brightness-[.75]'
                 : ' pointer-events-auto blur-0 brightness-100'
             }` +
-            ' flex  flex-1 flex-col items-stretch overflow-y-scroll transition-all'
+            ' flex  flex-1 flex-col items-stretch overflow-y-auto transition-all'
           }
         >
           <div id="feed" className=" flex flex-col  pt-2 ">

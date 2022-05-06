@@ -15,6 +15,7 @@ import {
   get_rooms_by_user_id,
   get_room_messages,
 } from '../../helpers/api_helper'
+import Head from 'next/head'
 
 type MessageObject = {
   message: string
@@ -199,6 +200,9 @@ const DirectMessagesPage = (props: { localStorage: Storage }) => {
   }
   return (
     <main className="flex max-h-screen min-h-screen w-[100%] flex-col items-stretch bg-back_2 py-2 pl-2 pr-2 md:pl-24 md:pr-4 md:pt-4">
+      <Head>
+        <title>Sheefoo Chat Rooms</title>
+      </Head>
       {/* Direct Message user bubbles */}
       <div className="relative flex h-16 w-full flex-row items-center justify-end gap-2 py-2">
         {activeDMS.map(({ roomID, roomName }, idx) => (

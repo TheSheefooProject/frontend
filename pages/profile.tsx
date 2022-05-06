@@ -73,6 +73,9 @@ const Profile = (props: { localStorage: Storage }) => {
   }
   return (
     <main className="static flex min-h-screen w-[100%] min-w-[320px] flex-col items-center justify-around overflow-x-hidden bg-back_3 px-10 pt-12 text-text_1 md:pl-[calc(1vw+10rem)] md:pr-[calc(1vw+5rem)]">
+      <Head>
+        <title>Sheefoo Profile</title>
+      </Head>
       {/* Profile Container */}
       <div className="lg:mx-1/2 mb-4 flex min-w-[50vw] max-w-[80vw] flex-col items-center justify-between rounded-lg border-0 bg-back_2 p-6 font-body sm:mx-0 md:mb-0 md:min-w-[600px] md:flex-row md:border-2">
         <div
