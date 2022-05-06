@@ -14,9 +14,11 @@ import {
   get_user_details_api,
   update_user_details,
 } from '../helpers/api_helper'
+import { useRouter } from 'next/router'
 
 const Profile = (props: { localStorage: Storage }) => {
   const { localStorage, ...restProps } = props
+  const router = useRouter()
 
   interface IDetails {
     username: string
@@ -67,8 +69,20 @@ const Profile = (props: { localStorage: Storage }) => {
       setNew_avatar(url)
     }
   }
-  const postUserDetails = (e: any) => {
+  const postUserDetails = async (e: any) => {
     e.preventDefault()
+    if (localStorage) {
+      localStorage.userDetails = JSON.stringify({
+        ...(true && { user_id: (await get_user_details_api()).userData._id }),
+        ...(new_username != 'DEFAULT' && { username: new_username }),
+        ...(new_email != 'DEFAULT@DEFAULT.DEFAULT' && { email: new_email }),
+      })
+    }
+
+    e.target.innerText = '🪴Changes Saved🪴'
+    setTimeout(() => {
+      e.target.innerText = 'Save Changes'
+    }, 1000)
     update_user_details(new_username, new_email, new_fullname, new_avatar)
   }
   return (

@@ -191,7 +191,7 @@ const Home: NextPage = () => {
             ' flex  flex-1 flex-col items-stretch overflow-y-auto transition-all'
           }
         >
-          <div id="feed" className=" flex flex-col  pt-2 ">
+          <div id="feed" className=" mt-8 flex  flex-col pt-2 md:mt-0">
             {posts.map((post: any) => (
               <div
                 key={post.createdAt + new Date().toLocaleTimeString()}
@@ -206,7 +206,7 @@ const Home: NextPage = () => {
                 </div>
 
                 {/* Post */}
-                <div className="grid w-full grid-cols-[auto_minmax(900px,_1fr)] rounded-md bg-back_4 p-2">
+                <div className="grid w-full grid-cols-[6rem_1fr] rounded-md bg-back_4 p-2 md:grid-cols-[auto_minmax(900px,_1fr)]">
                   {/* Post Picture */}
                   {post.imageURL != undefined ? (
                     <div className="relative h-24 w-24 overflow-hidden">
