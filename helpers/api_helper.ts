@@ -56,6 +56,31 @@ export async function register_api(username: string, email: string, password: st
   return response
 }
 
+// Update user details
+export async function update_user_details(username?: string, email?: string,fullName?: string,avatar?:string) {
+  const CONNECTION_STRING = 'http://localhost:3000/v1/user/'
+  let response:any = 'No response'
+  console.log(fullName,username,avatar,email);
+  
+  let updateData: { username?: string|undefined; email?: string|undefined;full_name?: string|undefined;profilePicURL?:string|undefined} = {
+    ...(fullName != "DEFAULT") && {full_name:fullName},
+    ...(username != "DEFAULT") && {username:username},
+    ...(avatar != "DEFAULT") && {profilePicURL:avatar},
+    ...(email != "DEFAULT") && {email:email},
+  }
+  console.log('updateData:',updateData);
+
+  try {
+    const res = await  general_api(CONNECTION_STRING,"POST", updateData)
+    
+    response = res
+
+  } catch (e) {
+    response = e
+  }
+  return response
+}
+
 // TODO FIX API TO USE CORRECT TOKEN TO RETURN USER DETAILS
 export async function get_user_details_api(token?:string) {
   const CONNECTION_STRING = 'http://localhost:3000/v1/user/'

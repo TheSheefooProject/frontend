@@ -9,24 +9,33 @@ import TextArea from '../components/common/TextArea'
 import TextBox from '../components/common/TextBox'
 
 import { FiEdit } from 'react-icons/fi'
-import { get_user_details_api } from '../helpers/api_helper'
+import {
+  get_user_details_api,
+  update_user_details,
+} from '../helpers/api_helper'
 
 const Profile = (props: { localStorage: Storage }) => {
   const { localStorage, ...restProps } = props
 
   interface IDetails {
     username: string
+    full_name: string
     email: string
     avatar: string
     biography?: string
   }
   const defaultDetails = {
     username: 'Default',
+    full_name: 'Default',
     email: 'Default',
     avatar: '/images/default_profile_image.webp',
     biography: 'Default',
   }
   const [details, setDetails] = useState<IDetails>(defaultDetails)
+  const [new_avatar, setNew_avatar] = useState<string>(defaultDetails.avatar)
+  const [new_username, setNew_username] = useState<string>(
+    defaultDetails.username
+  )
 
   useEffect(() => {
     try {
@@ -48,11 +57,23 @@ const Profile = (props: { localStorage: Storage }) => {
     let userDetails = await get_user_details_api()
     setDetails({
       username: userDetails.userData.username,
+      full_name: userDetails.userData.full_name,
       email: userDetails.userData.email,
       avatar: userDetails.userData.profile_pic_url,
       biography: userDetails.user_bio,
     })
-    console.log(details)
+    setNew_avatar(details.avatar)
+  }
+  const setNewAvatar = (url: string | null) => {
+    if (url == ('' || null || undefined) || url.length <= 4) {
+      setNew_avatar(defaultDetails.avatar)
+    } else {
+      setNew_avatar(url)
+    }
+  }
+  const postUserDetails = (e: any) => {
+    e.preventDefault()
+    update_user_details(new_username, 'DEFAULT', 'DEFAULT', new_avatar)
   }
   return (
     <main className="static flex min-h-screen w-[100%] min-w-[320px] flex-col items-center justify-between overflow-x-hidden bg-back_3 px-10 pt-12 text-text_1 md:pl-[calc(1vw+10rem)] md:pr-[calc(1vw+5rem)]">
@@ -61,8 +82,9 @@ const Profile = (props: { localStorage: Storage }) => {
         <div
           id="userimage"
           className="group relative h-[8rem] min-h-[8rem] w-[8rem] min-w-[8rem] basis-4 cursor-pointer overflow-hidden rounded-md border-2 border-back_4 hover:brightness-75 md:mr-8"
+          onClick={(e) => setNewAvatar(prompt('Enter an image URL'))}
         >
-          <Image src={details.avatar} layout="fill" objectFit="cover"></Image>
+          <Image src={new_avatar} layout="fill" objectFit="cover"></Image>
           <FiEdit className="absolute left-2 bottom-2 hidden h-12 w-12 text-white group-hover:inline"></FiEdit>
         </div>
         <div id="userinfo" className="relative w-full">
@@ -75,6 +97,7 @@ const Profile = (props: { localStorage: Storage }) => {
                   type="text"
                   placeholder={details.username}
                   name="username"
+                  onChange={(e: any) => setNew_username(e.target.value)}
                 ></TextBox>
               </li>
               <li>
@@ -83,7 +106,9 @@ const Profile = (props: { localStorage: Storage }) => {
                   text="Save Changes"
                   type="positive"
                   className="mb-2"
-                  onClick={() => {}}
+                  onClick={(e: any) => {
+                    postUserDetails(e)
+                  }}
                 ></Button>
               </li>
               <div className="h-0.5 w-full bg-accent_2 opacity-50"></div>
