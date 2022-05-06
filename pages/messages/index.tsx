@@ -75,7 +75,7 @@ const DirectMessagesPage = (props: { localStorage: Storage }) => {
     soundEnabled: soundOn,
   })
 
-  const getUserRooms = async () => {
+  const getUserRooms = async (user_id: string) => {
     await get_rooms_by_user_id(user_id).then((response) => {
       if (response.status == 'success') {
         setUser_rooms(response.rooms)
@@ -114,7 +114,7 @@ const DirectMessagesPage = (props: { localStorage: Storage }) => {
     setUser_name(JSON.parse(window.localStorage.userDetails).username)
 
     // Get User's chatrooms
-    getUserRooms()
+    getUserRooms(JSON.parse(window.localStorage.userDetails).user_id || user_id)
 
     const id = `${user_id}:${Date.now()}`
     axios
