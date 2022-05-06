@@ -56,6 +56,18 @@ export async function register_api(username: string, email: string, password: st
   return response
 }
 
+// Delete Account
+export async function delete_user() {
+  const CONNECTION_STRING = 'http://localhost:3000/v1/user'
+
+  try {
+
+    const response = await general_api(CONNECTION_STRING,"DELETE")
+    return response
+  } catch (e) {
+    return e
+  }
+}
 // Update user details
 export async function update_user_details(username?: string, email?: string,fullName?: string,avatar?:string) {
   const CONNECTION_STRING = 'http://localhost:3000/v1/user/'
@@ -65,13 +77,14 @@ export async function update_user_details(username?: string, email?: string,full
   let updateData: { username?: string|undefined; email?: string|undefined;full_name?: string|undefined;profilePicURL?:string|undefined} = {
     ...(fullName != "DEFAULT") && {full_name:fullName},
     ...(username != "DEFAULT") && {username:username},
-    ...(avatar != "DEFAULT") && {profilePicURL:avatar},
-    ...(email != "DEFAULT") && {email:email},
+    ...(avatar != "/images/default_profile_image.webp") && {profilePicURL:avatar},
+    ...(email != "DEFAULT@DEFAULT.DEFAULT") && {email:email},
   }
   console.log('updateData:',updateData);
 
   try {
-    const res = await  general_api(CONNECTION_STRING,"POST", updateData)
+    const res = await  general_api(CONNECTION_STRING,"PATCH", updateData)
+    console.log(res);
     
     response = res
 

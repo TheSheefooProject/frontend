@@ -10,6 +10,7 @@ import TextBox from '../components/common/TextBox'
 
 import { FiEdit } from 'react-icons/fi'
 import {
+  delete_user,
   get_user_details_api,
   update_user_details,
 } from '../helpers/api_helper'
@@ -25,29 +26,24 @@ const Profile = (props: { localStorage: Storage }) => {
     biography?: string
   }
   const defaultDetails = {
-    username: 'Default',
-    full_name: 'Default',
-    email: 'Default',
+    username: 'DEFAULT',
+    full_name: 'DEFAULT',
+    email: 'DEFAULT@DEFAULT.DEFAULT',
     avatar: '/images/default_profile_image.webp',
-    biography: 'Default',
+    biography: 'DEFAULT',
   }
   const [details, setDetails] = useState<IDetails>(defaultDetails)
   const [new_avatar, setNew_avatar] = useState<string>(defaultDetails.avatar)
   const [new_username, setNew_username] = useState<string>(
     defaultDetails.username
   )
-
+  const [new_fullname, setNew_fullname] = useState<string>(
+    defaultDetails.full_name
+  )
+  const [new_email, setNew_email] = useState<string>(defaultDetails.email)
   useEffect(() => {
-    try {
-      // let lsDetails = JSON.parse(localStorage.userDetails)
-      // setDetails({
-      //   username: lsDetails.username,
-      //   email: lsDetails.email,
-      //   avatar: '',
-      //   biography: 'default_biography',
-      // })
-    } catch (e) {}
-  }, [localStorage])
+    getUserDetails()
+  }, [details.avatar])
 
   useEffect(() => {
     getUserDetails()
@@ -73,10 +69,10 @@ const Profile = (props: { localStorage: Storage }) => {
   }
   const postUserDetails = (e: any) => {
     e.preventDefault()
-    update_user_details(new_username, 'DEFAULT', 'DEFAULT', new_avatar)
+    update_user_details(new_username, new_email, new_fullname, new_avatar)
   }
   return (
-    <main className="static flex min-h-screen w-[100%] min-w-[320px] flex-col items-center justify-between overflow-x-hidden bg-back_3 px-10 pt-12 text-text_1 md:pl-[calc(1vw+10rem)] md:pr-[calc(1vw+5rem)]">
+    <main className="static flex min-h-screen w-[100%] min-w-[320px] flex-col items-center justify-around overflow-x-hidden bg-back_3 px-10 pt-12 text-text_1 md:pl-[calc(1vw+10rem)] md:pr-[calc(1vw+5rem)]">
       {/* Profile Container */}
       <div className="lg:mx-1/2 mb-4 flex min-w-[50vw] max-w-[80vw] flex-col items-center justify-between rounded-lg border-0 bg-back_2 p-6 font-body sm:mx-0 md:mb-0 md:min-w-[600px] md:flex-row md:border-2">
         <div
@@ -91,6 +87,14 @@ const Profile = (props: { localStorage: Storage }) => {
           <form method="post">
             <ul>
               <li className=" mb-2 inline-flex w-full flex-col gap-1">
+                <label>E-Mail</label>
+                <TextBox
+                  controlledInput={false}
+                  type="text"
+                  placeholder={details.email}
+                  name="email"
+                  onChange={(e: any) => setNew_email(e.target.value)}
+                ></TextBox>
                 <label>Username </label>
                 <TextBox
                   controlledInput={false}
@@ -98,6 +102,14 @@ const Profile = (props: { localStorage: Storage }) => {
                   placeholder={details.username}
                   name="username"
                   onChange={(e: any) => setNew_username(e.target.value)}
+                ></TextBox>
+                <label>Full Name</label>
+                <TextBox
+                  controlledInput={false}
+                  type="text"
+                  placeholder={details.full_name}
+                  name="full_name"
+                  onChange={(e: any) => setNew_fullname(e.target.value)}
                 ></TextBox>
               </li>
               <li>
@@ -116,11 +128,15 @@ const Profile = (props: { localStorage: Storage }) => {
               {/* Change User Settings Container */}
               <div className="mb-0 mt-1 flex flex-col">
                 <div className="flex flex-col items-center md:flex-row">
-                  <Button text="Change E-Mail" type="neutral"></Button>
-                  <Button text="Change Password" type="neutral"></Button>
-                </div>
-                <div className="flex flex-col items-center md:flex-row">
-                  <Button text="Delete Account" type="negative"></Button>
+                  <Button
+                    text="Delete Account"
+                    type="negative"
+                    onClick={(e: any) => {
+                      e.preventDefault()
+                      delete_user()
+                      localStorage.removeItem('userDetails')
+                    }}
+                  ></Button>
                 </div>
               </div>
             </ul>
