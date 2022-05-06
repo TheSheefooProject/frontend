@@ -56,7 +56,9 @@ const Home: NextPage = () => {
   useEffect(() => {
     refreshPosts()
     setTimeout(() => {
-      posts_div.current.scroll(0, posts_div.current.scrollHeight)
+      if (posts_div.current != null) {
+        posts_div.current.scroll(0, posts_div.current.scrollHeight)
+      }
     }, 500)
   }, [])
 
