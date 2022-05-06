@@ -117,7 +117,6 @@ export async function get_userdetails_by_id(id:string) {
     return e
   }
 }
-
 export async function create_post(title: string,content: string,first_hashtag: string,second_hashtag: string,third_hashtag: string,imageURL?: string,) {
   const CONNECTION_STRING = 'http://localhost:3001/v1/posts/'
   let postData: { title: string,content: string,first_hashtag: string,second_hashtag: string,third_hashtag: string,imageURL?: string,} = {
@@ -136,6 +135,48 @@ export async function create_post(title: string,content: string,first_hashtag: s
     return 'success'
   } catch (e) {
     return 'failed'
+  }
+}
+
+// Livechat Helper Functions
+export async function create_room(chat_room_id:string,user_id:string) {
+  const CONNECTION_STRING = 'http://localhost:3005/v1/livechat/room/'
+  let roomData: {chat_room_id:string,user_id:string } = {
+   chat_room_id,
+   user_id
+  }
+
+  try {
+    const response = await general_api(CONNECTION_STRING,"POST", roomData)
+    console.log(response);
+    
+    return 'success'
+  } catch (e) {
+    return 'failed'
+  }
+}
+
+export async function get_room_messages(room_name:string) {
+  const CONNECTION_STRING = 'http://localhost:3005/v1/messages/'+ room_name
+
+  try {
+
+    const response = await general_api(CONNECTION_STRING,"GET")
+    return response
+  } catch (e) {
+    return e
+  }
+}
+
+export async function get_rooms_by_user_id(user_id:string) {
+  const CONNECTION_STRING = 'http://localhost:3005/v1/livechat/room/'+ user_id
+
+  try {
+
+    const response = await general_api(CONNECTION_STRING,"GET")
+    return response
+  } catch (e) {
+    return e
   }
 }
 
