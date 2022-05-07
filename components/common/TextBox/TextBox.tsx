@@ -11,7 +11,6 @@ const TextBox = (props: {
   onChange?: any | (() => {})
   onKeyUp?: any | (() => {})
   controlledInput: boolean
-  autofocus?: boolean
 }) => {
   // Default prop values
   const {
@@ -24,7 +23,6 @@ const TextBox = (props: {
     onKeyUp = () => {},
     required = false,
     controlledInput = false,
-    autofocus = false,
     ...restProps
   } = props
 
@@ -42,7 +40,6 @@ const TextBox = (props: {
       onKeyUp={onKeyUp}
       defaultValue={controlledInput ? undefined : text}
       value={controlledInput ? text : undefined}
-      autoFocus={autofocus}
     ></input>
   )
 }
