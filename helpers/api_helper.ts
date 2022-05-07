@@ -56,15 +56,51 @@ export async function register_api(username: string, email: string, password: st
   return response
 }
 
+// Delete Account
+export async function delete_user() {
+  const CONNECTION_STRING = 'http://localhost:3000/v1/user'
+
+  try {
+
+    const response = await general_api(CONNECTION_STRING,"DELETE")
+    return response
+  } catch (e) {
+    return e
+  }
+}
+// Update user details
+export async function update_user_details(username?: string, email?: string,fullName?: string,avatar?:string) {
+  const CONNECTION_STRING = 'http://localhost:3000/v1/user/'
+  let response:any = 'No response'
+  console.log(fullName,username,avatar,email);
+  
+  let updateData: { username?: string|undefined; email?: string|undefined;full_name?: string|undefined;profilePicURL?:string|undefined} = {
+    ...(fullName != "DEFAULT") && {full_name:fullName},
+    ...(username != "DEFAULT") && {username:username},
+    ...(avatar != "/images/default_profile_image.webp") && {profilePicURL:avatar},
+    ...(email != "DEFAULT@DEFAULT.DEFAULT") && {email:email},
+  }
+  console.log('updateData:',updateData);
+
+  try {
+    const res = await  general_api(CONNECTION_STRING,"PATCH", updateData)
+    console.log(res);
+    
+    response = res
+
+  } catch (e) {
+    response = e
+  }
+  return response
+}
+
 // TODO FIX API TO USE CORRECT TOKEN TO RETURN USER DETAILS
-export async function get_user_details_api(token:string) {
+export async function get_user_details_api(token?:string) {
   const CONNECTION_STRING = 'http://localhost:3000/v1/user/'
 
   try {
 
     const response = await general_api(CONNECTION_STRING,"GET")
-    console.log(response);
-
     return response
   } catch (e) {
     return e
@@ -117,7 +153,6 @@ export async function get_userdetails_by_id(id:string) {
     return e
   }
 }
-
 export async function create_post(title: string,content: string,first_hashtag: string,second_hashtag: string,third_hashtag: string,imageURL?: string,) {
   const CONNECTION_STRING = 'http://localhost:3001/v1/posts/'
   let postData: { title: string,content: string,first_hashtag: string,second_hashtag: string,third_hashtag: string,imageURL?: string,} = {
@@ -136,6 +171,48 @@ export async function create_post(title: string,content: string,first_hashtag: s
     return 'success'
   } catch (e) {
     return 'failed'
+  }
+}
+
+// Livechat Helper Functions
+export async function create_room(chat_room_id:string,user_id:string) {
+  const CONNECTION_STRING = 'http://localhost:3005/v1/livechat/room/'
+  let roomData: {chat_room_id:string,user_id:string } = {
+   chat_room_id,
+   user_id
+  }
+
+  try {
+    const response = await general_api(CONNECTION_STRING,"POST", roomData)
+    console.log(response);
+    
+    return 'success'
+  } catch (e) {
+    return 'failed'
+  }
+}
+
+export async function get_room_messages(room_name:string) {
+  const CONNECTION_STRING = 'http://localhost:3005/v1/messages/'+ room_name
+
+  try {
+
+    const response = await general_api(CONNECTION_STRING,"GET")
+    return response
+  } catch (e) {
+    return e
+  }
+}
+
+export async function get_rooms_by_user_id(user_id:string) {
+  const CONNECTION_STRING = 'http://localhost:3005/v1/livechat/room/'+ user_id
+
+  try {
+
+    const response = await general_api(CONNECTION_STRING,"GET")
+    return response
+  } catch (e) {
+    return e
   }
 }
 
